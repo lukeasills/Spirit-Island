@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://1earn4vslmdg"]
+
+[ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_wf2dp"]
+[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_45mjn"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_tt77s"]
+
+[node name="LandRegion5" type="Area2D"]
+script = ExtResource("1_wf2dp")
+invader_scene = ExtResource("2_45mjn")
+blight_scene = ExtResource("3_tt77s")
+id = 5
+land_type = "Sand"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.92, 0.77, 0.32, 0.8)
+polygon = PackedVector2Array(0, 0, 360, 0, 335, 100, 260, 175, 235, 300, 165, 415, -167, 250, 0, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, 0, 360, 0, 335, 100, 260, 175, 235, 300, 165, 415, -167, 250, 0, 0)
+
+[node name="TokenContainer" type="HFlowContainer" parent="."]
+offset_left = -46.0
+offset_top = 82.0
+offset_right = 229.0
+offset_bottom = 282.0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

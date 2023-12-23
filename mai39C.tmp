@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmaoafshanif2"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_yvfee"]
+[ext_resource type="PackedScene" uid="uid://hlg8ou050rac" path="res://invader_deck.tscn" id="2_5j4p5"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_yvfee")
+
+[node name="InvaderDeck" parent="." instance=ExtResource("2_5j4p5")]
+offset_left = 822.0
+offset_top = 203.0
+offset_right = 982.0
+offset_bottom = 427.0

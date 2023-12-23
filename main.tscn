@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmaoafshanif2"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_yvfee"]
+[ext_resource type="PackedScene" uid="uid://hlg8ou050rac" path="res://board/invaderboard/invader_deck.tscn" id="2_5j4p5"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="2_af6tv"]
+[ext_resource type="Script" path="res://board/invaderboard/InvaderBoard.gd" id="3_hen3h"]
+[ext_resource type="PackedScene" uid="uid://kpw1armnhu0v" path="res://board/invaderboard/invader_card_space.tscn" id="3_vgr1o"]
+[ext_resource type="PackedScene" uid="uid://b63wdd2ddmtks" path="res://board/map/land_map.tscn" id="4_n62ow"]
+[ext_resource type="PackedScene" uid="uid://cnsdfrqwvvbio" path="res://board/invaderboard/discard_space.tscn" id="5_btuvb"]
+[ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://board/invaderboard/invader_card_mover.tscn" id="7_dcxgg"]
+[ext_resource type="Script" path="res://LabelContainer.gd" id="9_njwbg"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_yvfee")
+blight_scene = ExtResource("2_af6tv")
+
+[node name="InvaderBoard" type="Node" parent="."]
+script = ExtResource("3_hen3h")
+
+[node name="InvaderDeck" parent="InvaderBoard" instance=ExtResource("2_5j4p5")]
+offset_left = 1700.0
+offset_top = 1200.0
+offset_right = 1860.0
+offset_bottom = 1424.0
+
+[node name="ExploreSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
+offset_left = 1390.0
+offset_top = 1200.0
+offset_right = 1560.0
+offset_bottom = 1472.0
+label_text = "Explore"
+
+[node name="BuildSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
+offset_left = 1080.0
+offset_top = 1200.0
+offset_right = 1250.0
+offset_bottom = 1472.0
+label_text = "Build"
+
+[node name="RavageSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
+offset_left = 770.0
+offset_top = 1200.0
+offset_right = 940.0
+offset_bottom = 1472.0
+label_text = "Ravage"
+
+[node name="DiscardSpace" parent="InvaderBoard" instance=ExtResource("5_btuvb")]
+offset_left = 396.0
+offset_top = 1240.0
+offset_right = 630.0
+offset_bottom = 1448.0
+
+[node name="InvaderCardMover" parent="InvaderBoard" instance=ExtResource("7_dcxgg")]
+
+[node name="LandMap" parent="." instance=ExtResource("4_n62ow")]
+offset_left = 363.0
+offset_top = 26.0
+offset_right = 363.0
+offset_bottom = 26.0
+
+[node name="LabelContainer" type="CenterContainer" parent="."]
+offset_left = 1012.0
+offset_top = 1056.0
+offset_right = 1319.0
+offset_bottom = 1152.0
+script = ExtResource("9_njwbg")
+
+[node name="Label" type="Label" parent="LabelContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.662745, 0.662745, 0.662745, 1)
+theme_override_font_sizes/font_size = 70
+text = "Test Text"
+
+[node name="InvaderActionTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="built" from="." to="LabelContainer" method="_on_main_built"]
+[connection signal="explored" from="." to="LabelContainer" method="_on_main_explored"]
+[connection signal="ravaged" from="." to="LabelContainer" method="_on_main_ravaged"]
+[connection signal="build_initiated" from="InvaderBoard" to="." method="_on_invader_board_build_initiated"]
+[connection signal="build_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_build_initiated"]
+[connection signal="explore_initiated" from="InvaderBoard" to="." method="_on_invader_board_explore_initiated"]
+[connection signal="explore_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_explore_initiated"]
+[connection signal="invader_actions_initiated" from="InvaderBoard" to="InvaderBoard" method="_on_invader_actions_initiated"]
+[connection signal="ravage_initiated" from="InvaderBoard" to="." method="_on_invader_board_ravage_initiated"]
+[connection signal="ravage_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravage_initiated"]
+[connection signal="emptied" from="InvaderBoard/InvaderDeck" to="." method="_on_invader_deck_emptied"]
+[connection signal="region_selected" from="LandMap" to="." method="_on_land_map_region_selected"]

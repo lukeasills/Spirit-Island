@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://u7gh7ogqekkc"]
+
+[ext_resource type="Script" path="res://cards/invader_card.gd" id="1_1f0gn"]
+[ext_resource type="PackedScene" uid="uid://b5ylxbdspa3d1" path="res://cards/card_base.tscn" id="1_6280g"]
+[ext_resource type="Texture2D" uid="uid://b067vq4182scw" path="res://art/cards/invaders/stage1/JungleCard.png" id="2_q473p"]
+
+[node name="InvaderCard" type="MarginContainer"]
+offset_right = 160.0
+offset_bottom = 224.0
+pivot_offset = Vector2(80, 112)
+script = ExtResource("1_1f0gn")
+front_texture = ExtResource("2_q473p")
+
+[node name="CardBase" parent="." instance=ExtResource("1_6280g")]
+layout_mode = 2

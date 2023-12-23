@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://5bel7pydcdbk"]
+
+[ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_nutrn"]
+[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_dijvs"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_ldt80"]
+
+[node name="LandRegion3" type="Area2D"]
+script = ExtResource("1_nutrn")
+invader_scene = ExtResource("2_dijvs")
+blight_scene = ExtResource("3_ldt80")
+id = 3
+land_type = "Sand"
+is_coastal = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.92, 0.77, 0.32, 0.8)
+polygon = PackedVector2Array(0, 0, 400, 0, 700, 100, 450, 250, 350, 350, 300, 125, 200, 50, 0, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, 0, 400, 0, 700, 100, 450, 250, 350, 350, 300, 125, 200, 50, 0, 0)
+
+[node name="TokenContainer" type="HFlowContainer" parent="."]
+offset_left = 320.0
+offset_top = 45.0
+offset_right = 520.0
+offset_bottom = 195.0
+alignment = 1
+metadata/_edit_use_anchors_ = true

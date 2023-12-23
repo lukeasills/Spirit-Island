@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5qtuaptrymme"]
+
+[ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_ymg14"]
+[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_kw80h"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_fagbd"]
+
+[node name="LandRegion2" type="Area2D"]
+script = ExtResource("1_ymg14")
+invader_scene = ExtResource("2_kw80h")
+blight_scene = ExtResource("3_fagbd")
+id = 2
+land_type = "Water"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.57, 0.91, 0.91, 0.8)
+polygon = PackedVector2Array(0, 0, 400, 0, 600, 50, 700, 125, 575, 175, 525, 250, 165, 250, 0, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, 0, 400, 0, 600, 50, 700, 125, 575, 175, 525, 250, 165, 250, 0, 0)
+
+[node name="TokenContainer" type="HFlowContainer" parent="."]
+offset_left = 168.0
+offset_top = 31.0
+offset_right = 493.0
+offset_bottom = 231.0
+alignment = 1
+metadata/_edit_use_anchors_ = true

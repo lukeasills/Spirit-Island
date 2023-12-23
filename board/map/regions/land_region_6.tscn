@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpo3hurms0q6j"]
+
+[ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_kk0jm"]
+[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_p01om"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_lw3jv"]
+
+[node name="LandRegion6" type="Area2D"]
+script = ExtResource("1_kk0jm")
+invader_scene = ExtResource("2_p01om")
+blight_scene = ExtResource("3_lw3jv")
+id = 6
+land_type = "Water"
+is_coastal = true
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.57, 0.91, 0.91, 0.8)
+polygon = PackedVector2Array(0, 0, 50, -75, 175, -125, 225, 100, 175, 300, 110, 350, 25, 325, -100, 425, -125, 300, -100, 175, -25, 100, 0, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, 0, 50, -75, 175, -125, 225, 100, 175, 300, 110, 350, 25, 325, -100, 425, -125, 300, -100, 175, -25, 100, 0, 0)
+
+[node name="TokenContainer" type="HFlowContainer" parent="."]
+offset_left = -2.0
+offset_top = 38.0
+offset_right = 173.0
+offset_bottom = 263.0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

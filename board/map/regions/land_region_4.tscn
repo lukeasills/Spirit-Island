@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://butbj13776vk3"]
+
+[ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_6r0sg"]
+[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_rgm78"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_07q54"]
+
+[node name="LandRegion4" type="Area2D"]
+script = ExtResource("1_6r0sg")
+invader_scene = ExtResource("2_rgm78")
+blight_scene = ExtResource("3_07q54")
+id = 4
+land_type = "Mountain"
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.47, 0.46, 0.49, 0.8)
+polygon = PackedVector2Array(0, 0, 165, 0, 335, 170, 665, 335, 85, 500, 0, 370, 60, 170, 0, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, 0, 165, 0, 335, 170, 665, 335, 85, 500, 0, 370, 60, 170, 0, 0)
+
+[node name="TokenContainer" type="HFlowContainer" parent="."]
+offset_left = 47.0
+offset_top = 230.0
+offset_right = 437.0
+offset_bottom = 395.0
+alignment = 1
+metadata/_edit_use_anchors_ = true

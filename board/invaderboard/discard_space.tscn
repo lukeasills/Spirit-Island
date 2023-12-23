@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnsdfrqwvvbio"]
+
+[ext_resource type="Texture2D" uid="uid://dl578ip20i55h" path="res://art/board/DiscardCardSpotBackground.png" id="1_70skw"]
+[ext_resource type="Script" path="res://board/invaderboard/discard_space.gd" id="1_pv66t"]
+[ext_resource type="Texture2D" uid="uid://dv6fcpf4mesbe" path="res://art/board/DiscardSpotBorder.png" id="2_2plt1"]
+
+[node name="DiscardSpace" type="VBoxContainer"]
+offset_right = 234.0
+offset_bottom = 208.0
+script = ExtResource("1_pv66t")
+
+[node name="CardSpace" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="Background" type="TextureRect" parent="CardSpace"]
+layout_mode = 2
+texture = ExtResource("1_70skw")
+
+[node name="Border" type="TextureRect" parent="CardSpace"]
+layout_mode = 2
+texture = ExtResource("2_2plt1")
+
+[node name="CardContainer" type="Node" parent="CardSpace"]
+
+[node name="TextLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Discard"
+horizontal_alignment = 1

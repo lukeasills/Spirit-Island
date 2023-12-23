@@ -1,0 +1,110 @@
+[gd_scene load_steps=18 format=3 uid="uid://hlg8ou050rac"]
+
+[ext_resource type="Script" path="res://board/invaderboard/invader_deck.gd" id="1_8t4vr"]
+[ext_resource type="PackedScene" uid="uid://u7gh7ogqekkc" path="res://cards/invader_card.tscn" id="2_mjmnn"]
+[ext_resource type="Texture2D" uid="uid://xqvobapms887" path="res://art/cards/invaders/backs/Invader1CardBack.png" id="3_6f3ke"]
+[ext_resource type="Texture2D" uid="uid://8oku727udwwk" path="res://art/cards/invaders/stage1/MountainCard.png" id="5_kpx3m"]
+[ext_resource type="Texture2D" uid="uid://cun6ka8dt86wh" path="res://art/cards/invaders/stage1/WaterCard.png" id="6_eqhfo"]
+[ext_resource type="Texture2D" uid="uid://dglwmuoh3ksxo" path="res://art/cards/invaders/stage1/SandCard.png" id="8_6fm66"]
+[ext_resource type="Texture2D" uid="uid://qyrigj8kl4ix" path="res://art/cards/invaders/stage2/JungleCardII.png" id="9_uq4m8"]
+[ext_resource type="Texture2D" uid="uid://dsm8nnltk0a3c" path="res://art/cards/invaders/stage2/SandCardII.png" id="10_uh60p"]
+[ext_resource type="Texture2D" uid="uid://csixnkdlqifuy" path="res://art/cards/invaders/stage2/WaterCardII.png" id="11_ct124"]
+[ext_resource type="Texture2D" uid="uid://bf814ih7h0k1p" path="res://art/cards/invaders/stage2/MountainCardII.png" id="12_vfk7i"]
+[ext_resource type="Texture2D" uid="uid://0v3wmwhkp3ur" path="res://art/cards/invaders/stage2/CoastalCard.png" id="13_qkr5x"]
+[ext_resource type="Texture2D" uid="uid://cquw14g1k6w6j" path="res://art/cards/invaders/stage3/SandWaterCard.png" id="14_f3a4y"]
+[ext_resource type="Texture2D" uid="uid://2hvuf0dp7g7s" path="res://art/cards/invaders/stage3/SandMountainCard.png" id="15_7d5i1"]
+[ext_resource type="Texture2D" uid="uid://ca8k377q5bahx" path="res://art/cards/invaders/stage3/JungleSandCard.png" id="16_i3ccl"]
+[ext_resource type="Texture2D" uid="uid://4s1jmd6vdy50" path="res://art/cards/invaders/stage3/JungleWaterCard.png" id="17_ym10a"]
+[ext_resource type="Texture2D" uid="uid://oypm6m83i5lh" path="res://art/cards/invaders/stage3/MountainWaterCard.png" id="18_spvcs"]
+[ext_resource type="Texture2D" uid="uid://c2rthq7p4bl8q" path="res://art/cards/invaders/stage3/MountainJungleCard.png" id="19_hwyan"]
+
+[node name="InvaderDeck" type="MarginContainer"]
+offset_right = 160.0
+offset_bottom = 224.0
+pivot_offset = Vector2(80, 112)
+script = ExtResource("1_8t4vr")
+card_back_texture = ExtResource("3_6f3ke")
+
+[node name="Stage1Cards" type="Node" parent="."]
+
+[node name="MountainCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Mountain"])
+front_texture = ExtResource("5_kpx3m")
+
+[node name="WaterCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Water"])
+front_texture = ExtResource("6_eqhfo")
+
+[node name="JungleCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Jungle"])
+
+[node name="SandCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Sand"])
+front_texture = ExtResource("8_6fm66")
+
+[node name="Stage2Cards" type="Node" parent="."]
+
+[node name="JungleCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Jungle"])
+front_texture = ExtResource("9_uq4m8")
+
+[node name="SandCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Sand"])
+front_texture = ExtResource("10_uh60p")
+
+[node name="WaterCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Water"])
+front_texture = ExtResource("11_ct124")
+
+[node name="MountainCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Mountain"])
+front_texture = ExtResource("12_vfk7i")
+
+[node name="CoastalCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Coastal"])
+front_texture = ExtResource("13_qkr5x")
+
+[node name="Stage3Cards" type="Node" parent="."]
+
+[node name="SandWaterCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Sand", "Water"])
+front_texture = ExtResource("14_f3a4y")
+
+[node name="SandMountainCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Sand", "Mountain"])
+front_texture = ExtResource("15_7d5i1")
+
+[node name="JungleSandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Jungle", "Sand"])
+front_texture = ExtResource("16_i3ccl")
+
+[node name="JungleWaterCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Jungle", "Water"])
+front_texture = ExtResource("17_ym10a")
+
+[node name="MountainWaterCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Mountain", "Water"])
+front_texture = ExtResource("18_spvcs")
+
+[node name="MountainJungleCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+visible = false
+land_types = Array[String](["Mountain", "Jungle"])
+front_texture = ExtResource("19_hwyan")
+
+[node name="DeckButton" type="TextureButton" parent="."]
+layout_mode = 2
+texture_normal = ExtResource("3_6f3ke")
