@@ -18,7 +18,8 @@ adjacent_regions = [NodePath("../LandRegion2"), NodePath("../LandRegion4"), Node
 
 [node name="LandRegion2" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("4_lcajq")]
 position = Vector2(500, 0)
-adjacent_regions = [NodePath("../LandRegion3"), NodePath("../LandRegion5"), NodePath("../LandRegion6")]
+land_type = "Wetland"
+adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion3"), NodePath("../LandRegion5"), NodePath("../LandRegion6")]
 
 [node name="LandRegion3" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("5_s2vlx")]
 position = Vector2(900, 0)
@@ -34,6 +35,7 @@ adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion2"), Node
 
 [node name="LandRegion6" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("8_003ex")]
 position = Vector2(1025, 250)
+land_type = "Wetland"
 adjacent_regions = [NodePath("../LandRegion2"), NodePath("../LandRegion3"), NodePath("../LandRegion5"), NodePath("../LandRegion7"), NodePath("../LandRegion8")]
 
 [node name="LandRegion7" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("9_0i58k")]

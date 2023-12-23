@@ -86,4 +86,3 @@ wait_time = 0.5
 [connection signal="ravage_initiated" from="InvaderBoard" to="." method="_on_invader_board_ravage_initiated"]
 [connection signal="ravage_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravage_initiated"]
 [connection signal="emptied" from="InvaderBoard/InvaderDeck" to="." method="_on_invader_deck_emptied"]
-[connection signal="region_selected" from="LandMap" to="." method="_on_land_map_region_selected"]

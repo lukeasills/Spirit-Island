@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4s1jmd6vdy50"
-path="res://.godot/imported/JungleWaterCard.png-92e38db68c80c3736b8fa6a910fde23a.ctex"
+uid="uid://cquw14g1k6w6j"
+path="res://.godot/imported/SandWetlandCard.png-25c215a2ad88e6a7c653f9a2f2aed3e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/cards/invaders/stage3/JungleWaterCard.png"
-dest_files=["res://.godot/imported/JungleWaterCard.png-92e38db68c80c3736b8fa6a910fde23a.ctex"]
+source_file="res://art/cards/invaders/stage3/SandWetlandCard.png"
+dest_files=["res://.godot/imported/SandWetlandCard.png-25c215a2ad88e6a7c653f9a2f2aed3e2.ctex"]
 
 [params]
 

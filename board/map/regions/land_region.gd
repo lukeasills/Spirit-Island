@@ -95,5 +95,5 @@ func _on_input_event(viewport, event, shape_idx):
 	if !active:
 		return
 	if (event is InputEventMouseButton && !event.pressed):
-		get_parent().region_selected(self)
+		get_parent().region_clicked(self)
 		active = false

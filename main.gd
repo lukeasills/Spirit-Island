@@ -112,32 +112,26 @@ func add_blight(region):
 	var had_blight = region.blight_count > 0
 	await timed_invader_action(region, "add_blight")
 	if had_blight:
-		cascade_blight(region)
+		await cascade_blight(region)
 
 func cascade_blight(region):
 	var adjacent_regions = region.adjacent_regions
 	var new_blight = blight_scene.instantiate()
 	$LabelContainer.set_text("The blight cascades! Choose a region.")
-	prompt_token_placement(adjacent_regions, new_blight)
 
-	var cascading_region = await $LandMap.region_selected
-	var had_blight = cascading_region.blight_count > 1
-
-	$InvaderActionTimer.start()
-	await $InvaderActionTimer.timeout
+	# Defer to function which prompts region selection and returns the region
+	var cascading_region = await prompt_region_selection(adjacent_regions, new_blight)
 	$LabelContainer.turn_off_text()
-	
-	if had_blight:
-		await cascade_blight(region)
 	await add_blight(cascading_region)
 
-# Handles the logic for prompting a region choice for placing a token
-func prompt_token_placement(valid_regions, token_on_hover):
+# Handles the logic for prompting a region choice
+func prompt_region_selection(valid_regions, token_on_hover):
 	for region in valid_regions:
 		region.set_active()
-	var clicked_region = null
-	while clicked_region == null:
-		await $LandMap.active_region_entered
+	var selected_region = await $LandMap.active_region_selected
+	for region in valid_regions:
+		region.set_inactive()
+	return selected_region
 
 func _on_invader_deck_emptied():
 	invader_deck_empty = true

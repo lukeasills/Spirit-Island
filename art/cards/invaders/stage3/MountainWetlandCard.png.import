@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csixnkdlqifuy"
-path="res://.godot/imported/WaterCardII.png-1047252ddd4ffdf62d1573de3a375f62.ctex"
+uid="uid://oypm6m83i5lh"
+path="res://.godot/imported/MountainWetlandCard.png-2a678b334da9782b0dcb070d2822fd9e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/cards/invaders/stage2/WaterCardII.png"
-dest_files=["res://.godot/imported/WaterCardII.png-1047252ddd4ffdf62d1573de3a375f62.ctex"]
+source_file="res://art/cards/invaders/stage3/MountainWetlandCard.png"
+dest_files=["res://.godot/imported/MountainWetlandCard.png-2a678b334da9782b0dcb070d2822fd9e.ctex"]
 
 [params]
 

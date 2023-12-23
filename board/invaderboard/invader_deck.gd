@@ -11,7 +11,20 @@ var current_stage_cards
 func _ready():
 	$DeckButton.texture_normal = card_back_texture
 	cards_drawn = 0
+	setup_initial_deck()
 	current_stage_cards = $Stage1Cards
+
+# Function to remove 1 card from each stage
+func setup_initial_deck():
+	var card = $Stage1Cards.get_children()[randi() % $Stage1Cards.get_child_count()]
+	$Stage1Cards.remove_child(card)
+	card.queue_free()
+	card = $Stage2Cards.get_children()[randi() % $Stage2Cards.get_child_count()]
+	$Stage2Cards.remove_child(card)
+	card.queue_free()
+	card = $Stage3Cards.get_children()[randi() % $Stage3Cards.get_child_count()]
+	$Stage3Cards.remove_child(card)
+	card.queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -27,13 +40,13 @@ func draw():
 	
 	# Keep track of how many have been drawn, and update texture accordingly
 	cards_drawn += 1
-	if cards_drawn == 4:
+	if cards_drawn == 3:
 		current_stage_cards = $Stage2Cards
 		update_back(2)
-	elif cards_drawn == 9:
+	elif cards_drawn == 7:
 		current_stage_cards = $Stage3Cards
 		update_back(3)
-	elif cards_drawn == 15:
+	elif cards_drawn == 12:
 		visible = false
 		emptied.emit()
 	
