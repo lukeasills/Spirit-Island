@@ -12,11 +12,23 @@ id = 3
 land_type = "Sand"
 is_coastal = true
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.92, 0.77, 0.32, 0.8)
+[node name="BorderPolygon" type="Polygon2D" parent="."]
+color = Color(0.237843, 0.16896, 0.00488826, 1)
 polygon = PackedVector2Array(0, 0, 400, 0, 700, 100, 450, 250, 350, 350, 300, 125, 200, 50, 0, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="RegionPolygon" type="Polygon2D" parent="."]
+color = Color(0.92, 0.77, 0.32, 0.8)
+polygon = PackedVector2Array(20, 2.5, 400, 10, 690, 100, 445, 245, 352, 340, 305, 120, 200, 45, 20, 2.5)
+
+[node name="HighlightPolygon" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.1)
+polygon = PackedVector2Array(20, 2.5, 400, 10, 690, 100, 445, 245, 352, 340, 305, 120, 200, 45, 20, 2.5)
+
+[node name="CoastPolygon" type="Polygon2D" parent="."]
+color = Color(0.784055, 0.945159, 0.993746, 0.9)
+polygon = PackedVector2Array(350, 350, 450, 250, 700, 100, 693, 114, 455, 258, 368, 346, 350, 350)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 400, 0, 700, 100, 450, 250, 350, 350, 300, 125, 200, 50, 0, 0)
 

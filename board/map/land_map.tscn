@@ -31,7 +31,7 @@ adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion5"), Node
 
 [node name="LandRegion5" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("7_6nq2b")]
 position = Vector2(665, 250)
-adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion2"), NodePath("../LandRegion3"), NodePath("../LandRegion4"), NodePath("../LandRegion6"), NodePath("../LandRegion7")]
+adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion2"), NodePath("../LandRegion4"), NodePath("../LandRegion6"), NodePath("../LandRegion7")]
 
 [node name="LandRegion6" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("8_003ex")]
 position = Vector2(1025, 250)

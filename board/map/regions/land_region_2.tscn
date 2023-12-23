@@ -11,11 +11,19 @@ blight_scene = ExtResource("3_fagbd")
 id = 2
 land_type = "Water"
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.57, 0.91, 0.91, 0.8)
+[node name="BorderPolygon" type="Polygon2D" parent="."]
+color = Color(0.237843, 0.16896, 0.00488826, 1)
 polygon = PackedVector2Array(0, 0, 400, 0, 600, 50, 700, 125, 575, 175, 525, 250, 165, 250, 0, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="RegionPolygon" type="Polygon2D" parent="."]
+color = Color(0.569, 0.91, 0.91, 0.8)
+polygon = PackedVector2Array(15, 10, 400, 10, 600, 60, 690, 125, 570, 170, 525, 240, 170, 240, 15, 10)
+
+[node name="HighlightPolygon" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.1)
+polygon = PackedVector2Array(15, 10, 400, 10, 600, 60, 690, 125, 570, 170, 525, 240, 170, 240, 15, 10)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 400, 0, 600, 50, 700, 125, 575, 175, 525, 250, 165, 250, 0, 0)
 

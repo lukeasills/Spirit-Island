@@ -11,11 +11,19 @@ blight_scene = ExtResource("3_wad45")
 id = 1
 land_type = "Jungle"
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.15, 0.56, 0.24, 0.8)
+[node name="BorderPolygon" type="Polygon2D" parent="."]
+color = Color(0.237843, 0.16896, 0.00488826, 1)
 polygon = PackedVector2Array(0, 0, 330, 165, 500, 0, 665, 250, 500, 500, 330, 330, 165, 330, 0, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="RegionPolygon" type="Polygon2D" parent="."]
+color = Color(0.149, 0.561, 0.239, 0.8)
+polygon = PackedVector2Array(10, 10, 330, 175, 500, 10, 655, 250, 500, 490, 330, 320, 170, 320, 10, 10)
+
+[node name="HighlightPolygon" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.1)
+polygon = PackedVector2Array(10, 10, 330, 175, 500, 10, 655, 250, 500, 490, 330, 320, 170, 320, 10, 10)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 330, 165, 500, 0, 665, 250, 500, 500, 330, 330, 165, 330, 0, 0)
 

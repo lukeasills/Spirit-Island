@@ -12,11 +12,23 @@ id = 6
 land_type = "Water"
 is_coastal = true
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.57, 0.91, 0.91, 0.8)
+[node name="BorderPolygon" type="Polygon2D" parent="."]
+color = Color(0.237843, 0.16896, 0.00488826, 1)
 polygon = PackedVector2Array(0, 0, 50, -75, 175, -125, 225, 100, 175, 300, 110, 350, 25, 325, -100, 425, -125, 300, -100, 175, -25, 100, 0, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="RegionPolygon" type="Polygon2D" parent="."]
+color = Color(0.57, 0.91, 0.91, 0.8)
+polygon = PackedVector2Array(10, 5, 58, -65, 166, -110, 215, 102, 165, 295, 108, 340, 23, 315, -98, 415, -115, 298, -90, 180, -20, 110, 10, 5)
+
+[node name="HighlightPolygon" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.1)
+polygon = PackedVector2Array(10, 5, 58, -65, 166, -110, 215, 102, 165, 295, 108, 340, 23, 315, -98, 415, -115, 298, -90, 180, -20, 110, 10, 5)
+
+[node name="CoastPolygon" type="Polygon2D" parent="."]
+color = Color(0.784055, 0.945159, 0.993746, 0.9)
+polygon = PackedVector2Array(175, 300, 225, 100, 230, 128, 189, 290, 175, 300)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 50, -75, 175, -125, 225, 100, 175, 300, 110, 350, 25, 325, -100, 425, -125, 300, -100, 175, -25, 100, 0, 0)
 

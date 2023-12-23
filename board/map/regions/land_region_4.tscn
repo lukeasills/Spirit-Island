@@ -11,11 +11,19 @@ blight_scene = ExtResource("3_07q54")
 id = 4
 land_type = "Mountain"
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.47, 0.46, 0.49, 0.8)
+[node name="BorderPolygon" type="Polygon2D" parent="."]
+color = Color(0.237843, 0.16896, 0.00488826, 1)
 polygon = PackedVector2Array(0, 0, 165, 0, 335, 170, 665, 335, 85, 500, 0, 370, 60, 170, 0, 0)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="RegionPolygon" type="Polygon2D" parent="."]
+color = Color(0.47, 0.46, 0.49, 0.8)
+polygon = PackedVector2Array(12, 10, 163, 10, 330, 180, 650, 335, 90, 490, 10, 370, 70, 170, 12, 10)
+
+[node name="HighlightPolygon" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0.1)
+polygon = PackedVector2Array(12, 10, 163, 10, 330, 180, 650, 335, 90, 490, 10, 370, 70, 170, 12, 10)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 165, 0, 335, 170, 665, 335, 85, 500, 0, 370, 60, 170, 0, 0)
 

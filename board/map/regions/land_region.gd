@@ -27,7 +27,7 @@ func _ready():
 	city_count = 0
 
 func set_color(new_color: Color):
-	$Polygon2D.color = new_color
+	$RegionPolygon.color = new_color
 
 func set_type(type: String):
 	land_type = type
@@ -76,19 +76,19 @@ func set_inactive():
 	active = false
 
 func set_lit():
-	$Polygon2D.color.a = 1
+	$HighlightPolygon.color.a = 0.4
 
 func set_unlit():
-	$Polygon2D.color.a = 0.8
+	$HighlightPolygon.color.a = 0.1
 
 func _on_mouse_entered():
 	if active:
-		$Polygon2D.color.a = 1
+		$RegionPolygon.color.a = 1
 		get_parent().region_entered(self)
 
 func _on_mouse_exited():
 	if active:
-		$Polygon2D.color.a = 0.8
+		$RegionPolygon.color.a = 0.8
 		get_parent().region_exited(self)
 
 func _on_input_event(viewport, event, shape_idx):
