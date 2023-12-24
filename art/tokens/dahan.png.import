@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bmrlwu00rxv2w"
-path="res://.godot/imported/explorer.png-ad0bf18fc7f96026c6050f5a1b1f61f3.ctex"
+uid="uid://bedblememoyoh"
+path="res://.godot/imported/dahan.png-23aadbd695605f8c5be20b8bfeded84b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tokens/explorer.png"
-dest_files=["res://.godot/imported/explorer.png-ad0bf18fc7f96026c6050f5a1b1f61f3.ctex"]
+source_file="res://art/tokens/dahan.png"
+dest_files=["res://.godot/imported/dahan.png-23aadbd695605f8c5be20b8bfeded84b.ctex"]
 
 [params]
 

@@ -2,6 +2,13 @@ extends MarginContainer
 signal active_region_entered
 signal active_region_selected
 signal active_region_exited
+signal active_token_selected
+
+@export var explorer_scene: PackedScene
+@export var town_scene: PackedScene
+@export var city_scene: PackedScene
+@export var blight_scene: PackedScene
+@export var dahan_scene: PackedScene
 
 var map_data = [
 	{"type":"Jungle", "iscoastal":false, "adjacentregions": [1,3,4],
@@ -56,6 +63,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func token_clicked(token):
+	active_token_selected.emit(token)
 
 func region_clicked(region):
 	active_region_selected.emit(region)

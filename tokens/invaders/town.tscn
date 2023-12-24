@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwwkxgfqrh8sx"]
+
+[ext_resource type="Texture2D" uid="uid://dthxn56fltr1d" path="res://art/tokens/invaders/town.png" id="1_bhitx"]
+[ext_resource type="Script" path="res://tokens/invaders/town.gd" id="1_rr4qg"]
+[ext_resource type="Texture2D" uid="uid://cgayt4vbttgo0" path="res://art/tokens/invaders/towndamaged.png" id="3_g5jvw"]
+[ext_resource type="Texture2D" uid="uid://db358uaygrbgh" path="res://art/tokens/invaders/Invader2Destroyed.png" id="4_ot5rh"]
+
+[node name="Town" type="MarginContainer" groups=["invaders", "towns"]]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_rr4qg")
+normal_texture = ExtResource("1_bhitx")
+damaged_texture = ExtResource("3_g5jvw")
+destroyed_texture = ExtResource("4_ot5rh")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_bhitx")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

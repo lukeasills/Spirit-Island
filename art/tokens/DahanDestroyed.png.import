@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c20vgswnu0vn5"
-path="res://.godot/imported/blight.png-4478df3a26ec8be2f1da7740e293bf99.ctex"
+uid="uid://tp0pwcixhaoe"
+path="res://.godot/imported/DahanDestroyed.png-07561c5f6f37f0492b8f0dc6ac7d28d6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tokens/blight.png"
-dest_files=["res://.godot/imported/blight.png-4478df3a26ec8be2f1da7740e293bf99.ctex"]
+source_file="res://art/tokens/DahanDestroyed.png"
+dest_files=["res://.godot/imported/DahanDestroyed.png-07561c5f6f37f0492b8f0dc6ac7d28d6.ctex"]
 
 [params]
 

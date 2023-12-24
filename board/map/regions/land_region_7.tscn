@@ -1,13 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ditio3kclv2v3"]
+[gd_scene load_steps=2 format=3 uid="uid://ditio3kclv2v3"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_3xcan"]
-[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_kpf35"]
-[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_p0h8q"]
 
 [node name="LandRegion7" type="Area2D"]
 script = ExtResource("1_3xcan")
-invader_scene = ExtResource("2_kpf35")
-blight_scene = ExtResource("3_p0h8q")
 id = 7
 land_type = "Jungle"
 

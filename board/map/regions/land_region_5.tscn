@@ -1,15 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://1earn4vslmdg"]
+[gd_scene load_steps=3 format=3 uid="uid://1earn4vslmdg"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_wf2dp"]
-[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_45mjn"]
 [ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_tt77s"]
 
-[node name="LandRegion5" type="Area2D"]
+[node name="LandRegion5" type="Area2D" node_paths=PackedStringArray("blights")]
 script = ExtResource("1_wf2dp")
-invader_scene = ExtResource("2_45mjn")
-blight_scene = ExtResource("3_tt77s")
 id = 5
 land_type = "Sand"
+blights = [NodePath("TokenContainer/Blight")]
 
 [node name="BorderPolygon" type="Polygon2D" parent="."]
 color = Color(0.237843, 0.16896, 0.00488826, 1)
@@ -34,6 +32,9 @@ offset_right = 229.0
 offset_bottom = 282.0
 alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Blight" parent="TokenContainer" instance=ExtResource("3_tt77s")]
+layout_mode = 2
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

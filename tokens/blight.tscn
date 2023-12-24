@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://bl1whvue2oc0r"]
 
 [ext_resource type="Script" path="res://tokens/blight.gd" id="1_5u0tq"]
-[ext_resource type="Texture2D" uid="uid://c20vgswnu0vn5" path="res://art/tokens/Blight.png" id="2_m8638"]
+[ext_resource type="Texture2D" uid="uid://c20vgswnu0vn5" path="res://art/tokens/blight.png" id="2_mqqhc"]
 
-[node name="Blight" type="MarginContainer"]
+[node name="Blight" type="MarginContainer" groups=["blight"]]
 offset_right = 64.0
 offset_bottom = 64.0
 script = ExtResource("1_5u0tq")
@@ -11,4 +11,4 @@ script = ExtResource("1_5u0tq")
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 2
 disabled = true
-texture_normal = ExtResource("2_m8638")
+texture_normal = ExtResource("2_mqqhc")

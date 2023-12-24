@@ -1,16 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpo3hurms0q6j"]
+[gd_scene load_steps=3 format=3 uid="uid://cpo3hurms0q6j"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_kk0jm"]
-[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invader.tscn" id="2_p01om"]
-[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_lw3jv"]
+[ext_resource type="PackedScene" uid="uid://dptgqgt0t7nkl" path="res://tokens/invaders/city.tscn" id="5_wucv6"]
 
-[node name="LandRegion6" type="Area2D"]
+[node name="LandRegion6" type="Area2D" node_paths=PackedStringArray("cities")]
 script = ExtResource("1_kk0jm")
-invader_scene = ExtResource("2_p01om")
-blight_scene = ExtResource("3_lw3jv")
 id = 6
-land_type = "Water"
+land_type = "Wetland"
 is_coastal = true
+cities = [NodePath("TokenContainer/City")]
 
 [node name="BorderPolygon" type="Polygon2D" parent="."]
 color = Color(0.237843, 0.16896, 0.00488826, 1)
@@ -39,6 +37,9 @@ offset_right = 173.0
 offset_bottom = 263.0
 alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="City" parent="TokenContainer" instance=ExtResource("5_wucv6")]
+layout_mode = 2
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

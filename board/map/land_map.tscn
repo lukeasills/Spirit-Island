@@ -1,10 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://b63wdd2ddmtks"]
+[gd_scene load_steps=15 format=3 uid="uid://b63wdd2ddmtks"]
 
 [ext_resource type="Script" path="res://board/map/land_map.gd" id="1_lb0sk"]
+[ext_resource type="PackedScene" uid="uid://3x4fejxyrk0b" path="res://tokens/invaders/explorer.tscn" id="2_bb2hc"]
+[ext_resource type="PackedScene" uid="uid://cwwkxgfqrh8sx" path="res://tokens/invaders/town.tscn" id="3_71jga"]
 [ext_resource type="PackedScene" uid="uid://t2lgj1kphfw2" path="res://board/map/regions/land_region_1.tscn" id="3_vn27u"]
+[ext_resource type="PackedScene" uid="uid://dptgqgt0t7nkl" path="res://tokens/invaders/city.tscn" id="4_i44k2"]
 [ext_resource type="PackedScene" uid="uid://b5qtuaptrymme" path="res://board/map/regions/land_region_2.tscn" id="4_lcajq"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="5_1g4s7"]
 [ext_resource type="PackedScene" uid="uid://5bel7pydcdbk" path="res://board/map/regions/land_region_3.tscn" id="5_s2vlx"]
 [ext_resource type="PackedScene" uid="uid://butbj13776vk3" path="res://board/map/regions/land_region_4.tscn" id="6_5n2yc"]
+[ext_resource type="PackedScene" uid="uid://16miyvwcpqqy" path="res://tokens/dahan.tscn" id="6_pf8ql"]
 [ext_resource type="PackedScene" uid="uid://1earn4vslmdg" path="res://board/map/regions/land_region_5.tscn" id="7_6nq2b"]
 [ext_resource type="PackedScene" uid="uid://cpo3hurms0q6j" path="res://board/map/regions/land_region_6.tscn" id="8_003ex"]
 [ext_resource type="PackedScene" uid="uid://ditio3kclv2v3" path="res://board/map/regions/land_region_7.tscn" id="9_0i58k"]
@@ -12,6 +17,11 @@
 
 [node name="LandMap" type="MarginContainer"]
 script = ExtResource("1_lb0sk")
+explorer_scene = ExtResource("2_bb2hc")
+town_scene = ExtResource("3_71jga")
+city_scene = ExtResource("4_i44k2")
+blight_scene = ExtResource("5_1g4s7")
+dahan_scene = ExtResource("6_pf8ql")
 
 [node name="LandRegion1" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("3_vn27u")]
 adjacent_regions = [NodePath("../LandRegion2"), NodePath("../LandRegion4"), NodePath("../LandRegion5")]
@@ -35,7 +45,6 @@ adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion2"), Node
 
 [node name="LandRegion6" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("8_003ex")]
 position = Vector2(1025, 250)
-land_type = "Wetland"
 adjacent_regions = [NodePath("../LandRegion2"), NodePath("../LandRegion3"), NodePath("../LandRegion5"), NodePath("../LandRegion7"), NodePath("../LandRegion8")]
 
 [node name="LandRegion7" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("9_0i58k")]

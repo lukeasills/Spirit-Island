@@ -70,6 +70,9 @@ func _on_invader_actions_initiated():
 		explore_initiated.emit(drawn_card.land_types)
 		await get_parent().explored
 	actions_processed = true
+	get_tree().call_group("dahan", "reset_damage")
+	get_tree().call_group("towns", "reset_damage")
+	get_tree().call_group("cities", "reset_damage")
 	
 	
 

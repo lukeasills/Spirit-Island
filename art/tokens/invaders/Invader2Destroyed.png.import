@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dthxn56fltr1d"
-path="res://.godot/imported/town.png-06e3a8968d46bb76d3da950381ddf765.ctex"
+uid="uid://db358uaygrbgh"
+path="res://.godot/imported/Invader2Destroyed.png-fb0b19c97f6614466857a0634d724a62.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tokens/town.png"
-dest_files=["res://.godot/imported/town.png-06e3a8968d46bb76d3da950381ddf765.ctex"]
+source_file="res://art/tokens/invaders/Invader2Destroyed.png"
+dest_files=["res://.godot/imported/Invader2Destroyed.png-fb0b19c97f6614466857a0634d724a62.ctex"]
 
 [params]
 

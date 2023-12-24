@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c20vgswnu0vn5"
-path="res://.godot/imported/blight.png-4478df3a26ec8be2f1da7740e293bf99.ctex"
+uid="uid://dyj6yttme21tg"
+path="res://.godot/imported/city.png-ed0ff0919855967c5f8d06f36709673f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/tokens/blight.png"
-dest_files=["res://.godot/imported/blight.png-4478df3a26ec8be2f1da7740e293bf99.ctex"]
+source_file="res://art/tokens/invaders/city.png"
+dest_files=["res://.godot/imported/city.png-ed0ff0919855967c5f8d06f36709673f.ctex"]
 
 [params]
 
