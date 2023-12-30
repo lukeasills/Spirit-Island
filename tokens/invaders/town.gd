@@ -37,6 +37,8 @@ func reset_damage():
 	damaged = false
 	$TextureButton.texture_normal = normal_texture
 
+func set_destroyed():
+	$TextureButton.texture_normal = destroyed_texture
 
 func _on_texture_button_pressed():
 	get_parent().get_parent().token_selected(self)

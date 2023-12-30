@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgwxcduh67xss"]
+
+[ext_resource type="Script" path="res://tokens/blight.gd" id="1_3qxaa"]
+[ext_resource type="Texture2D" uid="uid://bneq7378o3rf" path="res://art/tokens/Fear4.png" id="2_pb3sx"]
+
+[node name="Fear" type="MarginContainer" groups=["blight"]]
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_3qxaa")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_pb3sx")
+expand_mode = 1

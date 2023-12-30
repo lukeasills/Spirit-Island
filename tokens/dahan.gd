@@ -19,6 +19,22 @@ func reset_damage():
 	damaged = false
 	$TextureButton.texture_normal = normal_texture
 
+# Set texture to destroyed texture
+func set_destroyed():
+	$TextureButton.texture_normal = destroyed_texture
+
+# Set selectable by player for removing
+func set_active_for_removal():
+	$TextureButton.texture_hover = destroyed_texture
+	$TextureButton.texture_pressed = destroyed_texture
+	$TextureButton.disabled = false
+
+func set_inactive():
+	$TextureButton.disabled = true
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_texture_button_pressed():
+	get_parent().get_parent().token_selected(self)

@@ -17,3 +17,5 @@ destroyed_texture = ExtResource("4_vxfwi")
 layout_mode = 2
 disabled = true
 texture_normal = ExtResource("2_mpou5")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

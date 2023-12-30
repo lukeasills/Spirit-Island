@@ -1,4 +1,5 @@
 extends MarginContainer
+# Player input signals
 signal active_region_entered
 signal active_region_selected
 signal active_region_exited
@@ -9,6 +10,9 @@ signal active_token_selected
 @export var city_scene: PackedScene
 @export var blight_scene: PackedScene
 @export var dahan_scene: PackedScene
+
+# For passing control to FearBoard
+@export var fear_board: Node
 
 var map_data = [
 	{"type":"Jungle", "iscoastal":false, "adjacentregions": [1,3,4],
@@ -64,6 +68,123 @@ func _ready():
 func _process(delta):
 	pass
 
+# Generalized functions for damaging tokens, removing if maxed-out
+func damage_invader(region, token, is_delayed):
+	# If explorer, 1 damage destroys it
+	if region.explorers.has(token):
+		await destroy_invader(region, token, is_delayed)
+	# If a town, 2 options: destroy if damaged already, else damage
+	elif region.towns.has(token):
+		if token.damaged:
+			await destroy_invader(region, token, is_delayed)
+		else:
+			region.damage_town(token)
+			if is_delayed:
+				$Timer.start()
+				await $Timer.timeout
+	# If a city, destroy if at 2 damage, else add damage
+	else:
+		if token.damage == 2:
+			await destroy_invader(region, token, is_delayed)
+		else:
+			region.damage_city(token, token.damage + 1)
+			if is_delayed:
+				$Timer.start()
+				await $Timer.timeout
+
+func damage_dahan(region, token, is_delayed):
+	# If already damaged, destroy it
+	if token.damaged:
+		await destroy_dahan(region, token, is_delayed)
+	else:
+		region.damage_dahan(token)
+		if is_delayed:
+			$Timer.start()
+			await $Timer.timeout
+
+# Generalized functions for destroying tokens
+func destroy_invader(region, token, is_delayed):
+	# Set the texture to reflect destruction
+	token.set_destroyed()
+	# If is_delayed, run a timer first
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+	# Depending on type of invader, call the right function in the region
+	if region.explorers.has(token):
+		region.destroy_explorer(token)
+	elif region.towns.has(token):
+		region.destroy_town(token)
+		await fear_board.generate_fear(1)
+		
+	else:
+		region.destroy_city(token)
+		await fear_board.generate_fear(2)
+
+func destroy_dahan(region, token, is_delayed):
+	# Set the texture to reflect destruction
+	token.set_destroyed()
+	# If is_delayed, run a timer first
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+	region.destroy_dahan(token)
+
+# Genarlized functions for removing tokens
+func remove_blight(region, token, is_delayed):
+	# Set the texture to reflect destruction
+	token.set_removed()
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+	region.remove_blight(token)
+
+# Currently uses set_destroyed method, could update if using diff texture
+func remove_invader(region, token, is_delayed):
+	# Set the texture to reflect destruction
+	token.set_destroyed()
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+	if region.explorers.has(token):
+		region.remove_explorer(token)
+	elif region.towns.has(token):
+		region.remove_town(token)
+	else:
+		region.remove_city(token)
+
+# Currently uses set_destroyed method, could update if using diff texture
+func remove_dahan(region, token, is_delayed):
+	# Set the texture to reflect destruction
+	token.set_destroyed()
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+	region.remove_dahan(token)
+
+# Generalized functions for pushing tokens
+func push_invader(region, token, new_region, is_delayed):
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+	if region.explorers.has(token):
+		region.remove_explorer(token)
+		new_region.add_explorer(token)
+	elif region.towns.has(token):
+		region.remove_town(token)
+		new_region.add_town(token)
+	else:
+		region.remove_city(token)
+		new_region.add_city(token)
+
+func push_dahan(region, token, new_region, is_delayed):
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+	region.remove_dahan(token)
+	new_region.add_dahan(token)
+
+# User input functions
 func token_clicked(token):
 	active_token_selected.emit(token)
 

@@ -1,18 +1,61 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmaoafshanif2"]
+[gd_scene load_steps=16 format=3 uid="uid://cmaoafshanif2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yvfee"]
 [ext_resource type="PackedScene" uid="uid://hlg8ou050rac" path="res://board/invaderboard/invader_deck.tscn" id="2_5j4p5"]
 [ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="2_af6tv"]
 [ext_resource type="Script" path="res://board/invaderboard/InvaderBoard.gd" id="3_hen3h"]
 [ext_resource type="PackedScene" uid="uid://kpw1armnhu0v" path="res://board/invaderboard/invader_card_space.tscn" id="3_vgr1o"]
+[ext_resource type="PackedScene" uid="uid://bptwhp61iay73" path="res://board/fearpool/earned_fear_cards_spot.tscn" id="4_7a7jb"]
+[ext_resource type="Script" path="res://board/fearpool/fear_board.gd" id="4_alcv7"]
 [ext_resource type="PackedScene" uid="uid://b63wdd2ddmtks" path="res://board/map/land_map.tscn" id="4_n62ow"]
+[ext_resource type="PackedScene" uid="uid://dj1o4vf8b6lqi" path="res://board/fearpool/fear_deck.tscn" id="4_q3nq7"]
 [ext_resource type="PackedScene" uid="uid://cnsdfrqwvvbio" path="res://board/invaderboard/discard_space.tscn" id="5_btuvb"]
-[ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://board/invaderboard/invader_card_mover.tscn" id="7_dcxgg"]
+[ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://cards/card_mover.tscn" id="7_dcxgg"]
+[ext_resource type="PackedScene" uid="uid://b3c2qnpn3s7l0" path="res://cards/fear_cards/dahan_on_their_guard.tscn" id="8_07t1n"]
 [ext_resource type="Script" path="res://LabelContainer.gd" id="9_njwbg"]
+[ext_resource type="PackedScene" uid="uid://e4nfm80o7kmd" path="res://board/fearpool/fear_pool.tscn" id="10_87d84"]
+[ext_resource type="PackedScene" uid="uid://u7gh7ogqekkc" path="res://cards/invader_card.tscn" id="13_h7dub"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_yvfee")
 blight_scene = ExtResource("2_af6tv")
+
+[node name="FearBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap")]
+script = ExtResource("4_alcv7")
+LandMap = NodePath("../LandMap")
+
+[node name="FearDeck" parent="FearBoard" instance=ExtResource("4_q3nq7")]
+offset_left = 40.0
+offset_top = 400.0
+offset_right = 280.0
+offset_bottom = 736.0
+
+[node name="EarnedFearCardsSpot" parent="FearBoard" instance=ExtResource("4_7a7jb")]
+offset_left = 40.0
+offset_top = 800.0
+offset_right = 280.0
+offset_bottom = 1136.0
+
+[node name="FearPool" parent="FearBoard" instance=ExtResource("10_87d84")]
+offset_left = 324.0
+offset_top = 371.0
+offset_right = 964.0
+offset_bottom = 1011.0
+
+[node name="FearCardMover" parent="FearBoard" instance=ExtResource("7_dcxgg")]
+offset_left = 40.0
+offset_top = 400.0
+offset_right = 200.0
+offset_bottom = 624.0
+card_scene = ExtResource("8_07t1n")
+speed = Vector2(0, 5)
+
+[node name="LandMap" parent="." node_paths=PackedStringArray("fear_board") instance=ExtResource("4_n62ow")]
+offset_left = 780.0
+offset_top = 54.0
+offset_right = 780.0
+offset_bottom = 54.0
+fear_board = NodePath("../FearBoard")
 
 [node name="InvaderBoard" type="Node" parent="."]
 script = ExtResource("3_hen3h")
@@ -51,18 +94,18 @@ offset_right = 630.0
 offset_bottom = 1448.0
 
 [node name="InvaderCardMover" parent="InvaderBoard" instance=ExtResource("7_dcxgg")]
-
-[node name="LandMap" parent="." instance=ExtResource("4_n62ow")]
-offset_left = 363.0
-offset_top = 26.0
-offset_right = 363.0
-offset_bottom = 26.0
+offset_left = 1702.0
+offset_top = 1199.0
+offset_right = 1862.0
+offset_bottom = 1423.0
+card_scene = ExtResource("13_h7dub")
+speed = Vector2(-15, 0)
 
 [node name="LabelContainer" type="CenterContainer" parent="."]
-offset_left = 1012.0
-offset_top = 1056.0
-offset_right = 1319.0
-offset_bottom = 1152.0
+offset_left = 888.0
+offset_top = 1044.0
+offset_right = 1195.0
+offset_bottom = 1140.0
 script = ExtResource("9_njwbg")
 
 [node name="Label" type="Label" parent="LabelContainer"]
@@ -78,11 +121,12 @@ wait_time = 0.5
 [connection signal="built" from="." to="LabelContainer" method="_on_main_built"]
 [connection signal="explored" from="." to="LabelContainer" method="_on_main_explored"]
 [connection signal="ravaged" from="." to="LabelContainer" method="_on_main_ravaged"]
+[connection signal="fear_pool_empty" from="FearBoard/FearPool" to="FearBoard" method="_on_fear_pool_fear_pool_empty"]
 [connection signal="build_initiated" from="InvaderBoard" to="." method="_on_invader_board_build_initiated"]
 [connection signal="build_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_build_initiated"]
 [connection signal="explore_initiated" from="InvaderBoard" to="." method="_on_invader_board_explore_initiated"]
 [connection signal="explore_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_explore_initiated"]
-[connection signal="invader_actions_initiated" from="InvaderBoard" to="InvaderBoard" method="_on_invader_actions_initiated"]
+[connection signal="invader_actions_completed" from="InvaderBoard" to="." method="_on_invader_board_invader_actions_completed"]
 [connection signal="ravage_initiated" from="InvaderBoard" to="." method="_on_invader_board_ravage_initiated"]
 [connection signal="ravage_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravage_initiated"]
 [connection signal="emptied" from="InvaderBoard/InvaderDeck" to="." method="_on_invader_deck_emptied"]

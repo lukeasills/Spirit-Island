@@ -16,11 +16,13 @@ var active
 @export var towns: Array[Node]
 @export var cities: Array[Node]
 @export var dahans: Array[Node]
+var defense
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	active = false
+	defense = 0
 
 func set_color(new_color: Color):
 	$RegionPolygon.color = new_color
@@ -33,42 +35,31 @@ func set_id(id_number):
 
 # Token functions
 
-# Adding tokens
+# Adding tokens, optionally takes a token as parameter
 
-func add_explorer():
-	var explorer = get_parent().explorer_scene.instantiate()
+func add_explorer(explorer = get_parent().explorer_scene.instantiate()):
 	$TokenContainer.add_child(explorer)
 	explorers.append(explorer)
 
-func add_town():
-	var town = get_parent().town_scene.instantiate()
+func add_town(town = get_parent().town_scene.instantiate()):
 	$TokenContainer.add_child(town)
 	towns.append(town)
 
-func add_city():
-	var city = get_parent().city_scene.instantiate()
+func add_city(city = get_parent().city_scene.instantiate()):
 	$TokenContainer.add_child(city)
 	cities.append(city)
 
-func add_blight():
-	var blight = get_parent().blight_scene.instantiate()
+func add_blight(blight = get_parent().blight_scene.instantiate()):
 	$TokenContainer.add_child(blight)
 	blights.append(blight)
 
-func add_dahan():
-	var dahan = get_parent().dahan_scene.instantiate()
+func add_dahan(dahan = get_parent().dahan_scene.instantiate()):
 	$TokenContainer.add_child(dahan)
 	dahans.append(dahan)
 
-# Destroy and damage tokens
+# Functions for damaging tokens
 
-func destroy_dahan():
-	var dahan = dahans.pop_front()
-	$TokenContainer.remove_child(dahan)
-	dahan.queue_free()
-
-func damage_dahan():
-	var dahan = dahans[0]
+func damage_dahan(dahan):
 	dahan.set_damaged()
 
 func damage_town(town):
@@ -77,17 +68,54 @@ func damage_town(town):
 func damage_city(city, damage):
 	city.set_damaged(damage)
 
+# Functions for destroying tokens
+
+func destroy_dahan(dahan):
+	$TokenContainer.remove_child(dahan)
+	dahans.erase(dahan)
+	dahan.queue_free()
+
 func destroy_explorer(explorer):
+	$TokenContainer.remove_child(explorer)
 	explorers.erase(explorer)
 	explorer.queue_free()
 
 func destroy_town(town):
+	$TokenContainer.remove_child(town)
 	towns.erase(town)
 	town.queue_free()
 
 func destroy_city(city):
+	$TokenContainer.remove_child(city)
 	cities.erase(city)
 	city.queue_free()
+
+# Functions for removing tokens
+# TODO: Currently highly redundant with destroy
+
+func remove_dahan(dahan):
+	$TokenContainer.remove_child(dahan)
+	dahans.erase(dahan)
+	dahan.queue_free()
+
+func remove_explorer(explorer):
+	$TokenContainer.remove_child(explorer)
+	explorers.erase(explorer)
+	explorer.queue_free()
+
+func remove_town(town):
+	$TokenContainer.remove_child(town)
+	towns.erase(town)
+	town.queue_free()
+
+func remove_city(city):
+	$TokenContainer.remove_child(city)
+	cities.erase(city)
+	city.queue_free()
+
+func remove_blight(blight):
+	$TokenContainer.remove_child(blight)
+	blights.erase(blight)
 
 func has_invaders():
 	if explorers.size() + towns.size() + cities.size() > 0:
@@ -95,22 +123,16 @@ func has_invaders():
 	else:
 		return false
 
-func test_has_invaders():
-	print("why not? size of tokencontainer: ", $TokenContainer.get_child_count())
-	print("explorers: ", explorers.size())
-	print("towns: ", towns.size())
-	print("cities: ", cities.size())
-	if explorers.size() + towns.size() + cities.size() > 0:
-		return true
-	else:
-		return false
+# Defense functions
+func add_defense(how_much):
+	defense += how_much
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 # Setting invaders selectable for player distributing damage
-func set_invaders_active_for_damage():
+func activate_invaders_for_damage():
 	for explorer in explorers:
 		explorer.set_active_for_damage()
 	for town in towns:
@@ -118,22 +140,11 @@ func set_invaders_active_for_damage():
 	for city in cities:
 		city.set_active_for_damage()
 
-func damage_invader(invader):
-	if explorers.has(invader):
-		destroy_explorer(invader)
-	elif towns.has(invader):
-		if invader.damaged:
-			destroy_town(invader)
-		else:
-			damage_town(invader)
-	else:
-		if invader.damage == 2:
-			destroy_city(invader)
-		else:
-			damage_city(invader, invader.damage + 1)
+func activate_invaders_for_destruction():
+	pass
 
 # Setting invaders inactive again
-func set_invaders_inactive():
+func deactivate_invaders():
 	for explorer in explorers:
 		explorer.set_inactive()
 	for town in towns:

@@ -1,29 +1,20 @@
 extends Node
-signal invader_actions_initiated
+signal invader_actions_completed
 
 signal ravage_initiated
 signal build_initiated
 signal explore_initiated
 
-var actions_processed
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	actions_processed = true
+	pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func _unhandled_input(event):
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_SPACE:
-			if actions_processed:
-				actions_processed = false
-				invader_actions_initiated.emit()
-
-func _on_invader_actions_initiated():
+func initiate_invader_actions():
 	# From ravage space to discard space
 	var old_ravage_card = $RavageSpace.detach()
 	# Check if there is something in RavageSpace...
@@ -69,7 +60,7 @@ func _on_invader_actions_initiated():
 		$ExploreSpace.attach(drawn_card)
 		explore_initiated.emit(drawn_card.land_types)
 		await get_parent().explored
-	actions_processed = true
+	invader_actions_completed.emit()
 	get_tree().call_group("dahan", "reset_damage")
 	get_tree().call_group("towns", "reset_damage")
 	get_tree().call_group("cities", "reset_damage")

@@ -21,6 +21,9 @@ func set_active_for_damage():
 func set_inactive():
 	$TextureButton.disabled = true
 
+func set_destroyed():
+	$TextureButton.texture_normal = destroyed_texture
+
 
 func _on_texture_button_pressed():
 	get_parent().get_parent().token_selected(self)
