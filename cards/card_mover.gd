@@ -43,6 +43,7 @@ func _process(delta):
 					position.y = end_position.y
 					moving = false
 					moved.emit(end_position)
+					position = Vector2(-100,-100)
 	if moving:
 		position += speed
 

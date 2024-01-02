@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3c2qnpn3s7l0"]
+[gd_scene load_steps=4 format=3 uid="uid://b3c2qnpn3s7l0"]
 
 [ext_resource type="Script" path="res://cards/fear_cards/dahan_on_their_guard.gd" id="1_ribq1"]
+[ext_resource type="Texture2D" uid="uid://c3048dajn8ute" path="res://art/cards/fear/FearCardFront.png" id="2_81qjr"]
 [ext_resource type="Texture2D" uid="uid://bcptpix7s4cov" path="res://art/cards/fear/FearCardBack.png" id="2_vev7b"]
 
 [node name="DahanOnTheirGuard" type="ReferenceRect"]
 offset_right = 240.0
 offset_bottom = 336.0
 script = ExtResource("1_ribq1")
+card_front = ExtResource("2_81qjr")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture_normal = ExtResource("2_vev7b")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

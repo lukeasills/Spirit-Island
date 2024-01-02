@@ -12,10 +12,14 @@ func _process(delta):
 	pass
 
 # Generate one fear at a time
-func generate_fear():
+func generate_fear(is_delayed):
 	var fear = $FearPoolContainer.get_children()[0]
 	$FearPoolContainer.remove_child(fear)
 	$GeneratedFearContainer.add_child(fear)
+	
+	if is_delayed:
+		$GenerateFearTimer.start()
+		await $GenerateFearTimer.timeout
 	
 	# If ever empty... reset!
 	if $FearPoolContainer.get_child_count() == 0:

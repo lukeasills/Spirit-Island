@@ -55,7 +55,7 @@ var map_data = [
 var color_dict = {
 	"Jungle": Color(0.15, 0.56, 0.24, 0.8),
 	"Water": Color(0.57, 0.91, 0.91, 0.8),
-	"Sand": Color(0.92, 0.77, 0.32, 0.8),
+	"Sands": Color(0.92, 0.77, 0.32, 0.8),
 	"Mountain": Color(0.47, 0.46, 0.49, 0.8)
 }
 

@@ -3,7 +3,7 @@ class_name card_effects
 extends Node
 
 @onready var LandMap = get_node("/root/Main/LandMap")
-
+@onready var effect_timer = get_node("/root/CardEffectTimer")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +12,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func await_timer():
+	effect_timer.start()
+	await effect_timer.timeout
 
 # -- Functions for prompting selection of tokens
 func select_invaders(regions):
@@ -65,6 +69,7 @@ func distribute_damage(selected, parameters):
 
 func defend(regions, type, how_much):
 	for region in regions:
+		await await_timer()
 		var how_much_this_one = how_much
 		if type == "per_dahan":
 			how_much_this_one *= region.dahans.size()

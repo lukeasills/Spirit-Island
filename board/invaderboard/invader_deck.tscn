@@ -41,9 +41,9 @@ front_texture = ExtResource("5_7li3h")
 visible = false
 land_types = Array[String](["Jungle"])
 
-[node name="SandCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
+[node name="SandsCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
 visible = false
-land_types = Array[String](["Sand"])
+land_types = Array[String](["Sands"])
 front_texture = ExtResource("8_6fm66")
 
 [node name="Stage2Cards" type="Node" parent="."]
@@ -53,9 +53,9 @@ visible = false
 land_types = Array[String](["Jungle"])
 front_texture = ExtResource("9_uq4m8")
 
-[node name="SandCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
+[node name="SandsCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
 visible = false
-land_types = Array[String](["Sand"])
+land_types = Array[String](["Sands"])
 front_texture = ExtResource("10_uh60p")
 
 [node name="WetlandCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
@@ -70,24 +70,24 @@ front_texture = ExtResource("12_vfk7i")
 
 [node name="CoastalCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
 visible = false
-land_types = Array[String](["Coastal"])
+land_types = Array[String](["Coasts"])
 front_texture = ExtResource("13_qkr5x")
 
 [node name="Stage3Cards" type="Node" parent="."]
 
-[node name="SandWetlandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+[node name="SandsWetlandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
-land_types = Array[String](["Sand", "Wetland"])
+land_types = Array[String](["Sands", "Wetland"])
 front_texture = ExtResource("12_qpeqi")
 
-[node name="SandMountainCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+[node name="SandsMountainCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
-land_types = Array[String](["Sand", "Mountain"])
+land_types = Array[String](["Sands", "Mountain"])
 front_texture = ExtResource("15_7d5i1")
 
-[node name="JungleSandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
+[node name="JungleSandsCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
-land_types = Array[String](["Jungle", "Sand"])
+land_types = Array[String](["Jungle", "Sands"])
 front_texture = ExtResource("16_i3ccl")
 
 [node name="JungleWetlandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]

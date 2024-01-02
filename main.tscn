@@ -18,7 +18,6 @@
 
 [node name="Main" type="Node"]
 script = ExtResource("1_yvfee")
-blight_scene = ExtResource("2_af6tv")
 
 [node name="FearBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap")]
 script = ExtResource("4_alcv7")
@@ -50,6 +49,8 @@ offset_bottom = 624.0
 card_scene = ExtResource("8_07t1n")
 speed = Vector2(0, 5)
 
+[node name="FearCardTimer" type="Timer" parent="FearBoard"]
+
 [node name="LandMap" parent="." node_paths=PackedStringArray("fear_board") instance=ExtResource("4_n62ow")]
 offset_left = 780.0
 offset_top = 54.0
@@ -57,8 +58,10 @@ offset_right = 780.0
 offset_bottom = 54.0
 fear_board = NodePath("../FearBoard")
 
-[node name="InvaderBoard" type="Node" parent="."]
+[node name="InvaderBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap")]
 script = ExtResource("3_hen3h")
+LandMap = NodePath("../LandMap")
+blight_scene = ExtResource("2_af6tv")
 
 [node name="InvaderDeck" parent="InvaderBoard" instance=ExtResource("2_5j4p5")]
 offset_left = 1700.0
@@ -101,11 +104,14 @@ offset_bottom = 1423.0
 card_scene = ExtResource("13_h7dub")
 speed = Vector2(-15, 0)
 
+[node name="InvaderActionTimer" type="Timer" parent="InvaderBoard"]
+wait_time = 0.5
+
 [node name="LabelContainer" type="CenterContainer" parent="."]
-offset_left = 888.0
-offset_top = 1044.0
-offset_right = 1195.0
-offset_bottom = 1140.0
+offset_left = 304.0
+offset_top = 1061.0
+offset_right = 1964.0
+offset_bottom = 1179.0
 script = ExtResource("9_njwbg")
 
 [node name="Label" type="Label" parent="LabelContainer"]
@@ -113,20 +119,26 @@ visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.662745, 0.662745, 0.662745, 1)
 theme_override_font_sizes/font_size = 70
-text = "Test Text"
+text = "Test Text testing"
+horizontal_alignment = 1
 
-[node name="InvaderActionTimer" type="Timer" parent="."]
-wait_time = 0.5
-
-[connection signal="built" from="." to="LabelContainer" method="_on_main_built"]
-[connection signal="explored" from="." to="LabelContainer" method="_on_main_explored"]
-[connection signal="ravaged" from="." to="LabelContainer" method="_on_main_ravaged"]
+[connection signal="fear_cards_resolved" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_cards_resolved"]
+[connection signal="initiate_resolve_earned_fear_cards" from="FearBoard" to="LabelContainer" method="_on_fear_board_initiate_resolve_earned_fear_cards"]
+[connection signal="fear_card_effect_resolved" from="FearBoard/EarnedFearCardsSpot" to="LabelContainer" method="_on_earned_fear_cards_spot_fear_card_effect_resolved"]
+[connection signal="initiate_resolve_fear_card_effect" from="FearBoard/EarnedFearCardsSpot" to="LabelContainer" method="_on_earned_fear_cards_spot_initiate_resolve_fear_card_effect"]
 [connection signal="fear_pool_empty" from="FearBoard/FearPool" to="FearBoard" method="_on_fear_pool_fear_pool_empty"]
+[connection signal="blight_cascade_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_blight_cascade_initiated"]
+[connection signal="blight_cascade_resolved" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_blight_cascade_resolved"]
 [connection signal="build_initiated" from="InvaderBoard" to="." method="_on_invader_board_build_initiated"]
 [connection signal="build_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_build_initiated"]
+[connection signal="built" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_built"]
+[connection signal="dahan_fight_back_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_dahan_fight_back_initiated"]
+[connection signal="dahan_fight_back_resolved" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_dahan_fight_back_resolved"]
 [connection signal="explore_initiated" from="InvaderBoard" to="." method="_on_invader_board_explore_initiated"]
 [connection signal="explore_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_explore_initiated"]
+[connection signal="explored" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_explored"]
 [connection signal="invader_actions_completed" from="InvaderBoard" to="." method="_on_invader_board_invader_actions_completed"]
 [connection signal="ravage_initiated" from="InvaderBoard" to="." method="_on_invader_board_ravage_initiated"]
 [connection signal="ravage_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravage_initiated"]
+[connection signal="ravaged" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravaged"]
 [connection signal="emptied" from="InvaderBoard/InvaderDeck" to="." method="_on_invader_deck_emptied"]
