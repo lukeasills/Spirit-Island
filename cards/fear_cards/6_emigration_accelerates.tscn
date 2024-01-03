@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://bfeh1i6vg60p2"]
+
+[ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_ui1h7"]
+[ext_resource type="Script" path="res://cards/fear_cards/6_emigration_accelerates.gd" id="2_2t6ar"]
+[ext_resource type="Texture2D" uid="uid://c3048dajn8ute" path="res://art/cards/fear/FearCardFront.png" id="3_73d3a"]
+
+[node name="EmigrationAccelerates" instance=ExtResource("1_ui1h7")]
+script = ExtResource("2_2t6ar")
+card_front = ExtResource("3_73d3a")

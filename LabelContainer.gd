@@ -50,12 +50,6 @@ func _on_fear_board_initiate_resolve_earned_fear_cards():
 func _on_fear_board_fear_cards_resolved():
 	turn_off_text()
 
-func _on_earned_fear_cards_spot_initiate_resolve_fear_card_effect(text):
-	set_text(text)
-
-func _on_earned_fear_cards_spot_fear_card_effect_resolved():
-	turn_off_text()
-
 func _on_invader_board_blight_cascade_initiated():
 	set_text("Blight cascades! Choose a region.")
 
@@ -66,4 +60,16 @@ func _on_invader_board_dahan_fight_back_initiated(damage):
 	set_text(str("The Dahan fight back! Distribute ",damage," damage"))
 
 func _on_invader_board_dahan_fight_back_resolved():
+	turn_off_text()
+
+func _on_fear_board_fear_card_earned():
+	set_text("Fear card earned!")
+
+func _on_fear_board_fear_card_earned_resolved():
+	turn_off_text()
+
+func _on_fear_board_fear_generated(how_much):
+	set_text(str("Generated ",how_much," fear."))
+
+func _on_fear_board_fear_generated_resolved():
 	turn_off_text()

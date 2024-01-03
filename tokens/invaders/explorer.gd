@@ -18,6 +18,14 @@ func set_active_for_damage():
 	$TextureButton.texture_pressed = destroyed_texture
 	$TextureButton.disabled = false
 
+# Set selectable by player for distributing damage
+func set_active_for_destruction():
+	set_active_for_damage()
+
+# Set selectable by player for distributing damage
+func set_active_for_removal():
+	set_active_for_destruction()
+
 func set_inactive():
 	$TextureButton.disabled = true
 

@@ -138,7 +138,6 @@ func remove_blight(region, token, is_delayed):
 		$Timer.start()
 		await $Timer.timeout
 	region.remove_blight(token)
-
 # Currently uses set_destroyed method, could update if using diff texture
 func remove_invader(region, token, is_delayed):
 	# Set the texture to reflect destruction
@@ -152,7 +151,6 @@ func remove_invader(region, token, is_delayed):
 		region.remove_town(token)
 	else:
 		region.remove_city(token)
-
 # Currently uses set_destroyed method, could update if using diff texture
 func remove_dahan(region, token, is_delayed):
 	# Set the texture to reflect destruction
@@ -185,8 +183,9 @@ func push_dahan(region, token, new_region, is_delayed):
 	new_region.add_dahan(token)
 
 # User input functions
-func token_clicked(token):
-	active_token_selected.emit(token)
+	
+func token_clicked(token, region):
+	active_token_selected.emit({"token":token,"region":region})
 
 func region_clicked(region):
 	active_region_selected.emit(region)

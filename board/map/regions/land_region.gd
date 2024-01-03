@@ -132,16 +132,53 @@ func _process(delta):
 	pass
 
 # Setting invaders selectable for player distributing damage
-func activate_invaders_for_damage():
-	for explorer in explorers:
-		explorer.set_active_for_damage()
-	for town in towns:
-		town.set_active_for_damage()
-	for city in cities:
-		city.set_active_for_damage()
+func activate_invaders_for_damage(if_explorers=true, if_towns=true, if_cities=true):
+	var total_activated = 0
+	if if_explorers:
+		for explorer in explorers:
+			explorer.set_active_for_damage()
+			total_activated += 1
+	if if_towns:
+		for town in towns:
+			town.set_active_for_damage()
+			total_activated += 1
+	if if_cities:
+		for city in cities:
+			city.set_active_for_damage()
+			total_activated += 1
+	return total_activated
 
-func activate_invaders_for_destruction():
-	pass
+func activate_invaders_for_destruction(if_explorers=true, if_towns=true, if_cities=true):
+	var total_activated = 0
+	if if_explorers:
+		for explorer in explorers:
+			explorer.set_active_for_destruction()
+			total_activated += 1
+	if if_towns:
+		for town in towns:
+			town.set_active_for_destruction()
+			total_activated += 1
+	if if_cities:
+		for city in cities:
+			city.set_active_for_destruction()
+			total_activated += 1
+	return total_activated
+
+func activate_invaders_for_removal(if_explorers=true, if_towns=true, if_cities=true):
+	var total_activated = 0
+	if if_explorers:
+		for explorer in explorers:
+			explorer.set_active_for_removal()
+			total_activated += 1
+	if if_towns:
+		for town in towns:
+			town.set_active_for_removal()
+			total_activated += 1
+	if if_cities:
+		for city in cities:
+			city.set_active_for_removal()
+			total_activated += 1
+	return total_activated
 
 # Setting invaders inactive again
 func deactivate_invaders():
@@ -153,13 +190,14 @@ func deactivate_invaders():
 		city.set_inactive()
 
 func token_selected(token):
-	get_parent().token_clicked(token)
+	get_parent().token_clicked(token, self)
 
 func set_active():
 	active = true
 
 func set_inactive():
 	active = false
+	$HighlightPolygon.color.a = 0.1
 
 func set_lit():
 	$HighlightPolygon.color.a = 0.4

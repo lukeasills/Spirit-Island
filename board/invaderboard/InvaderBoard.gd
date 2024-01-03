@@ -33,7 +33,7 @@ func initiate_invader_actions():
 	# Check if there is something in RavageSpace...
 	if old_ravage_card != null:
 		$InvaderCardMover.attach(old_ravage_card)
-		$InvaderCardMover.move($RavageSpace.position, $DiscardSpace.position)
+		$InvaderCardMover.move($RavageSpace.position+Vector2(5,5), $DiscardSpace.position+Vector2(5,5))
 		await $InvaderCardMover.moved	
 		old_ravage_card = $InvaderCardMover.detach()
 		$DiscardSpace.attach(old_ravage_card)
@@ -43,7 +43,7 @@ func initiate_invader_actions():
 	# Check if there is something in BuildSpace...
 	if old_build_card != null:
 		$InvaderCardMover.attach(old_build_card)
-		$InvaderCardMover.move($BuildSpace.position, $RavageSpace.position)
+		$InvaderCardMover.move($BuildSpace.position+Vector2(5,5), $RavageSpace.position+Vector2(5,5))
 		await $InvaderCardMover.moved
 		old_build_card = $InvaderCardMover.detach()
 		$RavageSpace.attach(old_build_card)
@@ -54,7 +54,7 @@ func initiate_invader_actions():
 	# Check if there is something in RavageSpace...
 	if old_explore_card != null:
 		$InvaderCardMover.attach(old_explore_card)
-		$InvaderCardMover.move($ExploreSpace.position, $BuildSpace.position)
+		$InvaderCardMover.move($ExploreSpace.position+Vector2(5,5), $BuildSpace.position+Vector2(5,5))
 		await $InvaderCardMover.moved
 		old_explore_card = $InvaderCardMover.detach( )
 		print(old_explore_card)
@@ -65,7 +65,7 @@ func initiate_invader_actions():
 	if !get_parent().invader_deck_empty:
 		var drawn_card = $InvaderDeck.draw()
 		$InvaderCardMover.attach(drawn_card)
-		$InvaderCardMover.move($InvaderDeck.position, $ExploreSpace.position)
+		$InvaderCardMover.move($InvaderDeck.position+Vector2(5,5), $ExploreSpace.position+Vector2(5,5))
 		await $InvaderCardMover.moved
 		drawn_card = $InvaderCardMover.detach()
 		$ExploreSpace.attach(drawn_card)
@@ -196,7 +196,11 @@ func dahan_fight_back(region):
 	var damage = region.dahans.size() * 2
 	while damage > 0:
 		dahan_fight_back_initiated.emit(damage)
-		var invader = await prompt_invader_selection(region)
+		var dict = await prompt_invaders_for_damage(region)
+		if dict == null:
+			dahan_fight_back_resolved.emit()
+			return
+		var invader = dict["token"]
 		await LandMap.damage_invader(region, invader, false)
 		damage -= 1
 	dahan_fight_back_resolved.emit()
@@ -214,24 +218,25 @@ func blight_cascades(region):
 	blight_cascade_initiated.emit()
 
 	# Defer to function which prompts region selection and returns the region
-	var cascading_region = await prompt_region_selection(adjacent_regions, new_blight)
+	var cascading_region = await prompt_region_cascade_selection(adjacent_regions, new_blight)
 	blight_cascade_resolved.emit()
 	await invaders_damage_the_land(cascading_region)
 
-func prompt_invader_selection(region):	
-	region.activate_invaders_for_damage()
+func prompt_region_cascade_selection(regions, new_blight):
+	for region in regions:
+		region.set_active()
+	var selected_region = await LandMap.active_region_selected
+	for region in regions:
+		region.set_inactive()
+	return selected_region
+	
+func prompt_invaders_for_damage(region):
+	var total_activated = region.activate_invaders_for_damage()
+	if total_activated == 0:
+		return null
 	var selected_invader = await LandMap.active_token_selected
 	region.deactivate_invaders()
 	return selected_invader
-
-# Handles the logic for prompting a region choice
-func prompt_region_selection(valid_regions, token_on_hover):
-	for region in valid_regions:
-		region.set_active()
-	var selected_region = await LandMap.active_region_selected
-	for region in valid_regions:
-		region.set_inactive()
-	return selected_region
 
 func pre_invader_action_wait():
 	$InvaderActionTimer.start()

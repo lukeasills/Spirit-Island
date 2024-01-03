@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://dh0uv31isvww1"]
+
+[ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_j1vkk"]
+[ext_resource type="Texture2D" uid="uid://c3048dajn8ute" path="res://art/cards/fear/FearCardFront.png" id="2_40ooe"]
+[ext_resource type="Script" path="res://cards/fear_cards/2_isolation.gd" id="2_fdqm8"]
+
+[node name="Isolation" instance=ExtResource("1_j1vkk")]
+script = ExtResource("2_fdqm8")
+card_front = ExtResource("2_40ooe")

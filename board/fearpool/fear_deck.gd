@@ -13,7 +13,7 @@ func setup_initial_deck():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _prcess(delta):
 	pass
 
 # On button press, 'pop' the top card data, and instantiate a new card

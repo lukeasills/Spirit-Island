@@ -137,7 +137,7 @@ script = ExtResource("9_njwbg")
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.662745, 0.662745, 0.662745, 1)
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 70
 text = "Test Text testing"
 horizontal_alignment = 1
 
@@ -147,6 +147,8 @@ horizontal_alignment = 1
 [connection signal="fear_generated" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_generated"]
 [connection signal="fear_generated_resolved" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_generated_resolved"]
 [connection signal="initiate_resolve_earned_fear_cards" from="FearBoard" to="LabelContainer" method="_on_fear_board_initiate_resolve_earned_fear_cards"]
+[connection signal="fear_card_effect_resolved" from="FearBoard/EarnedFearCardsSpot" to="LabelContainer" method="_on_earned_fear_cards_spot_fear_card_effect_resolved"]
+[connection signal="initiate_resolve_fear_card_effect" from="FearBoard/EarnedFearCardsSpot" to="LabelContainer" method="_on_earned_fear_cards_spot_initiate_resolve_fear_card_effect"]
 [connection signal="fear_pool_empty" from="FearBoard/FearPool" to="FearBoard" method="_on_fear_pool_fear_pool_empty"]
 [connection signal="blight_cascade_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_blight_cascade_initiated"]
 [connection signal="blight_cascade_resolved" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_blight_cascade_resolved"]

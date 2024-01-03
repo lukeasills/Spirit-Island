@@ -1,5 +1,5 @@
 class_name dahan_on_their_guard
-extends "res://cards/fear_cards/fear_card_base.gd"
+extends "res://cards/fear_cards/fear_card.gd"
 
 func _ready():
 	level1_effect_text = "In each land, Defend 1 per Dahan"
@@ -18,7 +18,3 @@ func resolve_level2_effects():
 func resolve_level3_effects():
 	var regions = get_any_land()
 	await defend(regions, "per_dahan", 2)
-
-
-func _on_texture_button_pressed():
-	card_pressed()

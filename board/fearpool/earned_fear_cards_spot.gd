@@ -1,7 +1,6 @@
 extends ReferenceRect
-signal initiate_resolve_fear_card_effect
+
 signal fear_card_pressed
-signal fear_card_effect_resolved
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,9 +41,3 @@ func get_oldest_card():
 
 func card_pressed(card):
 	fear_card_pressed.emit(card)
-	
-func display_effect_text(text):
-	initiate_resolve_fear_card_effect.emit(text)
-
-func fear_card_resolved():
-	fear_card_effect_resolved.emit()

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://vyxn6jvgraqn"]
+
+[ext_resource type="Script" path="res://cards/fear_cards/fear_card.gd" id="1_c8x6q"]
+[ext_resource type="Texture2D" uid="uid://bcptpix7s4cov" path="res://art/cards/fear/FearCardBack.png" id="2_7i6xu"]
+[ext_resource type="Texture2D" uid="uid://cl8emdvc70qor" path="res://art/cards/fear/FearCardBackLit.png" id="3_emvr5"]
+
+[node name="FearCardBase" type="ReferenceRect"]
+offset_right = 240.0
+offset_bottom = 336.0
+script = ExtResource("1_c8x6q")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+disabled = true
+texture_normal = ExtResource("2_7i6xu")
+texture_hover = ExtResource("3_emvr5")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

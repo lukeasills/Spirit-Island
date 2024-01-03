@@ -24,6 +24,14 @@ func set_active_for_damage():
 		$TextureButton.texture_pressed = damaged_texture
 	$TextureButton.disabled = false
 
+func set_active_for_destruction():
+	$TextureButton.texture_hover = destroyed_texture
+	$TextureButton.texture_pressed = destroyed_texture
+	$TextureButton.disabled = false
+
+func set_active_for_removal():
+	set_active_for_destruction()
+
 func set_inactive():
 	$TextureButton.disabled = true
 

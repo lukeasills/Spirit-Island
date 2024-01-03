@@ -1,9 +1,10 @@
-class_name fear_card_base
+class_name fear_card
 
 extends "res://cards/card_effects.gd"
 
 @export var card_front: Texture2D
 var card_back = load("res://art/cards/fear/FearCardBack.png")
+var card_back_lit = load("res://art/cards/fear/FearCardBackLit.png")
 
 @onready var revealed = false
 
@@ -18,15 +19,15 @@ func _ready():
 # Base function for resolving effects. In fear cards, determine which level
 func resolve_effects(fear_level):
 	if fear_level == 1:
-		get_parent().display_effect_text(level1_effect_text)
+		LabelContainer.set_text(level1_effect_text)
 		await resolve_level1_effects()
 	elif fear_level == 2:
-		get_parent().display_effect_text(level2_effect_text)
+		LabelContainer.set_text(level2_effect_text)
 		await resolve_level2_effects()
 	else:
-		get_parent().display_effect_text(level3_effect_text)
+		LabelContainer.set_text(level3_effect_text)
 		await resolve_level3_effects()
-	get_parent().fear_card_resolved()
+	LabelContainer.turn_off_text()
 
 func resolve_level1_effects():
 	pass
@@ -60,3 +61,6 @@ func flip():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_texture_button_pressed():
+	card_pressed()
