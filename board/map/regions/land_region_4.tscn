@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://butbj13776vk3"]
+[gd_scene load_steps=4 format=3 uid="uid://butbj13776vk3"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_6r0sg"]
+[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="3_wol8e"]
 [ext_resource type="PackedScene" uid="uid://cwwkxgfqrh8sx" path="res://tokens/invaders/town.tscn" id="5_3vbfb"]
 
 [node name="LandRegion4" type="Area2D" node_paths=PackedStringArray("towns")]
@@ -24,6 +25,12 @@ polygon = PackedVector2Array(12, 10, 163, 10, 330, 180, 650, 335, 90, 490, 10, 3
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 165, 0, 335, 170, 665, 335, 85, 500, 0, 370, 60, 170, 0, 0)
+
+[node name="DefenseIcon" parent="." instance=ExtResource("3_wol8e")]
+offset_left = 151.0
+offset_top = 144.0
+offset_right = 215.0
+offset_bottom = 208.0
 
 [node name="TokenContainer" type="HFlowContainer" parent="."]
 offset_left = 47.0

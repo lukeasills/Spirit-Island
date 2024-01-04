@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://jx8pp3nuvlrd"]
+[gd_scene load_steps=4 format=3 uid="uid://jx8pp3nuvlrd"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_pmjju"]
+[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="2_g01v2"]
 [ext_resource type="PackedScene" uid="uid://16miyvwcpqqy" path="res://tokens/dahan.tscn" id="4_67o3r"]
 
 [node name="LandRegion8" type="Area2D" node_paths=PackedStringArray("dahans")]
@@ -29,6 +30,12 @@ polygon = PackedVector2Array(175, 225, 250, 100, 325, -25, 275, -125, 288, -115,
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 125, -100, 210, -75, 275, -125, 325, -25, 250, 100, 175, 225, -50, 155, 0, 0)
+
+[node name="DefenseIcon" parent="." instance=ExtResource("2_g01v2")]
+offset_left = 223.0
+offset_top = -68.0
+offset_right = 287.0
+offset_bottom = -4.0
 
 [node name="TokenContainer" type="HFlowContainer" parent="."]
 offset_left = 40.0

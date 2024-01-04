@@ -22,6 +22,14 @@ func initiate_main_turn_loop():
 	turn_in_progress = true
 	await $FearBoard.resolve_earned_fear_cards(true)
 	await $InvaderBoard.initiate_invader_actions()
+	await time_passes()
+
+func time_passes():
+	get_tree().call_group("dahan", "reset_damage")
+	get_tree().call_group("towns", "reset_damage")
+	get_tree().call_group("cities", "reset_damage")
+	get_tree().call_group("regions", "reset_defense")
+	get_tree().call_group("regions", "reset_blocked_invader_actions")
 
 func _on_invader_deck_emptied():
 	invader_deck_empty = true

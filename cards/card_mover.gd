@@ -26,24 +26,27 @@ func _process(delta):
 				if position.x + speed.x * delta <= end_position.x:
 					position.x = end_position.x
 					moving = false
+					position = Vector2(-100,-100)
 					moved.emit(end_position)
 			else:
 				if position.x + speed.x *delta >= end_position.x:
 					position.x = end_position.x
 					moving = false
+					position = Vector2(-100,-100)
 					moved.emit(end_position)
 		else:
 			if negative:
 				if position.y + speed.y * delta <= end_position.y:
 					position.x = end_position.x
 					moving = false
+					position = Vector2(-100,-100)
 					moved.emit(end_position)
 			else:
 				if position.y + speed.y *delta >= end_position.y:
 					position.y = end_position.y
 					moving = false
-					moved.emit(end_position)
 					position = Vector2(-100,-100)
+					moved.emit(end_position)
 	if moving:
 		position += speed
 

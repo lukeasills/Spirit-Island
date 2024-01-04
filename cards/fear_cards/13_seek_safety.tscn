@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7fv8bq6ee5or"]
+
+[ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_sct88"]
+[ext_resource type="Script" path="res://cards/fear_cards/13_seek_safety.gd" id="2_p38cw"]
+
+[node name="SeekSafety" instance=ExtResource("1_sct88")]
+script = ExtResource("2_p38cw")

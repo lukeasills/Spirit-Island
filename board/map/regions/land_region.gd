@@ -16,13 +16,17 @@ var active
 @export var towns: Array[Node]
 @export var cities: Array[Node]
 @export var dahans: Array[Node]
+
 var defense
+var blocked_invader_actions
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	active = false
 	defense = 0
+	# Explore, Build [Towns, Cities], Ravage respectively
+	blocked_invader_actions = [false, [false, false], false]
 
 func set_color(new_color: Color):
 	$RegionPolygon.color = new_color
@@ -93,25 +97,37 @@ func destroy_city(city):
 # Functions for removing tokens
 # TODO: Currently highly redundant with destroy
 
-func remove_dahan(dahan):
+func remove_dahan(dahan, delete=true):
 	$TokenContainer.remove_child(dahan)
 	dahans.erase(dahan)
-	dahan.queue_free()
+	if delete:
+		dahan.queue_free()
+	else:
+		return dahan
 
-func remove_explorer(explorer):
+func remove_explorer(explorer, delete=true):
 	$TokenContainer.remove_child(explorer)
 	explorers.erase(explorer)
-	explorer.queue_free()
+	if delete:
+		explorer.queue_free()
+	else:
+		return explorer
 
-func remove_town(town):
+func remove_town(town, delete=true):
 	$TokenContainer.remove_child(town)
 	towns.erase(town)
-	town.queue_free()
+	if delete:
+		town.queue_free()
+	else:
+		return town
 
-func remove_city(city):
+func remove_city(city, delete=true):
 	$TokenContainer.remove_child(city)
 	cities.erase(city)
-	city.queue_free()
+	if delete:
+		city.queue_free()
+	else:
+		return city
 
 func remove_blight(blight):
 	$TokenContainer.remove_child(blight)
@@ -126,6 +142,20 @@ func has_invaders():
 # Defense functions
 func add_defense(how_much):
 	defense += how_much
+	$DefenseIcon.set_amount(defense)
+
+func reduce_defense(how_much):
+	defense -= how_much
+	if defense < 0:
+		defense = 0
+	$DefenseIcon.set_amount(defense)
+
+func reset_defense():
+	defense = 0
+	$DefenseIcon.set_amount(defense)
+
+func reset_blocked_invader_actions():
+	blocked_invader_actions = [false, [false, false], false]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -180,6 +210,14 @@ func activate_invaders_for_removal(if_explorers=true, if_towns=true, if_cities=t
 			total_activated += 1
 	return total_activated
 
+# Setting dahan active for removal
+func activate_dahan_for_removal():
+	var total_activated = 0
+	for dahan in dahans:
+		dahan.set_active_for_removal()
+		total_activated += 1
+	return total_activated
+
 # Setting invaders inactive again
 func deactivate_invaders():
 	for explorer in explorers:
@@ -189,30 +227,35 @@ func deactivate_invaders():
 	for city in cities:
 		city.set_inactive()
 
+func deactivate_dahan():
+	for dahan in dahans:
+		dahan.set_inactive()
+
 func token_selected(token):
 	get_parent().token_clicked(token, self)
 
 func set_active():
 	active = true
+	return 1
 
 func set_inactive():
 	active = false
 	$HighlightPolygon.color.a = 0.1
 
 func set_lit():
-	$HighlightPolygon.color.a = 0.4
+	$HighlightPolygon.color.a = 0.25
 
 func set_unlit():
 	$HighlightPolygon.color.a = 0.1
 
 func _on_mouse_entered():
 	if active:
-		$RegionPolygon.color.a = 1
+		$HighlightPolygon.color.a = 0.4
 		get_parent().region_entered(self)
 
 func _on_mouse_exited():
 	if active:
-		$RegionPolygon.color.a = 0.8
+		$HighlightPolygon.color.a = 0.1
 		get_parent().region_exited(self)
 
 func _on_input_event(viewport, event, shape_idx):

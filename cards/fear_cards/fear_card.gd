@@ -2,7 +2,7 @@ class_name fear_card
 
 extends "res://cards/card_effects.gd"
 
-@export var card_front: Texture2D
+var card_front = load("res://art/cards/fear/FearCardFront.png")
 var card_back = load("res://art/cards/fear/FearCardBack.png")
 var card_back_lit = load("res://art/cards/fear/FearCardBackLit.png")
 
@@ -15,6 +15,9 @@ var level3_effect_text
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+
+func fear_card_on_ready():
+	card_effects_on_ready()
 
 # Base function for resolving effects. In fear cards, determine which level
 func resolve_effects(fear_level):

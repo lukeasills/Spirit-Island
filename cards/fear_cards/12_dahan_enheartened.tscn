@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bd7mlc3ojmhbt"]
+
+[ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_2fvmv"]
+[ext_resource type="Script" path="res://cards/fear_cards/12_dahan_enheartened.gd" id="2_36q0g"]
+
+[node name="DahanEnheartened" instance=ExtResource("1_2fvmv")]
+script = ExtResource("2_36q0g")

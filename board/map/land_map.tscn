@@ -23,37 +23,37 @@ city_scene = ExtResource("4_i44k2")
 blight_scene = ExtResource("5_1g4s7")
 dahan_scene = ExtResource("6_pf8ql")
 
-[node name="LandRegion1" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("3_vn27u")]
+[node name="LandRegion1" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("3_vn27u")]
 adjacent_regions = [NodePath("../LandRegion2"), NodePath("../LandRegion4"), NodePath("../LandRegion5")]
 
-[node name="LandRegion2" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("4_lcajq")]
+[node name="LandRegion2" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("4_lcajq")]
 position = Vector2(500, 0)
 land_type = "Wetland"
 adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion3"), NodePath("../LandRegion5"), NodePath("../LandRegion6")]
 
-[node name="LandRegion3" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("5_s2vlx")]
+[node name="LandRegion3" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("5_s2vlx")]
 position = Vector2(900, 0)
 land_type = "Sands"
 adjacent_regions = [NodePath("../LandRegion2"), NodePath("../LandRegion6")]
 
-[node name="LandRegion4" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("6_5n2yc")]
+[node name="LandRegion4" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("6_5n2yc")]
 position = Vector2(165, 330)
 adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion5"), NodePath("../LandRegion7")]
 
-[node name="LandRegion5" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("7_6nq2b")]
+[node name="LandRegion5" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("7_6nq2b")]
 position = Vector2(665, 250)
 land_type = "Sands"
 adjacent_regions = [NodePath("../LandRegion1"), NodePath("../LandRegion2"), NodePath("../LandRegion4"), NodePath("../LandRegion6"), NodePath("../LandRegion7")]
 
-[node name="LandRegion6" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("8_003ex")]
+[node name="LandRegion6" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("8_003ex")]
 position = Vector2(1025, 250)
 adjacent_regions = [NodePath("../LandRegion2"), NodePath("../LandRegion3"), NodePath("../LandRegion5"), NodePath("../LandRegion7"), NodePath("../LandRegion8")]
 
-[node name="LandRegion7" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("9_0i58k")]
+[node name="LandRegion7" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("9_0i58k")]
 position = Vector2(250, 830)
 adjacent_regions = [NodePath("../LandRegion4"), NodePath("../LandRegion5"), NodePath("../LandRegion6"), NodePath("../LandRegion8")]
 
-[node name="LandRegion8" parent="." node_paths=PackedStringArray("adjacent_regions") instance=ExtResource("10_6yh8j")]
+[node name="LandRegion8" parent="." node_paths=PackedStringArray("adjacent_regions") groups=["regions"] instance=ExtResource("10_6yh8j")]
 position = Vector2(925, 675)
 adjacent_regions = [NodePath("../LandRegion6"), NodePath("../LandRegion7")]
 

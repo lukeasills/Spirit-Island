@@ -5,6 +5,8 @@ signal active_region_selected
 signal active_region_exited
 signal active_token_selected
 
+@onready var skip_button = get_node("/root/SkipButton")
+
 @export var explorer_scene: PackedScene
 @export var town_scene: PackedScene
 @export var city_scene: PackedScene

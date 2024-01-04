@@ -71,9 +71,6 @@ func initiate_invader_actions():
 		$ExploreSpace.attach(drawn_card)
 		await initiate_explore(drawn_card.land_types)
 	invader_actions_completed.emit()
-	get_tree().call_group("dahan", "reset_damage")
-	get_tree().call_group("towns", "reset_damage")
-	get_tree().call_group("cities", "reset_damage")
 	
 # Explore the land type
 func initiate_explore(land_types):
@@ -85,6 +82,8 @@ func initiate_explore(land_types):
 		explore_initiated.emit(land_type)
 		# Iterate through all regions..
 		for region in regions:
+			if region.blocked_invader_actions[0]:
+				continue
 			var correct_type = false
 			# If "Coastal" is the land type, then check if coastal
 			if land_type == "Coasts":
@@ -129,10 +128,12 @@ func initiate_build(land_types):
 				# If more towns than cities, add a city
 
 				if towns > cities:
-					await timed_invader_action(region, "add_city")
+					if !region.blocked_invader_actions[1][1]:
+						await timed_invader_action(region, "add_city")
 				# Else, add a town
 				else:
-					await timed_invader_action(region, "add_town")
+					if !region.blocked_invader_actions[1][0]:
+						await timed_invader_action(region, "add_town")
 	built.emit()
 
 # When the ravage space emits the "ravage" signal wtih the card's land_type
@@ -144,6 +145,8 @@ func initiate_ravage(land_types):
 		ravage_initiated.emit(land_type)
 		# Iterate through all regions
 		for region in regions:
+			if region.blocked_invader_actions[2]:
+				continue
 			var correct_type = false
 			# If "Coastal" is the land type, then check if coastal
 			if land_type == "Coasts":
@@ -159,6 +162,13 @@ func initiate_ravage(land_types):
 				damage += region.explorers.size() 
 				damage += region.towns.size()*2 
 				damage += region.cities.size()*3
+			
+			# Decrease according to defense
+			var init_defense = region.defense
+			region.reduce_defense(damage)
+			damage -= init_defense
+			if damage < 0:
+				damage = 0
 			
 			# Don't even continue if damage is 0...
 			if damage == 0:
@@ -183,7 +193,7 @@ func invaders_fight_dahan(region, damage):
 	var dahan_damaged = damage % 2 == 1
 	for num in dahan_destroyed:
 		# Stop if past the total number of dahan in the region
-		if num >= region.dahans.size():
+		if region.dahans.size() == 0:
 			break
 		await LandMap.destroy_dahan(region, region.dahans[0], true)
 	# If any remain, see if the invaders damage 1
@@ -193,16 +203,19 @@ func invaders_fight_dahan(region, damage):
 
 # Handles logic of destroying / damaging invaders
 func dahan_fight_back(region):
+	region.set_lit()
 	var damage = region.dahans.size() * 2
 	while damage > 0:
 		dahan_fight_back_initiated.emit(damage)
 		var dict = await prompt_invaders_for_damage(region)
 		if dict == null:
 			dahan_fight_back_resolved.emit()
+			region.set_unlit()
 			return
 		var invader = dict["token"]
 		await LandMap.damage_invader(region, invader, false)
 		damage -= 1
+	region.set_unlit()
 	dahan_fight_back_resolved.emit()
 
 # Add blight to the region, cascading if one is already present

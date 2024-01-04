@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cmaoafshanif2"]
+[gd_scene load_steps=20 format=3 uid="uid://cmaoafshanif2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yvfee"]
 [ext_resource type="PackedScene" uid="uid://hlg8ou050rac" path="res://board/invaderboard/invader_deck.tscn" id="2_5j4p5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://LabelContainer.gd" id="9_njwbg"]
 [ext_resource type="PackedScene" uid="uid://e4nfm80o7kmd" path="res://board/fearpool/fear_pool.tscn" id="10_87d84"]
 [ext_resource type="PackedScene" uid="uid://u7gh7ogqekkc" path="res://cards/invader_card.tscn" id="13_h7dub"]
+[ext_resource type="Script" path="res://skip_button.gd" id="18_pudls"]
 
 [sub_resource type="PackedScene" id="PackedScene_owvxq"]
 _bundled = {
@@ -34,29 +35,37 @@ _bundled = {
 [node name="Main" type="Node"]
 script = ExtResource("1_yvfee")
 
+[node name="LandMap" parent="." node_paths=PackedStringArray("fear_board") instance=ExtResource("4_n62ow")]
+offset_left = 531.0
+offset_top = 351.0
+offset_right = 531.0
+offset_bottom = 351.0
+scale = Vector2(0.9, 0.9)
+fear_board = NodePath("../FearBoard")
+
 [node name="FearBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap")]
 script = ExtResource("4_alcv7")
 LandMap = NodePath("../LandMap")
 
 [node name="FearDeck" parent="FearBoard" instance=ExtResource("4_q3nq7")]
-offset_left = 40.0
-offset_top = 60.0
-offset_right = 280.0
-offset_bottom = 396.0
+offset_left = 75.0
+offset_top = 530.0
+offset_right = 315.0
+offset_bottom = 866.0
 scale = Vector2(0.66, 0.66)
 
 [node name="EarnedFearCardsSpot" parent="FearBoard" instance=ExtResource("4_7a7jb")]
-offset_left = 40.0
-offset_top = 325.0
-offset_right = 280.0
-offset_bottom = 661.0
+offset_left = 300.0
+offset_top = 530.0
+offset_right = 540.0
+offset_bottom = 866.0
 scale = Vector2(0.66, 0.66)
 
 [node name="FearPool" parent="FearBoard" instance=ExtResource("10_87d84")]
-offset_left = 320.0
-offset_top = 58.0
-offset_right = 960.0
-offset_bottom = 698.0
+offset_left = 58.0
+offset_top = 55.0
+offset_right = 698.0
+offset_bottom = 695.0
 scale = Vector2(0.66, 0.66)
 
 [node name="FearCardMover" parent="FearBoard" instance=ExtResource("7_dcxgg")]
@@ -66,16 +75,9 @@ offset_right = 60.0
 offset_bottom = 124.0
 scale = Vector2(0.66, 0.66)
 card_scene = SubResource("PackedScene_owvxq")
-speed = Vector2(0, 8)
+speed = Vector2(5, 0)
 
 [node name="FearCardTimer" type="Timer" parent="FearBoard"]
-
-[node name="LandMap" parent="." node_paths=PackedStringArray("fear_board") instance=ExtResource("4_n62ow")]
-offset_left = 780.0
-offset_top = 54.0
-offset_right = 780.0
-offset_bottom = 54.0
-fear_board = NodePath("../FearBoard")
 
 [node name="InvaderBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap")]
 script = ExtResource("3_hen3h")
@@ -83,43 +85,43 @@ LandMap = NodePath("../LandMap")
 blight_scene = ExtResource("2_af6tv")
 
 [node name="InvaderDeck" parent="InvaderBoard" instance=ExtResource("2_5j4p5")]
-offset_left = 1700.0
-offset_top = 1200.0
-offset_right = 1860.0
-offset_bottom = 1424.0
+offset_left = 1690.0
+offset_top = 21.0
+offset_right = 1850.0
+offset_bottom = 245.0
 
 [node name="ExploreSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
-offset_left = 1390.0
-offset_top = 1200.0
-offset_right = 1560.0
-offset_bottom = 1472.0
+offset_left = 1440.0
+offset_top = 21.0
+offset_right = 1610.0
+offset_bottom = 293.0
 label_text = "Explore"
 
 [node name="BuildSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
-offset_left = 1080.0
-offset_top = 1200.0
-offset_right = 1250.0
-offset_bottom = 1472.0
+offset_left = 1191.0
+offset_top = 21.0
+offset_right = 1361.0
+offset_bottom = 293.0
 label_text = "Build"
 
 [node name="RavageSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
-offset_left = 770.0
-offset_top = 1200.0
-offset_right = 940.0
-offset_bottom = 1472.0
+offset_left = 940.0
+offset_top = 21.0
+offset_right = 1110.0
+offset_bottom = 293.0
 label_text = "Ravage"
 
 [node name="DiscardSpace" parent="InvaderBoard" instance=ExtResource("5_btuvb")]
-offset_left = 396.0
-offset_top = 1240.0
-offset_right = 630.0
-offset_bottom = 1448.0
+offset_left = 634.0
+offset_top = 61.0
+offset_right = 868.0
+offset_bottom = 269.0
 
 [node name="InvaderCardMover" parent="InvaderBoard" instance=ExtResource("7_dcxgg")]
-offset_left = 1702.0
-offset_top = 1199.0
-offset_right = 1862.0
-offset_bottom = 1423.0
+offset_left = -186.0
+offset_top = -238.0
+offset_right = -26.0
+offset_bottom = -14.0
 card_scene = ExtResource("13_h7dub")
 speed = Vector2(-15, 0)
 
@@ -128,18 +130,29 @@ wait_time = 0.5
 
 [node name="LabelContainer" type="CenterContainer" parent="."]
 offset_left = 304.0
-offset_top = 1061.0
+offset_top = 1275.0
 offset_right = 1964.0
-offset_bottom = 1179.0
+offset_bottom = 1393.0
 script = ExtResource("9_njwbg")
 
 [node name="Label" type="Label" parent="LabelContainer"]
 visible = false
 layout_mode = 2
-theme_override_colors/font_color = Color(0.662745, 0.662745, 0.662745, 1)
+theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
 theme_override_font_sizes/font_size = 40
 text = "Test Text testing"
 horizontal_alignment = 1
+
+[node name="SkipButton" type="Button" parent="."]
+visible = false
+offset_left = 1050.0
+offset_top = 1405.0
+offset_right = 1222.0
+offset_bottom = 1455.0
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "Skip effect"
+script = ExtResource("18_pudls")
 
 [connection signal="fear_card_earned" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_card_earned"]
 [connection signal="fear_card_earned_resolved" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_card_earned_resolved"]
@@ -163,3 +176,4 @@ horizontal_alignment = 1
 [connection signal="ravage_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravage_initiated"]
 [connection signal="ravaged" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravaged"]
 [connection signal="emptied" from="InvaderBoard/InvaderDeck" to="." method="_on_invader_deck_emptied"]
+[connection signal="pressed" from="SkipButton" to="SkipButton" method="_on_pressed"]

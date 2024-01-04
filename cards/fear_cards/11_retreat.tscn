@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://qff0x16gam6c"]
+
+[ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_qw1ln"]
+[ext_resource type="Script" path="res://cards/fear_cards/11_retreat.gd" id="2_tlxa0"]
+
+[node name="Retreat" instance=ExtResource("1_qw1ln")]
+script = ExtResource("2_tlxa0")
