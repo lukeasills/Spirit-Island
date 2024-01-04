@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://1earn4vslmdg"]
+[gd_scene load_steps=5 format=3 uid="uid://1earn4vslmdg"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_wf2dp"]
 [ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="2_0k78y"]
+[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/presence.tscn" id="2_p1vgp"]
 [ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_tt77s"]
 
 [node name="LandRegion5" type="Area2D" node_paths=PackedStringArray("blights")]
@@ -25,6 +26,13 @@ polygon = PackedVector2Array(5, 10, 350, 10, 328, 95, 252, 167, 225, 295, 162, 4
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 360, 0, 335, 100, 260, 175, 235, 300, 165, 415, -167, 250, 0, 0)
+
+[node name="Presence" parent="." instance=ExtResource("2_p1vgp")]
+visible = false
+offset_left = 100.0
+offset_top = 285.0
+offset_right = 164.0
+offset_bottom = 349.0
 
 [node name="DefenseIcon" parent="." instance=ExtResource("2_0k78y")]
 offset_left = 116.0

@@ -221,7 +221,10 @@ func dahan_fight_back(region):
 # Add blight to the region, cascading if one is already present
 func invaders_damage_the_land(region):
 	var had_blight = region.blights.size() > 0
+	var had_presence = region.has_presence()
 	await timed_invader_action(region, "add_blight")
+	if had_presence:
+		region.remove_presence()
 	if had_blight:
 		await blight_cascades(region)
 

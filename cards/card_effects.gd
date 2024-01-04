@@ -175,6 +175,17 @@ func get_land_with_dahan(type="at least", how_many=1):
 			land_with_dahan.append(land)
 	return land_with_dahan
 
+func get_land_with_presence(holy_site = false):
+	var all_lands = get_any_land()
+	var land_with_presence = []
+	for land in all_lands:
+		if holy_site:
+			if land.has_holy_site():
+				land_with_presence.append(land)
+		elif land.has_presence():
+			land_with_presence.append(land)
+	return land_with_presence
+
 # - Effect functions
 
 # -- Push functions

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://t2lgj1kphfw2"]
+[gd_scene load_steps=5 format=3 uid="uid://t2lgj1kphfw2"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_rd08b"]
+[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/presence.tscn" id="2_g61tc"]
 [ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="2_offo1"]
 [ext_resource type="PackedScene" uid="uid://16miyvwcpqqy" path="res://tokens/dahan.tscn" id="4_74dep"]
 
@@ -25,6 +26,13 @@ polygon = PackedVector2Array(10, 10, 330, 175, 500, 10, 655, 250, 500, 490, 330,
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
 polygon = PackedVector2Array(0, 0, 330, 165, 500, 0, 665, 250, 500, 500, 330, 330, 165, 330, 0, 0)
+
+[node name="Presence" parent="." instance=ExtResource("2_g61tc")]
+offset_left = 126.0
+offset_top = 123.0
+offset_right = 190.0
+offset_bottom = 187.0
+amount = 1
 
 [node name="DefenseIcon" parent="." instance=ExtResource("2_offo1")]
 offset_left = 453.0

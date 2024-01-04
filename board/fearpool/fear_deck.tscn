@@ -2,14 +2,14 @@
 
 [ext_resource type="Texture2D" uid="uid://bcptpix7s4cov" path="res://art/cards/fear/FearCardBack.png" id="1_ndnlc"]
 [ext_resource type="Script" path="res://board/fearpool/fear_deck.gd" id="1_v7mys"]
-[ext_resource type="PackedScene" uid="uid://c7fv8bq6ee5or" path="res://cards/fear_cards/13_seek_safety.tscn" id="2_76tml"]
+[ext_resource type="PackedScene" uid="uid://b7s8q7gltjbwm" path="res://cards/fear_cards/15_belief_takes_root.tscn" id="2_btxb2"]
 
 [node name="FearDeck" type="ReferenceRect"]
 offset_right = 240.0
 offset_bottom = 336.0
 script = ExtResource("1_v7mys")
 
-[node name="SeekSafety" parent="." instance=ExtResource("2_76tml")]
+[node name="BeliefTakesRoot" parent="." instance=ExtResource("2_btxb2")]
 layout_mode = 0
 
 [node name="DeckButton" type="TextureButton" parent="."]

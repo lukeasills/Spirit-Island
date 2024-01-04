@@ -139,6 +139,22 @@ func has_invaders():
 	else:
 		return false
 
+# Presence functions
+func get_presence():
+	return $Presence
+
+func has_presence():
+	return $Presence.is_present
+
+func has_holy_site():
+	return $Presence.is_holy_site
+	
+func add_presence(how_much = 1):
+	$Presence.add_presence(how_much)
+
+func remove_presence(how_much = 1):
+	$Presence.remove_presence(how_much)
+
 # Defense functions
 func add_defense(how_much):
 	defense += how_much

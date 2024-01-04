@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7s8q7gltjbwm"]
+
+[ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_wow57"]
+[ext_resource type="Script" path="res://cards/fear_cards/15_belief_takes_root.gd" id="2_0m5ao"]
+
+[node name="BeliefTakesRoot" instance=ExtResource("1_wow57")]
+script = ExtResource("2_0m5ao")

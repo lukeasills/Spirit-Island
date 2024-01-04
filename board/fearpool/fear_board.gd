@@ -13,7 +13,7 @@ signal fear_card_earned_resolved
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	fear_level = 3
+	fear_level = 2
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
