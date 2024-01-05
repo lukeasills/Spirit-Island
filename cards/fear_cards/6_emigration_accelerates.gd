@@ -3,6 +3,7 @@ extends "res://cards/fear_cards/fear_card.gd"
 
 
 func _ready():
+	fear_card_on_ready()
 	level1_effect_text = "Remove 1 Explorer from a Coastal land."
 	level2_effect_text = "Remove 1 Explorer or Town from a Coastal land."
 	level3_effect_text  = "Remove 1 Explorer or Town from any land."

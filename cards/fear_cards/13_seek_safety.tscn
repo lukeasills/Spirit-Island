@@ -5,3 +5,56 @@
 
 [node name="SeekSafety" instance=ExtResource("1_sct88")]
 script = ExtResource("2_p38cw")
+
+[node name="Title" type="Label" parent="." index="1"]
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = 28.0
+offset_right = 215.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 14
+text = "SEEK SAFETY"
+horizontal_alignment = 1
+
+[node name="FearLevel1Text" type="Label" parent="." index="2"]
+visible = false
+layout_mode = 0
+offset_left = 22.0
+offset_top = 82.0
+offset_right = 218.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "You may Push 1 Explorer into a land
+with more Towns / Cities than the land 
+it came from"
+horizontal_alignment = 1
+
+[node name="FearLevel2Text" type="Label" parent="." index="3"]
+visible = false
+layout_mode = 0
+offset_left = 17.0
+offset_top = 158.0
+offset_right = 225.0
+offset_bottom = 206.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "You may Gather 1 Explorer into a land
+with Towns / Cities, or Gather 1 Town
+into a land with Cities. "
+horizontal_alignment = 1
+
+[node name="FearLevel3Text" type="Label" parent="." index="4"]
+visible = false
+layout_mode = 0
+offset_left = -5.0
+offset_top = 248.0
+offset_right = 244.0
+offset_bottom = 313.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "You may remove up to 3 Health
+worth of Invaders from
+a land without Cities."
+horizontal_alignment = 1

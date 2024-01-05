@@ -5,3 +5,54 @@
 
 [node name="Retreat" instance=ExtResource("1_qw1ln")]
 script = ExtResource("2_tlxa0")
+
+[node name="Title" type="Label" parent="." index="1"]
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = 28.0
+offset_right = 215.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 14
+text = "RETREAT!"
+horizontal_alignment = 1
+
+[node name="FearLevel1Text" type="Label" parent="." index="2"]
+visible = false
+layout_mode = 0
+offset_left = 22.0
+offset_top = 91.0
+offset_right = 218.0
+offset_bottom = 122.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Each player may Push up to
+2 Explorers from an Inland land."
+horizontal_alignment = 1
+
+[node name="FearLevel2Text" type="Label" parent="." index="3"]
+visible = false
+layout_mode = 0
+offset_left = 17.0
+offset_top = 159.0
+offset_right = 225.0
+offset_bottom = 207.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Each player may Push up to
+3 Explorer / Towns from 
+an Inland land."
+horizontal_alignment = 1
+
+[node name="FearLevel3Text" type="Label" parent="." index="4"]
+visible = false
+layout_mode = 0
+offset_left = -5.0
+offset_top = 248.0
+offset_right = 244.0
+offset_bottom = 313.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Each player may Push any number
+of Explorers / Towns from one land."
+horizontal_alignment = 1

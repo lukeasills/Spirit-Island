@@ -2,6 +2,7 @@ class_name tall_tales_of_savagery
 extends "res://cards/fear_cards/fear_card.gd"
 
 func _ready():
+	fear_card_on_ready()
 	level1_effect_text = "Remove 1 Explorer from a land with Dahan."
 	level2_effect_text = "Remove 2 Explorers or 1 Town from a land with Dahan."
 	level3_effect_text  = "Remove 2 Explorers or 1 Town from each land with Dahan. Then, remove 1 City from each land with at least 2 Dahan."

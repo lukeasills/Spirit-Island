@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cmaoafshanif2"]
+[gd_scene load_steps=21 format=3 uid="uid://cmaoafshanif2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yvfee"]
 [ext_resource type="PackedScene" uid="uid://hlg8ou050rac" path="res://board/invaderboard/invader_deck.tscn" id="2_5j4p5"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://LabelContainer.gd" id="9_njwbg"]
 [ext_resource type="PackedScene" uid="uid://e4nfm80o7kmd" path="res://board/fearpool/fear_pool.tscn" id="10_87d84"]
 [ext_resource type="PackedScene" uid="uid://u7gh7ogqekkc" path="res://cards/invader_card.tscn" id="13_h7dub"]
+[ext_resource type="PackedScene" uid="uid://b8o7yd28c26ni" path="res://board/active_card_space.tscn" id="17_iamwp"]
 [ext_resource type="Script" path="res://skip_button.gd" id="18_pudls"]
 
 [sub_resource type="PackedScene" id="PackedScene_owvxq"]
@@ -36,36 +37,38 @@ _bundled = {
 script = ExtResource("1_yvfee")
 
 [node name="LandMap" parent="." node_paths=PackedStringArray("fear_board") instance=ExtResource("4_n62ow")]
-offset_left = 531.0
-offset_top = 351.0
-offset_right = 531.0
-offset_bottom = 351.0
-scale = Vector2(0.9, 0.9)
+offset_left = 601.0
+offset_top = 367.0
+offset_right = 601.0
+offset_bottom = 367.0
+scale = Vector2(0.8, 0.8)
 fear_board = NodePath("../FearBoard")
 
-[node name="FearBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap")]
+[node name="FearBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap", "ActiveCardSpace", "CardEffectButton")]
 script = ExtResource("4_alcv7")
 LandMap = NodePath("../LandMap")
+ActiveCardSpace = NodePath("../ActiveCardSpace")
+CardEffectButton = NodePath("../CardEffectButton")
 
 [node name="FearDeck" parent="FearBoard" instance=ExtResource("4_q3nq7")]
-offset_left = 75.0
-offset_top = 530.0
-offset_right = 315.0
-offset_bottom = 866.0
+offset_left = 78.0
+offset_top = 459.0
+offset_right = 318.0
+offset_bottom = 795.0
 scale = Vector2(0.66, 0.66)
 
 [node name="EarnedFearCardsSpot" parent="FearBoard" instance=ExtResource("4_7a7jb")]
-offset_left = 300.0
-offset_top = 530.0
-offset_right = 540.0
-offset_bottom = 866.0
+offset_left = 303.0
+offset_top = 459.0
+offset_right = 543.0
+offset_bottom = 795.0
 scale = Vector2(0.66, 0.66)
 
 [node name="FearPool" parent="FearBoard" instance=ExtResource("10_87d84")]
 offset_left = 58.0
-offset_top = 55.0
+offset_top = 13.0
 offset_right = 698.0
-offset_bottom = 695.0
+offset_bottom = 653.0
 scale = Vector2(0.66, 0.66)
 
 [node name="FearCardMover" parent="FearBoard" instance=ExtResource("7_dcxgg")]
@@ -128,6 +131,12 @@ speed = Vector2(-15, 0)
 [node name="InvaderActionTimer" type="Timer" parent="InvaderBoard"]
 wait_time = 0.5
 
+[node name="ActiveCardSpace" parent="." instance=ExtResource("17_iamwp")]
+offset_left = 56.0
+offset_top = 727.0
+offset_right = 296.0
+offset_bottom = 1063.0
+
 [node name="LabelContainer" type="CenterContainer" parent="."]
 offset_left = 304.0
 offset_top = 1275.0
@@ -143,12 +152,13 @@ theme_override_font_sizes/font_size = 40
 text = "Test Text testing"
 horizontal_alignment = 1
 
-[node name="SkipButton" type="Button" parent="."]
+[node name="CardEffectButton" type="Button" parent="."]
 visible = false
-offset_left = 1050.0
-offset_top = 1405.0
-offset_right = 1222.0
-offset_bottom = 1455.0
+offset_left = 223.0
+offset_top = 1408.0
+offset_right = 395.0
+offset_bottom = 1458.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
 disabled = true
 text = "Skip effect"
@@ -176,4 +186,4 @@ script = ExtResource("18_pudls")
 [connection signal="ravage_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravage_initiated"]
 [connection signal="ravaged" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravaged"]
 [connection signal="emptied" from="InvaderBoard/InvaderDeck" to="." method="_on_invader_deck_emptied"]
-[connection signal="pressed" from="SkipButton" to="SkipButton" method="_on_pressed"]
+[connection signal="pressed" from="CardEffectButton" to="CardEffectButton" method="_on_pressed"]

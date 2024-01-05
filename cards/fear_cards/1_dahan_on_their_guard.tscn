@@ -1,9 +1,50 @@
-[gd_scene load_steps=4 format=3 uid="uid://butm88g4gjfey"]
+[gd_scene load_steps=3 format=3 uid="uid://butm88g4gjfey"]
 
 [ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_ll5gs"]
 [ext_resource type="Script" path="res://cards/fear_cards/1_dahan_on_their_guard.gd" id="2_wd7eo"]
-[ext_resource type="Texture2D" uid="uid://c3048dajn8ute" path="res://art/cards/fear/FearCardFront.png" id="3_tm17c"]
 
 [node name="DahanOnTheirGuard" instance=ExtResource("1_ll5gs")]
 script = ExtResource("2_wd7eo")
-card_front = ExtResource("3_tm17c")
+
+[node name="Title" type="Label" parent="." index="1"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 28.0
+offset_right = 207.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 14
+text = "DAHAN ON THEIR GUARD"
+
+[node name="FearLevel1Text" type="Label" parent="." index="2"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 96.0
+offset_right = 218.0
+offset_bottom = 119.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "In each land, Defend 1 per Dahan."
+horizontal_alignment = 1
+
+[node name="FearLevel2Text" type="Label" parent="." index="3"]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 165.0
+offset_right = 225.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "In each land with Dahan, Defend 1, 
+plus an additional Defend 1 per Dahan."
+horizontal_alignment = 1
+
+[node name="FearLevel3Text" type="Label" parent="." index="4"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 262.0
+offset_right = 203.0
+offset_bottom = 285.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "In each land, Defend 2 per Dahan."
+horizontal_alignment = 1

@@ -17,6 +17,11 @@ func _ready():
 	pass
 
 func fear_card_on_ready():
+	$TextureButton.texture_normal = card_back
+	$Title.visible = false
+	$FearLevel1Text.visible = false
+	$FearLevel2Text.visible = false
+	$FearLevel3Text.visible = false
 	card_effects_on_ready()
 
 # Base function for resolving effects. In fear cards, determine which level
@@ -56,6 +61,10 @@ func reveal():
 
 func flip():
 	revealed = !revealed
+	$Title.visible = !$Title.visible
+	$FearLevel1Text.visible = !$FearLevel1Text.visible
+	$FearLevel2Text.visible = !$FearLevel2Text.visible
+	$FearLevel3Text.visible = !$FearLevel3Text.visible
 	if revealed:
 		get_node("TextureButton").texture_normal = card_front
 	else:

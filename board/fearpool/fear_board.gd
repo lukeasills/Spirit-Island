@@ -1,6 +1,8 @@
 extends Node
 
 @export var LandMap: Node
+@export var ActiveCardSpace: Node
+@export var CardEffectButton: Node
 
 var fear_level
 signal initiate_resolve_earned_fear_cards
@@ -13,7 +15,7 @@ signal fear_card_earned_resolved
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	fear_level = 2
+	fear_level = 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,10 +50,20 @@ func resolve_earned_fear_cards(is_delayed):
 		fear_card = await $EarnedFearCardsSpot.fear_card_pressed
 		fear_card.deactivate()
 		await fear_card.reveal()
-		if is_delayed:
-			$FearCardTimer.start()
-			await $FearCardTimer.timeout
-		await fear_card.resolve_effects(fear_level)
 		fear_card = $EarnedFearCardsSpot.detach(fear_card)
+		ActiveCardSpace.attach_fear_card(fear_card)
+		ActiveCardSpace.highlight_fear_level(fear_level)
+		await prompt_card_effect_button()
+		await fear_card.resolve_effects(fear_level)
+		ActiveCardSpace.unhighlight_fear_level()
+		fear_card = ActiveCardSpace.detach_card()
 		fear_card.queue_free()
 	fear_cards_resolved.emit()
+
+func prompt_card_effect_button():
+	CardEffectButton.visible = true
+	CardEffectButton.disabled = false
+	CardEffectButton.text = "Continue"
+	await CardEffectButton.pressed
+	CardEffectButton.visible = false
+	CardEffectButton.disabled = true

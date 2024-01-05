@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8o7yd28c26ni"]
+
+[ext_resource type="Script" path="res://board/active_card_space.gd" id="1_rgvy7"]
+[ext_resource type="Texture2D" uid="uid://c6qomdtptckfm" path="res://art/cards/fear/FearCardLevel1Highlight.png" id="3_8bf7i"]
+[ext_resource type="Texture2D" uid="uid://b51pgef5h0mo3" path="res://art/cards/fear/FearCardLevel2Highlight.png" id="4_q8lbi"]
+[ext_resource type="Texture2D" uid="uid://bf3wil3hwwwk4" path="res://art/cards/fear/FearCardLevel3Highlight.png" id="5_gdnix"]
+
+[node name="ActiveCardSpace" type="ReferenceRect"]
+offset_right = 240.0
+offset_bottom = 336.0
+scale = Vector2(2.2, 2.2)
+script = ExtResource("1_rgvy7")
+
+[node name="CardContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FearLevel1Highlight" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.25)
+layout_mode = 2
+offset_right = 240.0
+offset_bottom = 336.0
+texture = ExtResource("3_8bf7i")
+
+[node name="FearLevel2Highlight" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.25)
+layout_mode = 2
+offset_right = 240.0
+offset_bottom = 336.0
+texture = ExtResource("4_q8lbi")
+
+[node name="FearLevel3Highlight" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.25)
+layout_mode = 2
+offset_right = 240.0
+offset_bottom = 336.0
+texture = ExtResource("5_gdnix")

@@ -5,3 +5,56 @@
 
 [node name="DahanEnheartened" instance=ExtResource("1_2fvmv")]
 script = ExtResource("2_36q0g")
+
+[node name="Title" type="Label" parent="." index="1"]
+visible = false
+layout_mode = 0
+offset_left = 27.0
+offset_top = 28.0
+offset_right = 215.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 14
+text = "DAHAN ENHEARTENED"
+horizontal_alignment = 1
+
+[node name="FearLevel1Text" type="Label" parent="." index="2"]
+visible = false
+layout_mode = 0
+offset_left = 22.0
+offset_top = 82.0
+offset_right = 218.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 9
+text = "You may Push 1 Dahan from a land
+with Invaders or Gather 1 Dahan into
+a land with Invaders."
+horizontal_alignment = 1
+
+[node name="FearLevel2Text" type="Label" parent="." index="3"]
+visible = false
+layout_mode = 0
+offset_left = 17.0
+offset_top = 157.0
+offset_right = 225.0
+offset_bottom = 205.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Choose a land. In chosen land: 
+Gather up to 2 Dahan, then 1 Damage 
+if Dahan are present."
+horizontal_alignment = 1
+
+[node name="FearLevel3Text" type="Label" parent="." index="4"]
+visible = false
+layout_mode = 0
+offset_left = -5.0
+offset_top = 248.0
+offset_right = 244.0
+offset_bottom = 313.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 10
+text = "Choose a land. In chosen lands:
+Gather up to 2 Dahan, then
+1 Damage per Dahan present."
+horizontal_alignment = 1

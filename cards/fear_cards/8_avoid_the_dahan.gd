@@ -2,6 +2,7 @@ class_name avoid_the_dahan
 extends "res://cards/fear_cards/fear_card.gd"
 
 func _ready():
+	fear_card_on_ready()
 	level1_effect_text = "Invaders do not Explore into lands with at least 2 Dahan."
 	level2_effect_text = "Invaders do not Build in lands where Dahan outnumber Towns and Cities."
 	level3_effect_text  = "Invaders do not Build in lands with Dahan."

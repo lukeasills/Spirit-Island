@@ -5,7 +5,7 @@ extends Node
 @onready var LandMap = get_node("/root/Main/LandMap")
 @onready var LabelContainer = get_node("/root/Main/LabelContainer")
 @onready var effect_timer = get_node("/root/CardEffectTimer")
-@onready var SkipButton = get_node("/root/Main/SkipButton")
+@onready var CardEffectButton = get_node("/root/Main/CardEffectButton")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -259,9 +259,10 @@ func block_invader_actions(regions, actions):
 
 # - Skippable action functions
 func await_skippable_selection():
-	SkipButton.visible = true
-	SkipButton.disabled = false
+	CardEffectButton.visible = true
+	CardEffectButton.disabled = false
+	CardEffectButton.text = "Skip effect"
 	var selected = await PlayerInputHandler.skippable_selection_made
-	SkipButton.visible = false
-	SkipButton.disabled = true
+	CardEffectButton.visible = false
+	CardEffectButton.disabled = true
 	return selected

@@ -2,6 +2,7 @@ class_name dahan_on_their_guard
 extends "res://cards/fear_cards/fear_card.gd"
 
 func _ready():
+	fear_card_on_ready()
 	level1_effect_text = "In each land, Defend 1 per Dahan"
 	level2_effect_text = "In each land with Dahan, Defend 1, plus an additional Defend 1 per Dahan"
 	level3_effect_text  = "In each land, Defend 2 per Dahan"

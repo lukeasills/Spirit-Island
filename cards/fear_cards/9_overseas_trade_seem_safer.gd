@@ -2,6 +2,7 @@ class_name overseas_trade_seem_safer
 extends "res://cards/fear_cards/fear_card.gd"
 
 func _ready():
+	fear_card_on_ready()
 	level1_effect_text = "Defend 3 in all Coastal lands."
 	level2_effect_text = "Defend 6 in all Coastal lands. Invaders do not Build Cities in Coastal lands this turn."
 	level3_effect_text  = "Defend 9 in all Coastal lands. Invaders do not Build in Coastal lands this turn."

@@ -3,6 +3,7 @@ extends "res://cards/fear_cards/fear_card.gd"
 
 
 func _ready():
+	fear_card_on_ready()
 	level1_effect_text = "Choose a land with Dahan. 1 Damage there."
 	level2_effect_text = "Choose a land with Dahan. 1 Damage per Dahan there."
 	level3_effect_text  = "Choose a land with Dahan. 2 Damage per Dahan there."
