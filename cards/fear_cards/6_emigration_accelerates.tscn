@@ -4,7 +4,11 @@
 [ext_resource type="Script" path="res://cards/fear_cards/6_emigration_accelerates.gd" id="2_2t6ar"]
 
 [node name="EmigrationAccelerates" instance=ExtResource("1_ui1h7")]
+mouse_filter = 2
 script = ExtResource("2_2t6ar")
+
+[node name="TextureButton" parent="." index="0"]
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="." index="1"]
 visible = false

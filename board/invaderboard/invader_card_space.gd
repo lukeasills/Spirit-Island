@@ -12,7 +12,6 @@ func _process(delta):
 
 # Add card to CardContainer (REVIEW: WHY DO I NEED CARDCONTAINER / WHY NOT MARGINS?)
 func attach(new_card):
-	new_card.position = position + Vector2(5,5)
 	$CardSpace/CardContainer.add_child(new_card)
 
 # Remove card from children and send back as return value

@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=3 uid="uid://gs6v0qnlrwis"]
+
+[ext_resource type="PackedScene" uid="uid://kpw1armnhu0v" path="res://board/invaderboard/invader_card_space.tscn" id="1_dodbx"]
+[ext_resource type="Script" path="res://board/invaderboard/invader_board.gd" id="1_risox"]
+[ext_resource type="PackedScene" uid="uid://hlg8ou050rac" path="res://board/invaderboard/invader_deck.tscn" id="2_nvxel"]
+[ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://cards/card_transformer.tscn" id="3_ywxan"]
+[ext_resource type="PackedScene" uid="uid://u7gh7ogqekkc" path="res://cards/invader_card.tscn" id="4_2hleg"]
+
+[node name="InvaderBoard" type="Area2D"]
+script = ExtResource("1_risox")
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, 0, 0, 600, 970, 600, 970, 0, 0, 0)
+
+[node name="BorderPolygon" type="Polygon2D" parent="."]
+color = Color(0.458824, 0.329412, 0.180392, 1)
+polygon = PackedVector2Array(0, 0, 0, 600, 970, 600, 970, 0, 0, 0)
+
+[node name="BackgroundPolygon" type="Polygon2D" parent="."]
+color = Color(0.890196, 0.768627, 0.52549, 1)
+polygon = PackedVector2Array(10, 10, 10, 590, 960, 590, 960, 10, 10, 10)
+
+[node name="ExploreSpace" parent="." instance=ExtResource("1_dodbx")]
+offset_left = 652.0
+offset_top = 276.0
+offset_right = 822.0
+offset_bottom = 548.0
+label_text = "Explore"
+
+[node name="InvaderDeck" parent="." instance=ExtResource("2_nvxel")]
+offset_left = 657.0
+offset_top = 281.0
+offset_right = 817.0
+offset_bottom = 505.0
+
+[node name="BuildSpace" parent="." instance=ExtResource("1_dodbx")]
+offset_left = 403.0
+offset_top = 276.0
+offset_right = 573.0
+offset_bottom = 548.0
+label_text = "Build"
+
+[node name="RavageSpace" parent="." instance=ExtResource("1_dodbx")]
+offset_left = 152.0
+offset_top = 276.0
+offset_right = 322.0
+offset_bottom = 548.0
+label_text = "Ravage"
+
+[node name="InvaderCardTransformer" parent="." instance=ExtResource("3_ywxan")]
+offset_left = -70.0
+offset_top = -238.0
+offset_right = 90.0
+offset_bottom = -14.0
+card_scene = ExtResource("4_2hleg")
+default_speed = Vector2(-10, 0)
+default_fade_speed = -0.1
+
+[node name="Label" type="Label" parent="."]
+offset_left = 339.0
+offset_top = 544.0
+offset_right = 612.0
+offset_bottom = 591.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.458824, 0.329412, 0.180392, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 34
+text = "INVADER BOARD	"
+metadata/_edit_use_anchors_ = true
+
+[node name="InvaderActionTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="HighlightPolygon" type="Polygon2D" parent="."]
+visible = false
+color = Color(1, 1, 1, 0.105882)
+polygon = PackedVector2Array(0, 0, 0, 600, 970, 600, 970, 0, 0, 0)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

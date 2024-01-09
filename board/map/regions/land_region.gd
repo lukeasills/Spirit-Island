@@ -2,6 +2,7 @@ extends Area2D
 
 # Interactible variables
 var active
+var highlight_token
 
 # Exported variables
 @export var id: int
@@ -39,25 +40,37 @@ func set_id(id_number):
 
 # Token functions
 
+func get_token_position(token):
+	return token.position + $TokenContainer.position
+
+func get_next_token_position():
+	return $TokenContainer.get_next_position() + $TokenContainer.position
+
 # Adding tokens, optionally takes a token as parameter
 
-func add_explorer(explorer = get_parent().explorer_scene.instantiate()):
+func add_placeholder(placeholder):
+	$TokenContainer.add_child(placeholder)
+
+func remove_placeholder(placeholder):
+	$TokenContainer.remove_child(placeholder)
+
+func add_explorer(explorer = get_tree().get_root().get_node("Main").get_token_instance("explorer")):
 	$TokenContainer.add_child(explorer)
 	explorers.append(explorer)
 
-func add_town(town = get_parent().town_scene.instantiate()):
+func add_town(town = get_tree().get_root().get_node("Main").get_token_instance("town")):
 	$TokenContainer.add_child(town)
 	towns.append(town)
 
-func add_city(city = get_parent().city_scene.instantiate()):
+func add_city(city = get_tree().get_root().get_node("Main").get_token_instance("city")):
 	$TokenContainer.add_child(city)
 	cities.append(city)
 
-func add_blight(blight = get_parent().blight_scene.instantiate()):
+func add_blight(blight = get_tree().get_root().get_node("Main").get_token_instance("blight")):
 	$TokenContainer.add_child(blight)
 	blights.append(blight)
 
-func add_dahan(dahan = get_parent().dahan_scene.instantiate()):
+func add_dahan(dahan = get_tree().get_root().get_node("Main").get_token_instance("dahan")):
 	$TokenContainer.add_child(dahan)
 	dahans.append(dahan)
 
@@ -75,22 +88,30 @@ func damage_city(city, damage):
 # Functions for destroying tokens
 
 func destroy_dahan(dahan):
+	dahan.init_fade()
+	await dahan.faded 
 	$TokenContainer.remove_child(dahan)
 	dahans.erase(dahan)
 	dahan.queue_free()
 
 func destroy_explorer(explorer):
+	explorer.init_fade()
+	await explorer.faded 
 	$TokenContainer.remove_child(explorer)
 	explorers.erase(explorer)
 	explorer.queue_free()
 
 func destroy_town(town):
+	town.init_fade()
+	await town.faded 
 	$TokenContainer.remove_child(town)
 	towns.erase(town)
 	town.queue_free()
 
 func destroy_city(city):
-	$TokenContainer.remove_child(city)
+	city.init_fade()
+	await city.faded 
+	$TokenContainer.remove_child(city)	
 	cities.erase(city)
 	city.queue_free()
 
@@ -98,38 +119,56 @@ func destroy_city(city):
 # TODO: Currently highly redundant with destroy
 
 func remove_dahan(dahan, delete=true):
-	$TokenContainer.remove_child(dahan)
-	dahans.erase(dahan)
 	if delete:
+		dahan.init_fade()
+		await dahan.faded 
+		$TokenContainer.remove_child(dahan)	
+		dahans.erase(dahan)
 		dahan.queue_free()
 	else:
+		$TokenContainer.remove_child(dahan)	
+		dahans.erase(dahan)
 		return dahan
 
 func remove_explorer(explorer, delete=true):
-	$TokenContainer.remove_child(explorer)
-	explorers.erase(explorer)
 	if delete:
+		explorer.init_fade()
+		await explorer.faded 
+		$TokenContainer.remove_child(explorer)
+		explorers.erase(explorer)
 		explorer.queue_free()
 	else:
+		$TokenContainer.remove_child(explorer)
+		explorers.erase(explorer)
 		return explorer
 
 func remove_town(town, delete=true):
-	$TokenContainer.remove_child(town)
-	towns.erase(town)
 	if delete:
+		town.init_fade()
+		await town.faded 
+		$TokenContainer.remove_child(town)
+		towns.erase(town)
 		town.queue_free()
 	else:
+		$TokenContainer.remove_child(town)
+		towns.erase(town)
 		return town
 
 func remove_city(city, delete=true):
-	$TokenContainer.remove_child(city)
-	cities.erase(city)
 	if delete:
+		city.init_fade()
+		await city.faded 
+		$TokenContainer.remove_child(city)
+		cities.erase(city)
 		city.queue_free()
 	else:
+		$TokenContainer.remove_child(city)
+		cities.erase(city)
 		return city
 
 func remove_blight(blight):
+	blight.init_fade()
+	await blight.faded 
 	$TokenContainer.remove_child(blight)
 	blights.erase(blight)
 
@@ -247,36 +286,70 @@ func deactivate_dahan():
 	for dahan in dahans:
 		dahan.set_inactive()
 
+func token_hovered(token):
+	get_parent().token_hovered(token, self)
+
+func stop_token_hovered(token):
+	get_parent().stop_token_hovered(token, self)
+
 func token_selected(token):
 	get_parent().token_clicked(token, self)
 
-func set_active():
+func set_active(token = null):
+	highlight_token = token	
+	if highlight_token != null:
+		highlight_token.modulate.a = 0.6
+		highlight_token.mouse_filter = 2
 	active = true
 	return 1
 
 func set_inactive():
 	active = false
 	$HighlightPolygon.color.a = 0.1
+	if highlight_token != null:
+		if $TokenContainer.get_children().has(highlight_token):
+			$TokenContainer.remove_child(highlight_token)
+		highlight_token.queue_free()
+		highlight_token = null
 
-func set_lit():
+func set_lit(token = null):
+	highlight_token = token	
+	if highlight_token != null:
+		highlight_token.modulate.a = 0.6
+		highlight_token.mouse_filter = 2
+		$TokenContainer.add_child(highlight_token)
 	$HighlightPolygon.color.a = 0.25
 
 func set_unlit():
+	if highlight_token != null:
+		if $TokenContainer.get_children().has(highlight_token):
+			$TokenContainer.remove_child(highlight_token)
+		highlight_token.queue_free()
+		highlight_token = null
 	$HighlightPolygon.color.a = 0.1
 
 func _on_mouse_entered():
 	if active:
 		$HighlightPolygon.color.a = 0.4
+		if highlight_token != null:
+			$TokenContainer.add_child(highlight_token)
+			print(highlight_token.mouse_filter)
 		get_parent().region_entered(self)
 
 func _on_mouse_exited():
 	if active:
 		$HighlightPolygon.color.a = 0.1
+		if highlight_token != null:
+			$TokenContainer.remove_child(highlight_token)
 		get_parent().region_exited(self)
 
 func _on_input_event(viewport, event, shape_idx):
 	if !active:
 		return
 	if (event is InputEventMouseButton && !event.pressed):
+		if highlight_token != null:
+			$TokenContainer.remove_child(highlight_token)
+			highlight_token.queue_free()
+			highlight_token = null
 		get_parent().region_clicked(self)
 		active = false

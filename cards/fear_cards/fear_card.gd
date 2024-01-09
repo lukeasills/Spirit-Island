@@ -27,15 +27,15 @@ func fear_card_on_ready():
 # Base function for resolving effects. In fear cards, determine which level
 func resolve_effects(fear_level):
 	if fear_level == 1:
-		LabelContainer.set_text(level1_effect_text)
+		Main.get_node("LabelContainer").set_text(level1_effect_text)
 		await resolve_level1_effects()
 	elif fear_level == 2:
-		LabelContainer.set_text(level2_effect_text)
+		Main.get_node("LabelContainer").set_text(level2_effect_text)
 		await resolve_level2_effects()
 	else:
-		LabelContainer.set_text(level3_effect_text)
+		Main.get_node("LabelContainer").set_text(level3_effect_text)
 		await resolve_level3_effects()
-	LabelContainer.turn_off_text()
+	Main.get_node("LabelContainer").turn_off_text()
 
 func resolve_level1_effects():
 	pass

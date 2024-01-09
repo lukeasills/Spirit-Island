@@ -22,6 +22,7 @@
 offset_right = 160.0
 offset_bottom = 224.0
 pivot_offset = Vector2(80, 112)
+mouse_filter = 2
 script = ExtResource("1_8t4vr")
 card_back_texture = ExtResource("3_6f3ke")
 
@@ -29,20 +30,24 @@ card_back_texture = ExtResource("3_6f3ke")
 
 [node name="MountainCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Mountain"])
 front_texture = ExtResource("5_kpx3m")
 
 [node name="WetlandCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Wetland"])
 front_texture = ExtResource("5_7li3h")
 
 [node name="JungleCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Jungle"])
 
 [node name="SandsCard" parent="Stage1Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Sands"])
 front_texture = ExtResource("8_6fm66")
 
@@ -50,26 +55,31 @@ front_texture = ExtResource("8_6fm66")
 
 [node name="JungleCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Jungle"])
 front_texture = ExtResource("9_uq4m8")
 
 [node name="SandsCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Sands"])
 front_texture = ExtResource("10_uh60p")
 
 [node name="WetlandCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Wetland"])
 front_texture = ExtResource("9_7doso")
 
 [node name="MountainCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Mountain"])
 front_texture = ExtResource("12_vfk7i")
 
 [node name="CoastalCard" parent="Stage2Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Coasts"])
 front_texture = ExtResource("13_qkr5x")
 
@@ -77,34 +87,41 @@ front_texture = ExtResource("13_qkr5x")
 
 [node name="SandsWetlandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Sands", "Wetland"])
 front_texture = ExtResource("12_qpeqi")
 
 [node name="SandsMountainCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Sands", "Mountain"])
 front_texture = ExtResource("15_7d5i1")
 
 [node name="JungleSandsCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Jungle", "Sands"])
 front_texture = ExtResource("16_i3ccl")
 
 [node name="JungleWetlandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Jungle", "Wetland"])
 front_texture = ExtResource("15_kwj2f")
 
 [node name="MountainWetlandCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Mountain", "Wetland"])
 front_texture = ExtResource("16_lwf5v")
 
 [node name="MountainJungleCard" parent="Stage3Cards" instance=ExtResource("2_mjmnn")]
 visible = false
+mouse_filter = 2
 land_types = Array[String](["Mountain", "Jungle"])
 front_texture = ExtResource("19_hwyan")
 
 [node name="DeckButton" type="TextureButton" parent="."]
 layout_mode = 2
+mouse_filter = 2
 texture_normal = ExtResource("3_6f3ke")

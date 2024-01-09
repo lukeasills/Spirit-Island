@@ -4,7 +4,11 @@
 [ext_resource type="Script" path="res://cards/fear_cards/5_tall_tales_of_savagery.gd" id="2_w8wrd"]
 
 [node name="TallTalesOfSavagery" instance=ExtResource("1_dby2b")]
+mouse_filter = 2
 script = ExtResource("2_w8wrd")
+
+[node name="TextureButton" parent="." index="0"]
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="." index="1"]
 visible = false

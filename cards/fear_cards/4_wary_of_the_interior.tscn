@@ -4,7 +4,11 @@
 [ext_resource type="Script" path="res://cards/fear_cards/4_wary_of_the_interior.gd" id="2_p7hq8"]
 
 [node name="WaryOfTheInterior" instance=ExtResource("1_crl7w")]
+mouse_filter = 2
 script = ExtResource("2_p7hq8")
+
+[node name="TextureButton" parent="." index="0"]
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="." index="1"]
 visible = false

@@ -8,14 +8,14 @@ func _ready():
 	level3_effect_text  = "In each land, Defend 2 per Dahan"
 
 func resolve_level1_effects():
-	var regions = get_land_with_dahan()
-	await defend(regions, "per_dahan", 1)
+	var regions = Main.get_land_with_dahan()
+	await Main.defend(regions, "per_dahan", 1)
 
 func resolve_level2_effects():
-	var regions = get_land_with_dahan()
-	await defend(regions, "constant", 1)
-	await defend(regions, "per_dahan", 1)
+	var regions = Main.get_land_with_dahan()
+	await Main.defend(regions, "constant", 1)
+	await Main.defend(regions, "per_dahan", 1)
 
 func resolve_level3_effects():
-	var regions = get_any_land()
-	await defend(regions, "per_dahan", 2)
+	var regions = Main.get_any_land()
+	await Main.defend(regions, "per_dahan", 2)

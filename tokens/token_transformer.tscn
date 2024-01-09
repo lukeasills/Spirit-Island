@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx4ym7i8ajq7f"]
+
+[ext_resource type="Script" path="res://tokens/token_transformer.gd" id="1_dmmvs"]
+
+[node name="TokenTransformer" type="MarginContainer"]
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_dmmvs")
+default_move_duration = 1.0

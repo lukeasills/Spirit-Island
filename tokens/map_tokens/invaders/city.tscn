@@ -1,0 +1,22 @@
+[gd_scene load_steps=7 format=3 uid="uid://dptgqgt0t7nkl"]
+
+[ext_resource type="PackedScene" uid="uid://do1ci3gljbrlk" path="res://tokens/map_tokens/token.tscn" id="1_ywohw"]
+[ext_resource type="Script" path="res://tokens/map_tokens/invaders/city.gd" id="2_e36fp"]
+[ext_resource type="Texture2D" uid="uid://dyj6yttme21tg" path="res://art/tokens/invaders/city.png" id="3_ub1vn"]
+[ext_resource type="Texture2D" uid="uid://1rvqj3lp5mfd" path="res://art/tokens/invaders/citydamage1.png" id="4_slwt1"]
+[ext_resource type="Texture2D" uid="uid://brfbqf3003h0" path="res://art/tokens/invaders/citydamage2.png" id="5_ukn1p"]
+[ext_resource type="Texture2D" uid="uid://cyx5k5da2r7xl" path="res://art/tokens/invaders/Invader3Destroyed.png" id="6_cwjw1"]
+
+[node name="City" instance=ExtResource("1_ywohw")]
+script = ExtResource("2_e36fp")
+normal_texture = ExtResource("3_ub1vn")
+damaged1_texture = ExtResource("4_slwt1")
+damaged2_texture = ExtResource("5_ukn1p")
+destroyed_texture = ExtResource("6_cwjw1")
+
+[node name="TextureButton" parent="." index="0"]
+texture_normal = ExtResource("3_ub1vn")
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

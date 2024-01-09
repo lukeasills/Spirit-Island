@@ -8,13 +8,13 @@ func _ready():
 	level3_effect_text  = "Choose a land and remove up to 2 Health worth of Invaders per Presence there."
 
 func resolve_level1_effects():
-	var regions = get_land_with_presence(false)
-	await defend(regions, "constant", 2)
+	var regions = Main.get_land_with_presence(false)
+	await Main.defend(regions, "constant", 2)
 
 func resolve_level2_effects():
-	var regions = get_land_with_presence(false)
-	await defend(regions, "constant", 2)
-	regions = get_land_with_presence(true)
+	var regions = Main.get_land_with_presence(false)
+	await Main.defend(regions, "constant", 2)
+	regions = Main.get_land_with_presence(true)
 	var gained_energy = 0
 	for region in regions:
 		if region.has_invaders():
@@ -23,16 +23,16 @@ func resolve_level2_effects():
 
 # Not quite consistent with other selection rules... need to figure out how to handle OR
 func resolve_level3_effects():
-	var regions = get_land_with_presence()
-	var region = await select_land(regions, false)
+	var regions = Main.get_land_with_presence()
+	var region = await Main.select_land(regions, false)
 	if region == null:
 		return
 	var health = region.get_presence().amount * 2
 	while health > 0:
 		var towns = health > 1
 		var cities = health > 2
-		LabelContainer.set_text(str("Remove up to ",health," Health worth of Invaders here."))
-		var selection = await select_invaders_for_removal([region], true, towns, cities, true)
+		Main.get_node("LabelContainer").set_text(str("Remove up to ",health," Health worth of Invaders here."))
+		var selection = await Main.select_invaders_for_removal([region], true, towns, cities, true)
 		if selection == null || selection["skipped"]:
 			return
 		health -= 1
@@ -42,5 +42,5 @@ func resolve_level3_effects():
 			health -= 2
 		if health < 0:
 			health = 0
-		await remove_invader(region, selection["token"], false)
-	LabelContainer.turn_off_text()
+		await Main.remove_invader(region, selection["token"], false)
+	Main.get_node("LabelContainer").turn_off_text()

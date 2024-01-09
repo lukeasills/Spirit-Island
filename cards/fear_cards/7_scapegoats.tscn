@@ -4,7 +4,11 @@
 [ext_resource type="Script" path="res://cards/fear_cards/7_scapegoats.gd" id="2_qf5n7"]
 
 [node name="Scapegoats" instance=ExtResource("1_16fdt")]
+mouse_filter = 2
 script = ExtResource("2_qf5n7")
+
+[node name="TextureButton" parent="." index="0"]
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="." index="1"]
 visible = false

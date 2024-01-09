@@ -1,0 +1,100 @@
+[gd_scene load_steps=10 format=3 uid="uid://cj0lykqi38rqy"]
+
+[ext_resource type="PackedScene" uid="uid://dj1o4vf8b6lqi" path="res://board/fearboard/fear_deck.tscn" id="1_3jeqi"]
+[ext_resource type="Script" path="res://board/fearboard/fear_board.gd" id="1_s6yyv"]
+[ext_resource type="PackedScene" uid="uid://bptwhp61iay73" path="res://board/fearboard/earned_fear_cards_spot.tscn" id="2_lx8qu"]
+[ext_resource type="PackedScene" uid="uid://e4nfm80o7kmd" path="res://board/fearboard/fear_pool.tscn" id="3_4im1w"]
+[ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://cards/card_transformer.tscn" id="4_qqpo1"]
+[ext_resource type="Script" path="res://cards/fear_cards/1_dahan_on_their_guard.gd" id="5_orn7k"]
+[ext_resource type="Texture2D" uid="uid://c3048dajn8ute" path="res://art/cards/fear/FearCardFront.png" id="6_388bb"]
+[ext_resource type="Texture2D" uid="uid://bcptpix7s4cov" path="res://art/cards/fear/FearCardBack.png" id="7_mpeew"]
+
+[sub_resource type="PackedScene" id="PackedScene_66ufy"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(1, 0, 10, 9, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("DahanOnTheirGuard", "offset_right", "offset_bottom", "script", "card_front", "ReferenceRect", "TextureButton", "layout_mode", "texture_normal", "_on_texture_button_pressed", "pressed"),
+"node_count": 2,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 5, 0, -1, 4, 1, 0, 2, 1, 3, 2, 4, 3, 0, 0, 0, 6, 6, -1, 4, 7, 4, 1, 5, 2, 5, 8, 6, 0),
+"variants": [240.0, 336.0, ExtResource("5_orn7k"), ExtResource("6_388bb"), 0, 40.0, ExtResource("7_mpeew")],
+"version": 3
+}
+
+[node name="FearBoard" type="Area2D"]
+script = ExtResource("1_s6yyv")
+speed = Vector2(0, 60)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(0, 0, 0, 880, 530, 880, 530, 0, 0, 0)
+
+[node name="BorderPolygon" type="Polygon2D" parent="."]
+color = Color(0.341176, 0.317647, 0.4, 1)
+polygon = PackedVector2Array(0, 0, 0, 880, 530, 880, 530, 0, 0, 0)
+
+[node name="BackgroundPolygon" type="Polygon2D" parent="."]
+color = Color(0.482353, 0.482353, 0.529412, 1)
+polygon = PackedVector2Array(10, 10, 10, 870, 520, 870, 520, 10, 10, 10)
+
+[node name="FearDeck" parent="." instance=ExtResource("1_3jeqi")]
+offset_left = 63.0
+offset_top = 555.0
+offset_right = 303.0
+offset_bottom = 891.0
+scale = Vector2(0.75, 0.75)
+metadata/_edit_use_anchors_ = true
+
+[node name="EarnedFearCardsSpot" parent="." instance=ExtResource("2_lx8qu")]
+offset_left = 288.0
+offset_top = 555.0
+offset_right = 528.0
+offset_bottom = 891.0
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="FearPool" parent="." instance=ExtResource("3_4im1w")]
+offset_left = 23.0
+offset_top = 29.0
+offset_right = 663.0
+offset_bottom = 669.0
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="FearCardTransformer" parent="." instance=ExtResource("4_qqpo1")]
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 40.0
+offset_bottom = 136.0
+scale = Vector2(0.75, 0.75)
+mouse_filter = 2
+card_scene = SubResource("PackedScene_66ufy")
+default_speed = Vector2(10, 0)
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 161.0
+offset_top = 819.0
+offset_right = 434.0
+offset_bottom = 866.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.458824, 0.329412, 0.180392, 1)
+theme_override_constants/outline_size = 3
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 34
+text = "FEAR BOARD	"
+metadata/_edit_use_anchors_ = true
+
+[node name="FearCardTimer" type="Timer" parent="."]
+
+[node name="HighlightPolygon" type="Polygon2D" parent="."]
+visible = false
+color = Color(1, 1, 1, 0.0588235)
+polygon = PackedVector2Array(10, 10, 10, 870, 520, 870, 520, 10, 10, 10)
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

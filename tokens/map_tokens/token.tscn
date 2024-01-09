@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://do1ci3gljbrlk"]
+
+[ext_resource type="Script" path="res://tokens/map_tokens/token.gd" id="1_a8tyy"]
+
+[node name="Token" type="ReferenceRect"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+script = ExtResource("1_a8tyy")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+disabled = true

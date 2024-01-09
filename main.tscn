@@ -1,147 +1,44 @@
-[gd_scene load_steps=21 format=3 uid="uid://cmaoafshanif2"]
+[gd_scene load_steps=11 format=3 uid="uid://cmaoafshanif2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yvfee"]
-[ext_resource type="PackedScene" uid="uid://hlg8ou050rac" path="res://board/invaderboard/invader_deck.tscn" id="2_5j4p5"]
-[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="2_af6tv"]
-[ext_resource type="Script" path="res://board/invaderboard/InvaderBoard.gd" id="3_hen3h"]
-[ext_resource type="PackedScene" uid="uid://kpw1armnhu0v" path="res://board/invaderboard/invader_card_space.tscn" id="3_vgr1o"]
-[ext_resource type="PackedScene" uid="uid://bptwhp61iay73" path="res://board/fearpool/earned_fear_cards_spot.tscn" id="4_7a7jb"]
-[ext_resource type="Script" path="res://board/fearpool/fear_board.gd" id="4_alcv7"]
+[ext_resource type="PackedScene" uid="uid://cj0lykqi38rqy" path="res://board/fearboard/fear_board.tscn" id="3_a8qb4"]
 [ext_resource type="PackedScene" uid="uid://b63wdd2ddmtks" path="res://board/map/land_map.tscn" id="4_n62ow"]
-[ext_resource type="PackedScene" uid="uid://dj1o4vf8b6lqi" path="res://board/fearpool/fear_deck.tscn" id="4_q3nq7"]
-[ext_resource type="PackedScene" uid="uid://cnsdfrqwvvbio" path="res://board/invaderboard/discard_space.tscn" id="5_btuvb"]
-[ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://cards/card_mover.tscn" id="7_dcxgg"]
-[ext_resource type="Script" path="res://cards/fear_cards/1_dahan_on_their_guard.gd" id="7_l0olb"]
-[ext_resource type="Texture2D" uid="uid://c3048dajn8ute" path="res://art/cards/fear/FearCardFront.png" id="8_rgaop"]
-[ext_resource type="Texture2D" uid="uid://bcptpix7s4cov" path="res://art/cards/fear/FearCardBack.png" id="9_gh8xa"]
+[ext_resource type="PackedScene" uid="uid://gs6v0qnlrwis" path="res://board/invaderboard/invader_board.tscn" id="4_rhvda"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/map_tokens/blight.tscn" id="6_poenu"]
+[ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://cards/card_transformer.tscn" id="7_dcxgg"]
 [ext_resource type="Script" path="res://LabelContainer.gd" id="9_njwbg"]
-[ext_resource type="PackedScene" uid="uid://e4nfm80o7kmd" path="res://board/fearpool/fear_pool.tscn" id="10_87d84"]
-[ext_resource type="PackedScene" uid="uid://u7gh7ogqekkc" path="res://cards/invader_card.tscn" id="13_h7dub"]
 [ext_resource type="PackedScene" uid="uid://b8o7yd28c26ni" path="res://board/active_card_space.tscn" id="17_iamwp"]
 [ext_resource type="Script" path="res://skip_button.gd" id="18_pudls"]
-
-[sub_resource type="PackedScene" id="PackedScene_owvxq"]
-_bundled = {
-"conn_count": 1,
-"conns": PackedInt32Array(1, 0, 10, 9, 2, 0, 0),
-"editable_instances": [],
-"names": PackedStringArray("DahanOnTheirGuard", "offset_right", "offset_bottom", "script", "card_front", "ReferenceRect", "TextureButton", "layout_mode", "texture_normal", "_on_texture_button_pressed", "pressed"),
-"node_count": 2,
-"node_paths": [],
-"nodes": PackedInt32Array(-1, -1, 5, 0, -1, 4, 1, 0, 2, 1, 3, 2, 4, 3, 0, 0, 0, 6, 6, -1, 4, 7, 4, 1, 5, 2, 5, 8, 6, 0),
-"variants": [240.0, 336.0, ExtResource("7_l0olb"), ExtResource("8_rgaop"), 0, 40.0, ExtResource("9_gh8xa")],
-"version": 3
-}
+[ext_resource type="PackedScene" uid="uid://ikiaijausj22" path="res://board/phase_order_tracker.tscn" id="20_srqrp"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_yvfee")
 
-[node name="LandMap" parent="." node_paths=PackedStringArray("fear_board") instance=ExtResource("4_n62ow")]
+[node name="LandMap" parent="." instance=ExtResource("4_n62ow")]
 offset_left = 601.0
 offset_top = 367.0
 offset_right = 601.0
 offset_bottom = 367.0
 scale = Vector2(0.8, 0.8)
-fear_board = NodePath("../FearBoard")
 
-[node name="FearBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap", "ActiveCardSpace", "CardEffectButton")]
-script = ExtResource("4_alcv7")
-LandMap = NodePath("../LandMap")
-ActiveCardSpace = NodePath("../ActiveCardSpace")
-CardEffectButton = NodePath("../CardEffectButton")
+[node name="FearBoard" parent="." instance=ExtResource("3_a8qb4")]
+position = Vector2(55, -540)
+unfocused_position = Vector2(55, -540)
+focused_position = Vector2(55, 40)
 
-[node name="FearDeck" parent="FearBoard" instance=ExtResource("4_q3nq7")]
-offset_left = 78.0
-offset_top = 459.0
-offset_right = 318.0
-offset_bottom = 795.0
-scale = Vector2(0.66, 0.66)
-
-[node name="EarnedFearCardsSpot" parent="FearBoard" instance=ExtResource("4_7a7jb")]
-offset_left = 303.0
-offset_top = 459.0
-offset_right = 543.0
-offset_bottom = 795.0
-scale = Vector2(0.66, 0.66)
-
-[node name="FearPool" parent="FearBoard" instance=ExtResource("10_87d84")]
-offset_left = 58.0
-offset_top = 13.0
-offset_right = 698.0
-offset_bottom = 653.0
-scale = Vector2(0.66, 0.66)
-
-[node name="FearCardMover" parent="FearBoard" instance=ExtResource("7_dcxgg")]
-offset_left = -100.0
-offset_top = -100.0
-offset_right = 60.0
-offset_bottom = 124.0
-scale = Vector2(0.66, 0.66)
-card_scene = SubResource("PackedScene_owvxq")
-speed = Vector2(5, 0)
-
-[node name="FearCardTimer" type="Timer" parent="FearBoard"]
-
-[node name="InvaderBoard" type="Node" parent="." node_paths=PackedStringArray("LandMap")]
-script = ExtResource("3_hen3h")
-LandMap = NodePath("../LandMap")
-blight_scene = ExtResource("2_af6tv")
-
-[node name="InvaderDeck" parent="InvaderBoard" instance=ExtResource("2_5j4p5")]
-offset_left = 1690.0
-offset_top = 21.0
-offset_right = 1850.0
-offset_bottom = 245.0
-
-[node name="ExploreSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
-offset_left = 1440.0
-offset_top = 21.0
-offset_right = 1610.0
-offset_bottom = 293.0
-label_text = "Explore"
-
-[node name="BuildSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
-offset_left = 1191.0
-offset_top = 21.0
-offset_right = 1361.0
-offset_bottom = 293.0
-label_text = "Build"
-
-[node name="RavageSpace" parent="InvaderBoard" instance=ExtResource("3_vgr1o")]
-offset_left = 940.0
-offset_top = 21.0
-offset_right = 1110.0
-offset_bottom = 293.0
-label_text = "Ravage"
-
-[node name="DiscardSpace" parent="InvaderBoard" instance=ExtResource("5_btuvb")]
-offset_left = 634.0
-offset_top = 61.0
-offset_right = 868.0
-offset_bottom = 269.0
-
-[node name="InvaderCardMover" parent="InvaderBoard" instance=ExtResource("7_dcxgg")]
-offset_left = -186.0
-offset_top = -238.0
-offset_right = -26.0
-offset_bottom = -14.0
-card_scene = ExtResource("13_h7dub")
-speed = Vector2(-15, 0)
-
-[node name="InvaderActionTimer" type="Timer" parent="InvaderBoard"]
-wait_time = 0.5
-
-[node name="ActiveCardSpace" parent="." instance=ExtResource("17_iamwp")]
-offset_left = 56.0
-offset_top = 727.0
-offset_right = 296.0
-offset_bottom = 1063.0
+[node name="InvaderBoard" parent="." instance=ExtResource("4_rhvda")]
+position = Vector2(760, -260)
+speed = Vector2(0, 40)
+unfocused_position = Vector2(760, -260)
+focused_position = Vector2(760, 40)
+blight_scene = ExtResource("6_poenu")
 
 [node name="LabelContainer" type="CenterContainer" parent="."]
 offset_left = 304.0
 offset_top = 1275.0
 offset_right = 1964.0
 offset_bottom = 1393.0
+mouse_filter = 2
 script = ExtResource("9_njwbg")
 
 [node name="Label" type="Label" parent="LabelContainer"]
@@ -151,6 +48,18 @@ theme_override_colors/font_color = Color(0.752941, 0.752941, 0.752941, 1)
 theme_override_font_sizes/font_size = 40
 text = "Test Text testing"
 horizontal_alignment = 1
+
+[node name="ActiveCardTransformer" parent="." instance=ExtResource("7_dcxgg")]
+default_speed = Vector2(-25, 5)
+default_scale_speed = Vector2(0.125, 0.125)
+default_fade_speed = -0.1
+
+[node name="ActiveCardSpace" parent="." instance=ExtResource("17_iamwp")]
+offset_left = 56.0
+offset_top = 478.0
+offset_right = 56.0
+offset_bottom = 478.0
+scale = Vector2(1, 1)
 
 [node name="CardEffectButton" type="Button" parent="."]
 visible = false
@@ -164,26 +73,59 @@ disabled = true
 text = "Skip effect"
 script = ExtResource("18_pudls")
 
-[connection signal="fear_card_earned" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_card_earned"]
-[connection signal="fear_card_earned_resolved" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_card_earned_resolved"]
-[connection signal="fear_cards_resolved" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_cards_resolved"]
-[connection signal="fear_generated" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_generated"]
-[connection signal="fear_generated_resolved" from="FearBoard" to="LabelContainer" method="_on_fear_board_fear_generated_resolved"]
-[connection signal="initiate_resolve_earned_fear_cards" from="FearBoard" to="LabelContainer" method="_on_fear_board_initiate_resolve_earned_fear_cards"]
-[connection signal="fear_pool_empty" from="FearBoard/FearPool" to="FearBoard" method="_on_fear_pool_fear_pool_empty"]
-[connection signal="blight_cascade_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_blight_cascade_initiated"]
-[connection signal="blight_cascade_resolved" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_blight_cascade_resolved"]
-[connection signal="build_initiated" from="InvaderBoard" to="." method="_on_invader_board_build_initiated"]
-[connection signal="build_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_build_initiated"]
-[connection signal="built" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_built"]
-[connection signal="dahan_fight_back_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_dahan_fight_back_initiated"]
-[connection signal="dahan_fight_back_resolved" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_dahan_fight_back_resolved"]
-[connection signal="explore_initiated" from="InvaderBoard" to="." method="_on_invader_board_explore_initiated"]
-[connection signal="explore_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_explore_initiated"]
-[connection signal="explored" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_explored"]
+[node name="PowerCardHand" type="ReferenceRect" parent="."]
+visible = false
+offset_left = 623.0
+offset_top = 1179.0
+offset_right = 1926.0
+offset_bottom = 1482.0
+mouse_filter = 2
+editor_only = false
+
+[node name="ResourceBank" type="ReferenceRect" parent="."]
+visible = false
+offset_left = 1965.0
+offset_top = 1183.0
+offset_right = 2067.0
+offset_bottom = 1475.0
+mouse_filter = 2
+editor_only = false
+
+[node name="HandDiscardPile" type="ReferenceRect" parent="."]
+visible = false
+offset_left = 2098.0
+offset_top = 1122.0
+offset_right = 2367.0
+offset_bottom = 1475.0
+mouse_filter = 2
+editor_only = false
+
+[node name="SpiritBoardPreview" type="ReferenceRect" parent="."]
+visible = false
+offset_left = 1983.0
+offset_top = 535.0
+offset_right = 2357.0
+offset_bottom = 1082.0
+mouse_filter = 2
+editor_only = false
+
+[node name="InnatePowers" type="ReferenceRect" parent="."]
+visible = false
+offset_left = 58.0
+offset_top = 1118.0
+offset_right = 586.0
+offset_bottom = 1471.0
+mouse_filter = 2
+editor_only = false
+
+[node name="PhaseOrderTracker" parent="." instance=ExtResource("20_srqrp")]
+visible = false
+offset_left = 1903.0
+offset_top = 26.0
+offset_right = 1943.0
+offset_bottom = 66.0
+
+[connection signal="active_region_selected" from="LandMap" to="." method="_on_land_map_active_region_selected"]
+[connection signal="active_token_selected" from="LandMap" to="." method="_on_land_map_active_token_selected"]
 [connection signal="invader_actions_completed" from="InvaderBoard" to="." method="_on_invader_board_invader_actions_completed"]
-[connection signal="ravage_initiated" from="InvaderBoard" to="." method="_on_invader_board_ravage_initiated"]
-[connection signal="ravage_initiated" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravage_initiated"]
-[connection signal="ravaged" from="InvaderBoard" to="LabelContainer" method="_on_invader_board_ravaged"]
-[connection signal="emptied" from="InvaderBoard/InvaderDeck" to="." method="_on_invader_deck_emptied"]
 [connection signal="pressed" from="CardEffectButton" to="CardEffectButton" method="_on_pressed"]

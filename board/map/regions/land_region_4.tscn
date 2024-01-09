@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://butbj13776vk3"]
+[gd_scene load_steps=6 format=3 uid="uid://butbj13776vk3"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_6r0sg"]
-[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/presence.tscn" id="2_njaar"]
-[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="3_wol8e"]
-[ext_resource type="PackedScene" uid="uid://cwwkxgfqrh8sx" path="res://tokens/invaders/town.tscn" id="5_3vbfb"]
+[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/map_tokens/player_markers/presence.tscn" id="2_njaar"]
+[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/map_tokens/player_markers/defense_icon.tscn" id="3_wol8e"]
+[ext_resource type="Script" path="res://board/token_container.gd" id="4_bnvks"]
+[ext_resource type="PackedScene" uid="uid://cwwkxgfqrh8sx" path="res://tokens/map_tokens/invaders/town.tscn" id="5_3vbfb"]
 
 [node name="LandRegion4" type="Area2D" node_paths=PackedStringArray("towns")]
 script = ExtResource("1_6r0sg")
@@ -46,6 +47,7 @@ offset_top = 230.0
 offset_right = 437.0
 offset_bottom = 395.0
 alignment = 1
+script = ExtResource("4_bnvks")
 metadata/_edit_use_anchors_ = true
 
 [node name="Town" parent="TokenContainer" instance=ExtResource("5_3vbfb")]

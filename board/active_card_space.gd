@@ -10,9 +10,10 @@ func _ready():
 func _process(delta):
 	pass
 
-func attach_fear_card(fear_card):
+func attach_fear_card(fear_card, fear_level):
 	$CardContainer.add_child(fear_card)
 	scale = Vector2(2.2, 2.2)
+	highlight_fear_level(fear_level)
 
 func highlight_fear_level(level):
 	if level == 1:
@@ -29,6 +30,11 @@ func unhighlight_fear_level():
 		
 func attach_power_card(power_card):
 	pass
+
+func detach_fear_card():
+	unhighlight_fear_level()
+	var card = detach_card()
+	return card
 
 func detach_card():
 	var card = $CardContainer.get_children()[0]

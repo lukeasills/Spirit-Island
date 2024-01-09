@@ -4,7 +4,11 @@
 [ext_resource type="Script" path="res://cards/fear_cards/1_dahan_on_their_guard.gd" id="2_wd7eo"]
 
 [node name="DahanOnTheirGuard" instance=ExtResource("1_ll5gs")]
+mouse_filter = 2
 script = ExtResource("2_wd7eo")
+
+[node name="TextureButton" parent="." index="0"]
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="." index="1"]
 layout_mode = 0

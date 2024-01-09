@@ -8,15 +8,15 @@ func _ready():
 	level3_effect_text  = "Defend 9 in all Coastal lands. Invaders do not Build in Coastal lands this turn."
 
 func resolve_level1_effects():
-	var regions = get_coastal_land()
-	await defend(regions, "constant", 3)
+	var regions = Main.get_coastal_land()
+	await Main.defend(regions, "constant", 3)
 
 func resolve_level2_effects():
-	var regions = get_coastal_land()
-	await defend(regions, "constant", 6)
-	await block_invader_actions(regions, [false, [false, true], false])
+	var regions = Main.get_coastal_land()
+	await Main.defend(regions, "constant", 6)
+	await Main.block_invader_actions(regions, [false, [false, true], false])
 
 func resolve_level3_effects():
-	var regions = get_coastal_land()
-	await defend(regions, "constant", 9)
-	await block_invader_actions(regions, [false, [true, true], false])
+	var regions = Main.get_coastal_land()
+	await Main.defend(regions, "constant", 9)
+	await Main.block_invader_actions(regions, [false, [true, true], false])

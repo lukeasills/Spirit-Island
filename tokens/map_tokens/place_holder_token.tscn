@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhowbaurjtc3l"]
+
+[ext_resource type="Texture2D" uid="uid://c20vgswnu0vn5" path="res://art/tokens/blight.png" id="1_goptb"]
+
+[node name="PlaceHolderToken" type="TextureRect"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("1_goptb")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://t2lgj1kphfw2"]
+[gd_scene load_steps=6 format=3 uid="uid://t2lgj1kphfw2"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_rd08b"]
-[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/presence.tscn" id="2_g61tc"]
-[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="2_offo1"]
-[ext_resource type="PackedScene" uid="uid://16miyvwcpqqy" path="res://tokens/dahan.tscn" id="4_74dep"]
+[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/map_tokens/player_markers/presence.tscn" id="2_08rpx"]
+[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/map_tokens/player_markers/defense_icon.tscn" id="3_bryes"]
+[ext_resource type="PackedScene" uid="uid://16miyvwcpqqy" path="res://tokens/map_tokens/dahan.tscn" id="4_74dep"]
+[ext_resource type="Script" path="res://board/token_container.gd" id="4_b36es"]
 
 [node name="LandRegion1" type="Area2D" node_paths=PackedStringArray("dahans")]
 script = ExtResource("1_rd08b")
@@ -27,14 +28,14 @@ polygon = PackedVector2Array(10, 10, 330, 175, 500, 10, 655, 250, 500, 490, 330,
 visible = false
 polygon = PackedVector2Array(0, 0, 330, 165, 500, 0, 665, 250, 500, 500, 330, 330, 165, 330, 0, 0)
 
-[node name="Presence" parent="." instance=ExtResource("2_g61tc")]
+[node name="Presence" parent="." instance=ExtResource("2_08rpx")]
 offset_left = 126.0
 offset_top = 123.0
 offset_right = 190.0
 offset_bottom = 187.0
 amount = 1
 
-[node name="DefenseIcon" parent="." instance=ExtResource("2_offo1")]
+[node name="DefenseIcon" parent="." instance=ExtResource("3_bryes")]
 offset_left = 453.0
 offset_top = 95.0
 offset_right = 517.0
@@ -46,6 +47,7 @@ offset_top = 174.0
 offset_right = 601.0
 offset_bottom = 324.0
 alignment = 1
+script = ExtResource("4_b36es")
 metadata/_edit_use_anchors_ = true
 
 [node name="Dahan" parent="TokenContainer" instance=ExtResource("4_74dep")]

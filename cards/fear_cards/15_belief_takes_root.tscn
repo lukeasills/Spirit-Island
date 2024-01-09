@@ -4,7 +4,11 @@
 [ext_resource type="Script" path="res://cards/fear_cards/15_belief_takes_root.gd" id="2_0m5ao"]
 
 [node name="BeliefTakesRoot" instance=ExtResource("1_wow57")]
+mouse_filter = 2
 script = ExtResource("2_0m5ao")
+
+[node name="TextureButton" parent="." index="0"]
+mouse_filter = 2
 
 [node name="Title" type="Label" parent="." index="1"]
 visible = false

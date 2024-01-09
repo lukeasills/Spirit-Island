@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsoono7ubgwlq"]
-
-[ext_resource type="Script" path="res://cards/card_mover.gd" id="1_y5bka"]
-
-[node name="CardMover" type="MarginContainer"]
-offset_right = 160.0
-offset_bottom = 224.0
-script = ExtResource("1_y5bka")

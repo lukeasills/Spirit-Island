@@ -8,23 +8,23 @@ func _ready():
 	level3_effect_text  = "Remove an Invader from a land with 2 or fewer Invaders."
 
 func resolve_level1_effects():
-	var regions = get_land_with_invaders("exactly", 1)
-	var selected = await select_invaders_for_removal(regions, true, true, false)
+	var regions = Main.get_land_with_invaders("exactly", 1)
+	var selected = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selected == null:
 		return
-	await remove_invader(selected["region"], selected["token"], false)
+	await Main.remove_invader(selected["region"], selected["token"], false)
 
 func resolve_level2_effects():
-	var regions = get_land_with_invaders("or fewer", 2)
-	var selected = await select_invaders_for_removal(regions, true, true, false)
+	var regions = Main.get_land_with_invaders("or fewer", 2)
+	var selected = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selected == null:
 		return
-	await remove_invader(selected["region"], selected["token"], false)
+	await Main.remove_invader(selected["region"], selected["token"], false)
 
 func resolve_level3_effects():
-	var regions = get_land_with_invaders("or fewer", 2)
-	var selected = await select_invaders_for_removal(regions, true, true, true)
+	var regions = Main.get_land_with_invaders("or fewer", 2)
+	var selected = await Main.select_invaders_for_removal(regions, true, true, true)
 	if selected == null:
 		return
-	await remove_invader(selected["region"], selected["token"], false)
+	await Main.remove_invader(selected["region"], selected["token"], false)
 

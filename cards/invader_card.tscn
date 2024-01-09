@@ -8,9 +8,11 @@
 offset_right = 160.0
 offset_bottom = 224.0
 pivot_offset = Vector2(80, 112)
+mouse_filter = 2
 script = ExtResource("1_1f0gn")
 front_texture = ExtResource("2_q473p")
 card_back = ExtResource("3_icc0m")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 2
+mouse_filter = 2

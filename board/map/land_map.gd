@@ -1,8 +1,10 @@
-extends MarginContainer
+extends ReferenceRect
 # Player input signals
 signal active_region_entered
 signal active_region_selected
 signal active_region_exited
+signal active_token_hovered
+signal active_token_stop_hovered
 signal active_token_selected
 
 @onready var skip_button = get_node("/root/SkipButton")
@@ -12,9 +14,6 @@ signal active_token_selected
 @export var city_scene: PackedScene
 @export var blight_scene: PackedScene
 @export var dahan_scene: PackedScene
-
-# For passing control to FearBoard
-@export var fear_board: Node
 
 var map_data = [
 	{"type":"Jungle", "iscoastal":false, "adjacentregions": [1,3,4],
@@ -70,6 +69,12 @@ func _ready():
 func _process(delta):
 	pass
 
+func get_regions():
+	return get_children().slice(0, get_child_count()-2)
+
+func get_place_holder_token():
+	return get_tree().get_root().get_node("Main").get_place_holder_token()
+
 # Generalized functions for damaging tokens, removing if maxed-out
 func damage_invader(region, token, is_delayed):
 	# If explorer, 1 damage destroys it
@@ -114,14 +119,14 @@ func destroy_invader(region, token, is_delayed):
 		await $Timer.timeout
 	# Depending on type of invader, call the right function in the region
 	if region.explorers.has(token):
-		region.destroy_explorer(token)
+		await region.destroy_explorer(token)
 	elif region.towns.has(token):
-		region.destroy_town(token)
-		await fear_board.generate_fear(1)
+		await region.destroy_town(token)
+		await get_tree().get_root().get_node("Main").generate_fear(1)
 		
 	else:
-		region.destroy_city(token)
-		await fear_board.generate_fear(2)
+		await region.destroy_city(token)
+		await get_tree().get_root().get_node("Main").generate_fear(2)
 
 func destroy_dahan(region, token, is_delayed):
 	# Set the texture to reflect destruction
@@ -130,7 +135,7 @@ func destroy_dahan(region, token, is_delayed):
 	if is_delayed:
 		$Timer.start()
 		await $Timer.timeout
-	region.destroy_dahan(token)
+	await region.destroy_dahan(token)
 
 # Genarlized functions for removing tokens
 func remove_blight(region, token, is_delayed):
@@ -139,7 +144,7 @@ func remove_blight(region, token, is_delayed):
 	if is_delayed:
 		$Timer.start()
 		await $Timer.timeout
-	region.remove_blight(token)
+	await region.remove_blight(token)
 # Currently uses set_destroyed method, could update if using diff texture
 func remove_invader(region, token, is_delayed):
 	# Set the texture to reflect destruction
@@ -148,11 +153,11 @@ func remove_invader(region, token, is_delayed):
 		$Timer.start()
 		await $Timer.timeout
 	if region.explorers.has(token):
-		region.remove_explorer(token)
+		await region.remove_explorer(token)
 	elif region.towns.has(token):
-		region.remove_town(token)
+		await region.remove_town(token)
 	else:
-		region.remove_city(token)
+		await region.remove_city(token)
 # Currently uses set_destroyed method, could update if using diff texture
 func remove_dahan(region, token, is_delayed):
 	# Set the texture to reflect destruction
@@ -160,32 +165,57 @@ func remove_dahan(region, token, is_delayed):
 	if is_delayed:
 		$Timer.start()
 		await $Timer.timeout
-	region.remove_dahan(token)
+	await region.remove_dahan(token)
 
 # Generalized functions for pushing tokens
 func push_invader(region, token, new_region, is_delayed):
-	if is_delayed:
-		$Timer.start()
-		await $Timer.timeout
 	if region.explorers.has(token):
-		region.remove_explorer(token)
+		var init_pos = region.get_token_position(token) + region.position
+		region.remove_explorer(token, false)
+		await push_token_animation(init_pos, new_region, token)
 		new_region.add_explorer(token)
 	elif region.towns.has(token):
-		region.remove_town(token)
+		var init_pos = region.get_token_position(token) + region.position
+		region.remove_town(token, false)
+		await push_token_animation(init_pos, new_region, token)
 		new_region.add_town(token)
 	else:
-		region.remove_city(token)
+		var init_pos = region.get_token_position(token) + region.position
+		region.remove_city(token, false)
+		await push_token_animation(init_pos, new_region, token)
 		new_region.add_city(token)
-
-func push_dahan(region, token, new_region, is_delayed):
 	if is_delayed:
 		$Timer.start()
 		await $Timer.timeout
-	region.remove_dahan(token)
+
+func push_dahan(region, token, new_region, is_delayed):
+	var init_pos = region.get_token_position(token) + region.position
+	region.remove_dahan(token, false)
+	await push_token_animation(init_pos, new_region, token)
 	new_region.add_dahan(token)
+	if is_delayed:
+		$Timer.start()
+		await $Timer.timeout
+
+func push_token_animation(start_pos, end_region, token):
+	var placeholder = get_parent().get_token_instance("placeholder")
+	var new_position = end_region.get_next_token_position() + end_region.position
+	end_region.add_placeholder(placeholder)
+	$TokenTransformer.attach(token)
+	$TokenTransformer.init_move(start_pos, new_position, 0.3)
+	await $TokenTransformer.transformed
+	token = $TokenTransformer.detach()
+	end_region.remove_placeholder(placeholder)
+	return token
 
 # User input functions
 	
+func token_hovered(token, region):
+	active_token_hovered.emit()
+
+func stop_token_hovered(token, region):
+	active_token_stop_hovered.emit()
+
 func token_clicked(token, region):
 	active_token_selected.emit({"token":token,"region":region})
 

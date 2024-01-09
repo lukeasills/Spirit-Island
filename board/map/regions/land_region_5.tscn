@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://1earn4vslmdg"]
+[gd_scene load_steps=6 format=3 uid="uid://1earn4vslmdg"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_wf2dp"]
-[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="2_0k78y"]
-[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/presence.tscn" id="2_p1vgp"]
-[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/blight.tscn" id="3_tt77s"]
+[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/map_tokens/player_markers/defense_icon.tscn" id="2_0k78y"]
+[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/map_tokens/player_markers/presence.tscn" id="2_p1vgp"]
+[ext_resource type="PackedScene" uid="uid://bl1whvue2oc0r" path="res://tokens/map_tokens/blight.tscn" id="3_tt77s"]
+[ext_resource type="Script" path="res://board/token_container.gd" id="4_h7aku"]
 
 [node name="LandRegion5" type="Area2D" node_paths=PackedStringArray("blights")]
 script = ExtResource("1_wf2dp")
@@ -46,6 +47,7 @@ offset_top = 82.0
 offset_right = 229.0
 offset_bottom = 282.0
 alignment = 1
+script = ExtResource("4_h7aku")
 metadata/_edit_use_anchors_ = true
 
 [node name="Blight" parent="TokenContainer" instance=ExtResource("3_tt77s")]

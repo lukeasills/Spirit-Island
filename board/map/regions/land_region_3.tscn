@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://5bel7pydcdbk"]
+[gd_scene load_steps=6 format=3 uid="uid://5bel7pydcdbk"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_nutrn"]
-[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/presence.tscn" id="2_pktd1"]
-[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="2_qvnje"]
-[ext_resource type="PackedScene" uid="uid://16miyvwcpqqy" path="res://tokens/dahan.tscn" id="4_4bsd0"]
+[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/map_tokens/player_markers/presence.tscn" id="2_pktd1"]
+[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/map_tokens/player_markers/defense_icon.tscn" id="2_qvnje"]
+[ext_resource type="PackedScene" uid="uid://16miyvwcpqqy" path="res://tokens/map_tokens/dahan.tscn" id="4_4bsd0"]
+[ext_resource type="Script" path="res://board/token_container.gd" id="4_lft7q"]
 
 [node name="LandRegion3" type="Area2D" node_paths=PackedStringArray("dahans")]
 script = ExtResource("1_nutrn")
@@ -51,6 +52,7 @@ offset_top = 45.0
 offset_right = 520.0
 offset_bottom = 195.0
 alignment = 1
+script = ExtResource("4_lft7q")
 metadata/_edit_use_anchors_ = true
 
 [node name="Dahan" parent="TokenContainer" instance=ExtResource("4_4bsd0")]

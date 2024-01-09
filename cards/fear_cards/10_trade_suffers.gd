@@ -8,27 +8,27 @@ func _ready():
 	level3_effect_text  = "You may replace 1 City with 1 Town, or 1 Town with 1 Explorer in a Coastal land."
 
 func resolve_level1_effects():
-	var regions = get_land_with_cities()
-	await block_invader_actions(regions, [false, [true, true], false])
+	var regions = Main.get_land_with_cities()
+	await Main.block_invader_actions(regions, [false, [true, true], false])
 
 func resolve_level2_effects():
-	var regions = get_coastal_land()
-	var selection = await select_invaders_for_removal(regions, false, true, false, true)
+	var regions = Main.get_coastal_land()
+	var selection = await Main.select_invaders_for_removal(regions, false, true, false, true)
 	if selection == null || selection["skipped"]:
 		return
 	var region = selection["region"]
-	await remove_invader(region, selection["token"], false)
+	await Main.remove_invader(region, selection["token"], false)
 	await region.add_explorer()
 
 func resolve_level3_effects():
-	var regions = get_coastal_land()
-	var selection = await select_invaders_for_removal(regions, false, true, true, true)
+	var regions = Main.get_coastal_land()
+	var selection = await Main.select_invaders_for_removal(regions, false, true, true, true)
 	if selection == null || selection["skipped"]:
 		return
 	var region = selection["region"]
 	if region.towns.has(selection["token"]):
-		await remove_invader(region, selection["token"], false)
+		await Main.remove_invader(region, selection["token"], false)
 		await region.add_explorer()
 	else:
-		await remove_invader(region, selection["token"], false)
+		await Main.remove_invader(region, selection["token"], false)
 		await region.add_town()

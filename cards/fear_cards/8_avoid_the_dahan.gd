@@ -8,17 +8,17 @@ func _ready():
 	level3_effect_text  = "Invaders do not Build in lands with Dahan."
 
 func resolve_level1_effects():
-	var regions = get_land_with_dahan("at least", 2)
-	await block_invader_actions(regions, [true, false, false])
+	var regions = Main.get_land_with_dahan("at least", 2)
+	await Main.block_invader_actions(regions, [true, false, false])
 
 func resolve_level2_effects():
-	var regions = get_land_with_dahan()
+	var regions = Main.get_land_with_dahan()
 	var regions_to_block = []
 	for region in regions:
 		if region.dahans.size() > region.towns.size() + region.cities.size():
 			regions_to_block.append(region)
-	await block_invader_actions(regions_to_block, [false, [true, true], false])
+	await Main.block_invader_actions(regions_to_block, [false, [true, true], false])
 
 func resolve_level3_effects():
-	var regions = get_land_with_dahan()
-	await block_invader_actions(regions, [false, [true, true], false])
+	var regions = Main.get_land_with_dahan()
+	await Main.block_invader_actions(regions, [false, [true, true], false])

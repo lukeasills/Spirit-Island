@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://st4yvswkqspv"]
+
+[ext_resource type="PackedScene" uid="uid://do1ci3gljbrlk" path="res://tokens/map_tokens/token.tscn" id="1_p20ls"]
+[ext_resource type="Script" path="res://tokens/map_tokens/invaders/explorer.gd" id="2_2xn6q"]
+[ext_resource type="Texture2D" uid="uid://bmrlwu00rxv2w" path="res://art/tokens/invaders/explorer.png" id="2_nn0db"]
+[ext_resource type="Texture2D" uid="uid://dc22qvx0tl5o1" path="res://art/tokens/invaders/Invader1Destroyed.png" id="4_afga6"]
+
+[node name="Explorer" instance=ExtResource("1_p20ls")]
+script = ExtResource("2_2xn6q")
+normal_texture = ExtResource("2_nn0db")
+destroyed_texture = ExtResource("4_afga6")
+
+[node name="TextureButton" parent="." index="0"]
+texture_normal = ExtResource("2_nn0db")
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

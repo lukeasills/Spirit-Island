@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ditio3kclv2v3"]
+[gd_scene load_steps=5 format=3 uid="uid://ditio3kclv2v3"]
 
 [ext_resource type="Script" path="res://board/map/regions/land_region.gd" id="1_3xcan"]
-[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/defense_icon.tscn" id="2_8mb04"]
-[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/presence.tscn" id="2_yoay2"]
+[ext_resource type="PackedScene" uid="uid://ctagsgqrtl7d3" path="res://tokens/map_tokens/player_markers/defense_icon.tscn" id="2_8mb04"]
+[ext_resource type="PackedScene" uid="uid://bmntxqvcaco8" path="res://tokens/map_tokens/player_markers/presence.tscn" id="2_yoay2"]
+[ext_resource type="Script" path="res://board/token_container.gd" id="4_ojmlu"]
 
 [node name="LandRegion7" type="Area2D"]
 script = ExtResource("1_3xcan")
@@ -44,6 +45,7 @@ offset_top = -86.0
 offset_right = 614.0
 offset_bottom = 39.0
 alignment = 1
+script = ExtResource("4_ojmlu")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
