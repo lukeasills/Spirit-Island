@@ -17,7 +17,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="FearLevel1Highlight" type="TextureRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.25)
 layout_mode = 2
 offset_right = 240.0
@@ -25,7 +24,6 @@ offset_bottom = 336.0
 texture = ExtResource("3_8bf7i")
 
 [node name="FearLevel2Highlight" type="TextureRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.25)
 layout_mode = 2
 offset_right = 240.0
@@ -33,7 +31,6 @@ offset_bottom = 336.0
 texture = ExtResource("4_q8lbi")
 
 [node name="FearLevel3Highlight" type="TextureRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.25)
 layout_mode = 2
 offset_right = 240.0

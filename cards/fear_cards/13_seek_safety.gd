@@ -45,6 +45,7 @@ func resolve_level2_effects():
 	var region_selection = await Main.select_land(regions, true)
 	if region_selection == null || region_selection["skipped"]:
 		return
+	Main.initiate_gather(region_selection["region"])
 	var adjacent_regions = region_selection["region"].adjacent_regions
 	var explorers = false
 	var towns = false
@@ -70,6 +71,7 @@ func resolve_level2_effects():
 		message = "You may Gather 1 Town."
 	Main.get_node("LabelContainer").set_text(message)
 	var token_selection = await Main.select_invaders_for_removal(adjacent_regions, explorers, towns, false, true)
+	Main.resolve_gather()
 	if token_selection == null || token_selection["skipped"]:
 		return
 	await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), region_selection["region"],false)

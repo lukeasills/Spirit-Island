@@ -8,6 +8,10 @@ var card_back_lit = load("res://art/cards/fear/FearCardBackLit.png")
 
 @onready var revealed = false
 
+@export var level1_options_polygons: Array[PackedVector2Array]
+@export var level2_options_polygons: Array[PackedVector2Array]
+@export var level3_options_polygons: Array[PackedVector2Array]
+
 var level1_effect_text
 var level2_effect_text
 var level3_effect_text 
@@ -25,6 +29,15 @@ func fear_card_on_ready():
 	card_effects_on_ready()
 
 # Base function for resolving effects. In fear cards, determine which level
+func setup_effects(fear_level):
+	if fear_level == 1:
+		setup_level1_effects()
+	elif fear_level == 2:
+		setup_level2_effects()
+	else:
+		setup_level3_effects()
+	pass
+
 func resolve_effects(fear_level):
 	if fear_level == 1:
 		Main.get_node("LabelContainer").set_text(level1_effect_text)
@@ -36,6 +49,15 @@ func resolve_effects(fear_level):
 		Main.get_node("LabelContainer").set_text(level3_effect_text)
 		await resolve_level3_effects()
 	Main.get_node("LabelContainer").turn_off_text()
+
+func setup_level1_effects():
+	pass
+
+func setup_level2_effects():
+	pass
+
+func setup_level3_effects():
+	pass
 
 func resolve_level1_effects():
 	pass

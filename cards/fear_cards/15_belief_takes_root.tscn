@@ -58,5 +58,5 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 10
 text = "Choose a land and remove up to
 2 Health worth of Invaders
-per a Presence there."
+per Presence there."
 horizontal_alignment = 1

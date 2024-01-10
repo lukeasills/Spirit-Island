@@ -56,7 +56,7 @@ offset_right = 244.0
 offset_bottom = 313.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 10
-text = "Each player removes 1 Explorer / Town
+text = "Remove 1 Explorer / Town
 from a land with a Presence, or
 1 City from a land with a Holy Site."
 horizontal_alignment = 1

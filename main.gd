@@ -5,6 +5,9 @@ var invader_deck_empty = false
 var turn_in_progress
 var map_is_active
 var is_awaiting_skippable_selection
+var gather_in_progress
+var gather_destination
+
 
 @onready var placeholder_scene = preload("res://tokens/map_tokens/place_holder_token.tscn")
 @onready var blight_scene = preload("res://tokens/map_tokens/blight.tscn")
@@ -26,6 +29,8 @@ signal player_selection_made
 func _ready():
 	turn_in_progress = false
 	map_is_active = false
+	gather_in_progress = false
+	gather_destination = null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -285,22 +290,24 @@ func push_token(token, source, destination, is_delayed):
 		token = await $LandMap.push_invader(source, token, destination, is_delayed)
 	await await_timer()
 
-# --- Gather functions (currently redundant with push)
+# --- Gather functions
+func initiate_gather(dest_region):
+	gather_destination = dest_region
+	gather_destination.set_lit()
+	gather_in_progress = true
+
+func resolve_gather():
+	gather_destination.set_unlit()
+	gather_destination.set_lit()
+	gather_in_progress = false
+	gather_destination = null
+
+# Currently redundant with push
 func gather_token(token, source, destination, is_delayed):
-	token.visible = false
 	if source.dahans.has(token):
-		token = source.remove_dahan(token, false)
-		destination.add_dahan(token)
-	if source.explorers.has(token):
-		token = source.remove_explorer(token, false)
-		destination.add_explorer(token)
-	if source.towns.has(token):
-		token = source.remove_town(token, false)
-		destination.add_town(token)
-	if source.cities.has(token):
-		token = source.remove_city(token, false)
-		destination.add_city(token)
-	token.visible = true
+		token = await $LandMap.push_dahan(source, token, destination, is_delayed)
+	else:
+		token = await $LandMap.push_invader(source, token, destination, is_delayed)
 	await await_timer()
 	
 # --- Remove functions
@@ -345,7 +352,7 @@ func block_invader_actions(regions, actions):
 func await_skippable_selection():
 	$CardEffectButton.visible = true
 	$CardEffectButton.disabled = false
-	$CardEffectButton.text = "Skip effect"
+	$CardEffectButton.text = "Continue"
 	var selection = await player_selection_made
 	$CardEffectButton.visible = false
 	$CardEffectButton.disabled = true
@@ -359,10 +366,23 @@ func on_token_selected(token):
 
 func on_token_hovered(token):
 	if token.active:
+		if gather_in_progress:
+			var source_region = token.get_parent().get_parent()
+			var type = "dahan"
+			if source_region.explorers.has(token):
+				type = "explorer"
+			elif source_region.towns.has(token):
+				type = "town"
+			elif source_region.cities.has(token):
+				type = "city"
+			gather_destination.set_lit(get_token_instance(type))
 		active_token_hovered.emit(token)
 
 func on_token_end_hovered(token):
 	if token.active:
+		if gather_in_progress:
+			gather_destination.set_unlit()
+			gather_destination.set_lit()
 		active_token_end_hovered.emit(token)
 
 # -- REGION INTERACTION FUNCTIONS
