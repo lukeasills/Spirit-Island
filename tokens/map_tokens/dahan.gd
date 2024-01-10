@@ -9,6 +9,7 @@ var damaged
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	damaged = false
+	token_ready()
 
 # Set dahan to "damaged" mode
 func set_damaged():
@@ -29,15 +30,3 @@ func set_active_for_removal():
 	$TextureButton.texture_hover = destroyed_texture
 	$TextureButton.texture_pressed = destroyed_texture
 	set_active()
-
-func _on_texture_button_pressed():
-	if !$TextureButton.disabled:
-		get_parent().get_parent().token_selected(self)
-
-func _on_texture_button_mouse_entered():
-	if !$TextureButton.disabled:
-		get_parent().get_parent().token_hovered(self)
-
-func _on_texture_button_mouse_exited():
-	if !$TextureButton.disabled:
-		get_parent().get_parent().stop_token_hovered(self)

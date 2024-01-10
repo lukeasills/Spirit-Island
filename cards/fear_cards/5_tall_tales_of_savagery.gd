@@ -12,25 +12,26 @@ func resolve_level1_effects():
 	var selected = await Main.select_invaders_for_removal(regions, true, false, false)
 	if selected == null:
 		return
-	await Main.remove_invader(selected["region"], selected["token"], false)
+	await Main.remove_invader(selected["token"].get_parent().get_parent(), selected["token"], false)
 
 func resolve_level2_effects():
 	var regions = Main.get_land_with_dahan()
 	var selected = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selected == null:
 		return
+	var region = selected["token"].get_parent().get_parent()
 	# If it is an explorer, set up the player to choose a second explorer
-	if selected["region"].explorers.has(selected):
-		await Main.remove_invader(selected["region"], selected["token"], false)
+	if region.explorers.has(selected):
+		await Main.remove_invader(region, selected["token"], false)
 		Main.get_node("LabelContainer").set_text("Remove 1 more Explorer.")
-		selected = await Main.select_invaders_for_removal([selected["region"]], true, false, false)
+		selected = await Main.select_invaders_for_removal([region], true, false, false)
 		if selected == null:
 			Main.get_node("LabelContainer").turn_off_text()
 			return
-		await Main.remove_invader(selected["region"], selected["token"], false)
+		await Main.remove_invader(region, selected["token"], false)
 	# Else remove the town
 	else:
-		await Main.remove_invader(selected["region"], selected["token"], false)
+		await Main.remove_invader(region, selected["token"], false)
 
 func resolve_level3_effects():
 	var regions = Main.get_land_with_dahan()

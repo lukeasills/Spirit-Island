@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://brfbqf3003h0" path="res://art/tokens/invaders/citydamage2.png" id="5_ukn1p"]
 [ext_resource type="Texture2D" uid="uid://cyx5k5da2r7xl" path="res://art/tokens/invaders/Invader3Destroyed.png" id="6_cwjw1"]
 
-[node name="City" instance=ExtResource("1_ywohw")]
+[node name="City" groups=["cities"] instance=ExtResource("1_ywohw")]
 script = ExtResource("2_e36fp")
 normal_texture = ExtResource("3_ub1vn")
 damaged1_texture = ExtResource("4_slwt1")
@@ -16,7 +16,3 @@ destroyed_texture = ExtResource("6_cwjw1")
 
 [node name="TextureButton" parent="." index="0"]
 texture_normal = ExtResource("3_ub1vn")
-
-[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
-[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

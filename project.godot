@@ -18,7 +18,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 CardEffectTimer="res://card_effect_timer.tscn"
-PlayerInputHandler="*res://player_input_handler.gd"
 
 [display]
 

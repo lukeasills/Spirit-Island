@@ -16,7 +16,7 @@ func _ready():
 
 # Function to remove 1 card from each stage
 func setup_initial_deck():
-	var card = $Stage1Cards.get_children()[randi() % $Stage1Cards.get_child_count()]
+	var card = $Stage1Cards.get_children()[1]#[randi() % $Stage1Cards.get_child_count()]
 	$Stage1Cards.remove_child(card)
 	card.queue_free()
 	card = $Stage2Cards.get_children()[randi() % $Stage2Cards.get_child_count()]
@@ -34,7 +34,7 @@ func _process(delta):
 # Emit the new card to be listened to by main
 func draw():
 	# Get a random card from the current stage
-	var random_card_index = randi() % current_stage_cards.get_child_count()
+	var random_card_index = 0#randi() % current_stage_cards.get_child_count()
 	var drawn_card = current_stage_cards.get_children()[random_card_index]
 	current_stage_cards.remove_child(drawn_card)
 	

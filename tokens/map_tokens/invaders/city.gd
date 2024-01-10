@@ -9,7 +9,7 @@ var damage
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	token_ready()
 
 # Set selectable by player for distributing damage
 func set_active_for_damage():
@@ -47,15 +47,3 @@ func reset_damage():
 
 func set_destroyed():
 	$TextureButton.texture_normal = destroyed_texture
-
-func _on_texture_button_pressed():
-	if !$TextureButton.disabled:
-		get_parent().get_parent().token_selected(self)
-
-func _on_texture_button_mouse_entered():
-	if !$TextureButton.disabled:
-		get_parent().get_parent().token_hovered(self)
-
-func _on_texture_button_mouse_exited():
-	if !$TextureButton.disabled:
-		get_parent().get_parent().stop_token_hovered(self)

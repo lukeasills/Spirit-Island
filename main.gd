@@ -4,6 +4,7 @@ var invader_deck_empty = false
 
 var turn_in_progress
 var map_is_active
+var is_awaiting_skippable_selection
 
 @onready var placeholder_scene = preload("res://tokens/map_tokens/place_holder_token.tscn")
 @onready var blight_scene = preload("res://tokens/map_tokens/blight.tscn")
@@ -14,8 +15,12 @@ var map_is_active
 
 @onready var effect_timer = get_node("/root/CardEffectTimer")
 
-signal active_region_selected
-signal active_token_selected
+signal active_region_hovered
+signal active_region_end_hovered
+signal active_token_hovered
+signal active_token_end_hovered
+
+signal player_selection_made
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -65,7 +70,7 @@ func get_token_instance(type):
 		new_token = dahan_scene.instantiate()
 	return new_token
 
-# Handling relationship with fear board
+# - FEAR BOARD RELATIONSHIPS
 func generate_fear(num):
 	await $FearBoard.generate_fear(num)
 	
@@ -94,15 +99,14 @@ func prompt_faer_card_effect_button():
 	$CardEffectButton.visible = false
 	$CardEffectButton.disabled = true
 
-# Handling relationship with LandMap
-# Card Effect Functions
+# - LAND MAP RELATIONSHIPS
 
 func await_timer():
 	effect_timer.start()
 	await effect_timer.timeout
 
-# - Select functions
-# -- Select invaders
+# -- Select functions
+# --- Select invaders
 
 func select_invaders_for_damage(regions, explorers=true, towns=true, cities=true, skippable=false):
 	var total_activated = 0
@@ -115,7 +119,7 @@ func select_invaders_for_damage(regions, explorers=true, towns=true, cities=true
 		return null
 	var selected
 	if !skippable:
-		selected = await $LandMap.active_token_selected
+		selected = await player_selection_made
 	else:
 		selected = await await_skippable_selection()
 	for region in regions:
@@ -134,7 +138,7 @@ func select_invaders_for_destruction(regions, explorers=true, towns=true, cities
 		return null
 	var selected
 	if !skippable:
-		selected = await $LandMap.active_token_selected
+		selected = await player_selection_made
 	else:
 		selected = await await_skippable_selection()
 	for region in regions:
@@ -153,7 +157,7 @@ func select_invaders_for_removal(regions, explorers=true, towns=true, cities=tru
 		return null
 	var selected
 	if !skippable:
-		selected = await $LandMap.active_token_selected
+		selected = await player_selection_made
 	else:
 		selected = await await_skippable_selection()
 	for region in regions:
@@ -161,7 +165,7 @@ func select_invaders_for_removal(regions, explorers=true, towns=true, cities=tru
 		region.deactivate_invaders()
 	return selected
 
-# -- Select dahans
+# --- Select dahans
 
 func select_dahan_for_removal(regions, skippable=false):
 	var total_activated = 0
@@ -174,31 +178,34 @@ func select_dahan_for_removal(regions, skippable=false):
 		return null
 	var selected
 	if !skippable:
-		selected = await $LandMap.active_token_selected
+		selected = await player_selection_made
 	else:
 		selected = await await_skippable_selection()
 	for region in regions:
 		region.set_unlit()
 		region.deactivate_dahan()
 	return selected
-# -- Select lands
+# --- Select lands
 
 func select_land(regions, skippable=false, hover_token = null):
 	var total_activated = 0
+	if hover_token != null:
+		hover_token = get_token_instance(hover_token)
 	for region in regions:
 		total_activated += region.set_active(hover_token)
 	if regions.size() == 0:
 		return null
 	var selected
 	if !skippable:
-		selected = await $LandMap.active_region_selected
+		selected = await player_selection_made
 	else:
 		selected = await await_skippable_selection()
 	for region in regions:
 		region.set_inactive()
 	return selected
+	
 
-# - Region condition functions
+# -- Region condition functions
 
 func get_regions():
 	return $LandMap.get_regions()
@@ -268,9 +275,9 @@ func get_land_with_presence(holy_site = false):
 			land_with_presence.append(land)
 	return land_with_presence
 
-# - Effect functions
+# -- Effect functions
 
-# -- Push functions
+# --- Push functions
 func push_token(token, source, destination, is_delayed):
 	if source.dahans.has(token):
 		token = await $LandMap.push_dahan(source, token, destination, is_delayed)
@@ -278,7 +285,7 @@ func push_token(token, source, destination, is_delayed):
 		token = await $LandMap.push_invader(source, token, destination, is_delayed)
 	await await_timer()
 
-# -- Gather functions (currently redundant with push)
+# --- Gather functions (currently redundant with push)
 func gather_token(token, source, destination, is_delayed):
 	token.visible = false
 	if source.dahans.has(token):
@@ -296,18 +303,18 @@ func gather_token(token, source, destination, is_delayed):
 	token.visible = true
 	await await_timer()
 	
-# -- Remove functions
+# --- Remove functions
 func remove_invader(region, selected, is_delayed):
 	await $LandMap.remove_invader(region, selected, is_delayed)
 
-# -- Destroy functions
+# --- Destroy functions
 func destroy_invader(region, selected, is_delayed):
 	await $LandMap.destroy_invader(region, selected, is_delayed)
 
 func destroy_dahan(region, dahan, is_delayed):
 	await $LandMap.destroy_dahan(region, dahan, is_delayed)
 
-# -- Damage and defend functions
+# --- Damage and defend functions
 func damage_invader(region, selected, is_delayed):
 	await $LandMap.damage_invader(region, selected, is_delayed)
 
@@ -324,7 +331,7 @@ func defend(regions, type, how_much):
 		await await_timer()
 		region.set_unlit()
 
-# -- Block invader action functions
+# --- Block invader action functions
 func block_invader_actions(regions, actions):
 	for region in regions:
 		region.set_lit()
@@ -334,24 +341,50 @@ func block_invader_actions(regions, actions):
 		await await_timer()
 		region.set_unlit()
 
-# - Skippable action functions
+# -- Skippable action functions
 func await_skippable_selection():
-	get_node("CardEffectButton").visible = true
-	get_node("CardEffectButton").disabled = false
-	get_node("CardEffectButton").text = "Skip effect"
-	var selected = await PlayerInputHandler.skippable_selection_made
-	get_node("CardEffectButton").visible = false
-	get_node("CardEffectButton").disabled = true
-	return selected
+	$CardEffectButton.visible = true
+	$CardEffectButton.disabled = false
+	$CardEffectButton.text = "Skip effect"
+	var selection = await player_selection_made
+	$CardEffectButton.visible = false
+	$CardEffectButton.disabled = true
+	return selection
+
+# -- TOKEN INTERACTION FUNCTIONS
+
+func on_token_selected(token):
+	if token.active:
+		player_selection_made.emit({"token":token,"skipped":false})
+
+func on_token_hovered(token):
+	if token.active:
+		active_token_hovered.emit(token)
+
+func on_token_end_hovered(token):
+	if token.active:
+		active_token_end_hovered.emit(token)
+
+# -- REGION INTERACTION FUNCTIONS
+
+func on_region_selected(region):
+	if region.active:
+		player_selection_made.emit({"region":region,"skipped":false})
+
+func on_region_hovered(region):
+	if region.active:
+		active_region_hovered.emit(region)
+
+func on_region_end_hovered(region):
+	if region.active:
+		active_region_end_hovered.emit(region)
+
+# -- SKIP BUTTON INTERACTION FUNCTIONS
+func on_skip_button_pressed():
+	player_selection_made.emit({"skipped":true})
 
 func _on_invader_deck_emptied():
 	invader_deck_empty = true
 
 func _on_invader_board_invader_actions_completed():
 	turn_in_progress = false
-
-func _on_land_map_active_region_selected(region):
-	active_region_selected.emit(region)
-
-func _on_land_map_active_token_selected(dict):
-	active_token_selected.emit(dict)

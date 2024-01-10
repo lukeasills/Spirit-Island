@@ -21,12 +21,12 @@ func resolve_level1_effects():
 		return
 	Main.get_node("LabelContainer").set_text("Select a destination with more Towns and Cities than the land it came from.")
 	var valid_destinations = []
-	var source = token_selection["region"]
+	var source = token_selection["token"].get_parent().get_parent()
 	for adj in source.adjacent_regions:
 		if adj.towns.size() + adj.cities.size() > source.towns.size() + source.cities.size():
 			valid_destinations.append(adj)
 	var destination = await Main.select_land(valid_destinations, false, Main.get_token_instance("explorer"))
-	await Main.push_token(token_selection["token"], source, destination, false)
+	await Main.push_token(token_selection["token"], source, destination["region"], false)
 
 func resolve_level2_effects():
 	var lands_with_invaders = Main.get_land_with_invaders()
@@ -72,7 +72,7 @@ func resolve_level2_effects():
 	var token_selection = await Main.select_invaders_for_removal(adjacent_regions, explorers, towns, false, true)
 	if token_selection == null || token_selection["skipped"]:
 		return
-	await Main.gather_token(token_selection["token"], token_selection["region"], region_selection["region"],false)
+	await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), region_selection["region"],false)
 	Main.get_node("LabelContainer").turn_off_text()
 	
 
@@ -85,12 +85,12 @@ func resolve_level3_effects():
 			valid_regions.append(region)
 	var selection = await Main.select_invaders_for_removal(valid_regions, true, true, false, true)
 	if selection != null && !selection["skipped"]:
-		var region = selection["region"]
+		var region = selection["token"].get_parent().get_parent()
 		if region.explorers.has(selection["token"]):
 			health -= 1
 		elif region.towns.has(selection["token"]):
 			health -= 2
-		await Main.remove_invader(selection["region"], selection["token"],false)
+		await Main.remove_invader(selection["token"].get_parent().get_parent(), selection["token"],false)
 		Main.get_node("LabelContainer").set_text(str("You may remove up to ", health, "more Health worth of Invaders from this land."))
 		var towns = health == 2
 		selection = await Main.select_invaders_for_removal([region], true, towns, false, true)
@@ -99,10 +99,10 @@ func resolve_level3_effects():
 				health -= 1
 			else:
 				health = 0
-			await Main.remove_invader(selection["region"], selection["token"],false)
+			await Main.remove_invader(selection["token"].get_parent().get_parent(), selection["token"],false)
 			if health == 1:
 				Main.get_node("LabelContainer").set_text("You may remove up to 1 more Health worth of Invaders from this land.")
 				selection = await Main.select_invaders_for_removal([region], true, false, false, true)
 				if selection != null && !selection["skipped"]:
-					await Main.remove_invader(selection["region"], selection["token"],false)
+					await Main.remove_invader(selection["token"].get_parent().get_parent(), selection["token"],false)
 	Main.get_node("LabelContainer").turn_off_text()

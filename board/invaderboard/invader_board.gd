@@ -229,12 +229,12 @@ func dahan_fight_back(region):
 	var damage = region.dahans.size() * 2
 	while damage > 0:
 		dahan_fight_back_initiated.emit(damage)
-		var dict = await prompt_invaders_for_damage(region)
-		if dict == null:
+		var selected = await Main.select_invaders_for_damage([region])
+		if selected == null:
 			dahan_fight_back_resolved.emit()
 			region.set_unlit()
 			return
-		var invader = dict["token"]
+		var invader = selected["token"]
 		await Main.damage_invader(region, invader, false)
 		damage -= 1
 	region.set_unlit()
@@ -262,19 +262,11 @@ func blight_cascades(region):
 func prompt_region_cascade_selection(regions):
 	for region in regions:
 		region.set_active(blight_scene.instantiate())
-	var selected_region = await Main.active_region_selected
+	var selected_region = await Main.player_selection_made
 	for region in regions:
 		region.set_inactive()
-	return selected_region
+	return selected_region["region"]
 	
-func prompt_invaders_for_damage(region):
-	var total_activated = region.activate_invaders_for_damage()
-	if total_activated == 0:
-		return null
-	var selected_invader = await Main.active_token_selected
-	region.deactivate_invaders()
-	return selected_invader
-
 func pre_invader_action_wait():
 	$InvaderActionTimer.start()
 	await $InvaderActionTimer.timeout

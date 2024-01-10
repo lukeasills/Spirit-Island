@@ -25,7 +25,7 @@ func resolve_level3_effects():
 	var selection = await Main.select_invaders_for_removal(regions, false, true, true, true)
 	if selection == null || selection["skipped"]:
 		return
-	var region = selection["region"]
+	var region = selection["token"].get_parent().get_parent()
 	if region.towns.has(selection["token"]):
 		await Main.remove_invader(region, selection["token"], false)
 		await region.add_explorer()

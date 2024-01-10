@@ -3,6 +3,9 @@ extends Area2D
 # Interactible variables
 var active
 var highlight_token
+signal selected
+signal hovered
+signal end_hovered
 
 # Exported variables
 @export var id: int
@@ -26,6 +29,10 @@ var blocked_invader_actions
 func _ready():
 	active = false
 	defense = 0
+	selected.connect(get_tree().get_root().get_node("Main").on_region_selected.bind(self))
+	hovered.connect(get_tree().get_root().get_node("Main").on_region_hovered.bind(self))
+	end_hovered.connect(get_tree().get_root().get_node("Main").on_region_end_hovered.bind(self))
+	
 	# Explore, Build [Towns, Cities], Ravage respectively
 	blocked_invader_actions = [false, [false, false], false]
 
@@ -286,15 +293,6 @@ func deactivate_dahan():
 	for dahan in dahans:
 		dahan.set_inactive()
 
-func token_hovered(token):
-	get_parent().token_hovered(token, self)
-
-func stop_token_hovered(token):
-	get_parent().stop_token_hovered(token, self)
-
-func token_selected(token):
-	get_parent().token_clicked(token, self)
-
 func set_active(token = null):
 	highlight_token = token	
 	if highlight_token != null:
@@ -334,14 +332,14 @@ func _on_mouse_entered():
 		if highlight_token != null:
 			$TokenContainer.add_child(highlight_token)
 			print(highlight_token.mouse_filter)
-		get_parent().region_entered(self)
+		hovered.emit()
 
 func _on_mouse_exited():
 	if active:
 		$HighlightPolygon.color.a = 0.1
 		if highlight_token != null:
 			$TokenContainer.remove_child(highlight_token)
-		get_parent().region_exited(self)
+		end_hovered.emit()
 
 func _on_input_event(viewport, event, shape_idx):
 	if !active:
@@ -351,5 +349,5 @@ func _on_input_event(viewport, event, shape_idx):
 			$TokenContainer.remove_child(highlight_token)
 			highlight_token.queue_free()
 			highlight_token = null
-		get_parent().region_clicked(self)
+		selected.emit()
 		active = false

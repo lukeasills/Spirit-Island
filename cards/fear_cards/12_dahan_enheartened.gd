@@ -22,37 +22,37 @@ func resolve_level1_effects():
 		return
 	Main.get_node("LabelContainer").set_text("Select a destination.")
 	# If a push...
-	if token_selection["region"].has_invaders():
-		regions = token_selection["region"].adjacent_regions
+	if token_selection["token"].get_parent().get_parent().has_invaders():
+		regions = token_selection["token"].get_parent().get_parent().adjacent_regions
 		var destination = await Main.select_land(regions, false)
-		await Main.push_token(token_selection["token"], token_selection["region"], destination, false)
+		await Main.push_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), destination["region"], false)
 	# If a gather...
 	else:
-		regions = token_selection["region"].adjacent_regions
+		regions = token_selection["token"].get_parent().get_parent().adjacent_regions
 		var valid_destinations = []
 		for region in regions:
 			if region.has_invaders():
 				valid_destinations.append(region)
 		var destination = await Main.select_land(valid_destinations, false)
-		await Main.gather_token(token_selection["token"], token_selection["region"], destination, false)
+		await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), destination["region"], false)
 	
 func resolve_level2_effects():
 	var regions = Main.get_any_land()
 	var chosen_land = await Main.select_land(regions, false)
 	Main.get_node("LabelContainer").set_text("Gather up to 2 Dahan, then 1 Damage if Dahan are present.")
-	var adj_regions = chosen_land.adjacent_regions
+	var adj_regions = chosen_land["region"].adjacent_regions
 	var selection = await Main.select_dahan_for_removal(adj_regions, true)
 	# Only prompt again if selected already...
 	if selection != null && !selection["skipped"]:
-		await Main.gather_token(selection["token"], selection["region"], chosen_land, false)
+		await Main.gather_token(selection["token"], selection["token"].get_parent().get_parent(), chosen_land["region"], false)
 		# Second...
 		selection = await Main.select_dahan_for_removal(adj_regions, true)
 		if selection != null || !selection["skipped"]:
-			await Main.gather_token(selection["token"], selection["region"], chosen_land, false)
+			await Main.gather_token(selection["token"], selection["token"].get_parent().get_parent(), chosen_land["region"], false)
 	if chosen_land.dahans.size() > 0:
 		Main.get_node("LabelContainer").set_text("Distribute 1 Damage.")
-		selection = await Main.select_invaders_for_damage([chosen_land], true, true, true, false)
-		await Main.damage_invader(selection["region"], selection["token"],false)
+		selection = await Main.select_invaders_for_damage([chosen_land["region"]], true, true, true, false)
+		await Main.damage_invader(selection["token"].get_parent().get_parent(), selection["token"],false)
 	Main.get_node("LabelContainer").turn_off_text()
 	
 
@@ -60,20 +60,20 @@ func resolve_level3_effects():
 	var regions = Main.get_any_land()
 	var chosen_land = await Main.select_land(regions, false)
 	Main.get_node("LabelContainer").set_text("Gather up to 2 Dahan, then 1 Damage per Dahan present.")
-	var adj_regions = chosen_land.adjacent_regions
+	var adj_regions = chosen_land["region"].adjacent_regions
 	var selection = await Main.select_dahan_for_removal(adj_regions, true)
 	# Only prompt again if selected already...
 	if selection != null && !selection["skipped"]:
-		await Main.gather_token(selection["token"], selection["region"], chosen_land, false)
+		await Main.gather_token(selection["token"], selection["token"].get_parent().get_parent(), chosen_land["region"], false)
 		# Second...
 		selection = await Main.select_dahan_for_removal(adj_regions, true)
-		if selection != null || !selection["skipped"]:
-			await Main.gather_token(selection["token"], selection["region"], chosen_land, false)
-	if chosen_land.dahans.size() > 0:
-		var damage = chosen_land.dahans.size()
-		while damage > 0 && chosen_land.has_invaders():
+		if selection != null && !selection["skipped"]:
+			await Main.gather_token(selection["token"], selection["token"].get_parent().get_parent(), chosen_land["region"], false)
+	if chosen_land["region"].dahans.size() > 0:
+		var damage = chosen_land["region"].dahans.size()
+		while damage > 0 && chosen_land["region"].has_invaders():
 			Main.get_node("LabelContainer").set_text(str("Distribute ",damage," Damage."))
-			selection = await Main.select_invaders_for_damage([chosen_land], true, true, true, false)
-			await Main.damage_invader(selection["region"], selection["token"],false)
+			selection = await Main.select_invaders_for_damage([chosen_land["region"]], true, true, true, false)
+			await Main.damage_invader(selection["token"].get_parent().get_parent(), selection["token"],false)
 			damage -= 1
 	Main.get_node("LabelContainer").turn_off_text()

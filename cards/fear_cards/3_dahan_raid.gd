@@ -13,24 +13,24 @@ func resolve_level1_effects():
 	var selected_land = await Main.select_land(regions)
 	if selected_land == null:
 		return
-	var selected_invader = await Main.select_invaders_for_damage([selected_land])
+	var selected_invader = await Main.select_invaders_for_damage([selected_land["region"]])
 	if selected_invader == null:
 		return
 	Main.get_node("LabelContainer").set_text("Distribute 1 damage there.")
-	await Main.damage_invader(selected_invader["region"], selected_invader["token"], false)
+	await Main.damage_invader(selected_land["region"], selected_invader["token"], false)
 
 func resolve_level2_effects():
 	var regions = Main.get_land_with_dahan()
 	var selected_land = await Main.select_land(regions)
 	if selected_land == null:
 		return
-	var damage_to_deal = selected_land.dahans.size()
+	var damage_to_deal = selected_land["region"].dahans.size()
 	while damage_to_deal > 0:
 		Main.get_node("LabelContainer").set_text(str("Distribute ", damage_to_deal, " damage there."))
-		var selected_invader = await Main.select_invaders_for_damage([selected_land])
+		var selected_invader = await Main.select_invaders_for_damage([selected_land["region"]])
 		if selected_invader == null:
 			return
-		await Main.damage_invader(selected_invader["region"], selected_invader["token"], false)
+		await Main.damage_invader(selected_land["region"], selected_invader["token"], false)
 		damage_to_deal -= 1
 
 func resolve_level3_effects():
@@ -38,11 +38,11 @@ func resolve_level3_effects():
 	var selected_land = await Main.select_land(regions)
 	if selected_land == null:
 		return
-	var damage_to_deal = selected_land.dahans.size() * 2
+	var damage_to_deal = selected_land["region"].dahans.size() * 2
 	while damage_to_deal > 0:
 		Main.get_node("LabelContainer").set_text(str("Distribute ", damage_to_deal, " damage there."))
-		var selected_invader = await Main.select_invaders_for_damage([selected_land])
+		var selected_invader = await Main.select_invaders_for_damage([selected_land["region"]])
 		if selected_invader == null:
 			return
-		await Main.damage_invader(selected_invader["region"], selected_invader["token"], false)
+		await Main.damage_invader(selected_land["region"], selected_invader["token"], false)
 		damage_to_deal -= 1

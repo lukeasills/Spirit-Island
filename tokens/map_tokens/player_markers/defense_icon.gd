@@ -6,6 +6,7 @@ var defense_total
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	defense_total = 0
+	token_ready()
 
 func set_amount(how_much):
 	if how_much == 0:

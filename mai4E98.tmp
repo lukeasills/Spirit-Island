@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmaoafshanif2"]
+[gd_scene load_steps=11 format=3 uid="uid://cmaoafshanif2"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_yvfee"]
 [ext_resource type="PackedScene" uid="uid://cj0lykqi38rqy" path="res://board/fearboard/fear_board.tscn" id="3_a8qb4"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://cards/card_transformer.tscn" id="7_dcxgg"]
 [ext_resource type="Script" path="res://LabelContainer.gd" id="9_njwbg"]
 [ext_resource type="PackedScene" uid="uid://b8o7yd28c26ni" path="res://board/active_card_space.tscn" id="17_iamwp"]
+[ext_resource type="Script" path="res://skip_button.gd" id="18_pudls"]
 [ext_resource type="PackedScene" uid="uid://ikiaijausj22" path="res://board/phase_order_tracker.tscn" id="20_srqrp"]
 
 [node name="Main" type="Node"]
@@ -62,14 +63,15 @@ scale = Vector2(1, 1)
 
 [node name="CardEffectButton" type="Button" parent="."]
 visible = false
-offset_left = 229.0
-offset_top = 1168.0
-offset_right = 401.0
-offset_bottom = 1218.0
+offset_left = 223.0
+offset_top = 1408.0
+offset_right = 395.0
+offset_bottom = 1458.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
 disabled = true
 text = "Skip effect"
+script = ExtResource("18_pudls")
 
 [node name="PowerCardHand" type="ReferenceRect" parent="."]
 visible = false
@@ -125,5 +127,4 @@ offset_bottom = 66.0
 
 [connection signal="active_region_selected" from="LandMap" to="." method="_on_land_map_active_region_selected"]
 [connection signal="invader_actions_completed" from="InvaderBoard" to="." method="_on_invader_board_invader_actions_completed"]
-[connection signal="pressed" from="CardEffectButton" to="." method="on_skip_button_pressed"]
 [connection signal="pressed" from="CardEffectButton" to="CardEffectButton" method="_on_pressed"]

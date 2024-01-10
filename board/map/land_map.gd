@@ -3,9 +3,6 @@ extends ReferenceRect
 signal active_region_entered
 signal active_region_selected
 signal active_region_exited
-signal active_token_hovered
-signal active_token_stop_hovered
-signal active_token_selected
 
 @onready var skip_button = get_node("/root/SkipButton")
 
@@ -209,16 +206,6 @@ func push_token_animation(start_pos, end_region, token):
 	return token
 
 # User input functions
-	
-func token_hovered(token, region):
-	active_token_hovered.emit()
-
-func stop_token_hovered(token, region):
-	active_token_stop_hovered.emit()
-
-func token_clicked(token, region):
-	active_token_selected.emit({"token":token,"region":region})
-
 func region_clicked(region):
 	active_region_selected.emit(region)
 

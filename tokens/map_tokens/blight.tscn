@@ -11,7 +11,3 @@ removed_texture = ExtResource("3_exev4")
 
 [node name="TextureButton" parent="." index="0"]
 texture_normal = ExtResource("3_i4jp8")
-
-[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
-[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

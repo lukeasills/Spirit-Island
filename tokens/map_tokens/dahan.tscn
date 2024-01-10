@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dh11m36lv0ckh" path="res://art/tokens/dahandamaged.png" id="4_so5lq"]
 [ext_resource type="Texture2D" uid="uid://tp0pwcixhaoe" path="res://art/tokens/DahanDestroyed.png" id="5_wcaox"]
 
-[node name="Dahan" instance=ExtResource("1_ows1v")]
+[node name="Dahan" groups=["dahan"] instance=ExtResource("1_ows1v")]
 script = ExtResource("2_3axkk")
 normal_texture = ExtResource("3_voai4")
 damaged_texture = ExtResource("4_so5lq")
@@ -14,7 +14,3 @@ destroyed_texture = ExtResource("5_wcaox")
 
 [node name="TextureButton" parent="." index="0"]
 texture_normal = ExtResource("3_voai4")
-
-[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
-[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
-[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

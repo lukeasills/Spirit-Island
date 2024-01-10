@@ -8,6 +8,7 @@ var is_holy_site
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_amount(amount)
+	token_ready()
 
 func add_presence(to_add):
 	set_amount(amount + to_add)

@@ -3,12 +3,14 @@
 [ext_resource type="Script" path="res://tokens/map_tokens/blight.gd" id="1_3qxaa"]
 [ext_resource type="Texture2D" uid="uid://bneq7378o3rf" path="res://art/tokens/Fear4.png" id="2_pb3sx"]
 
-[node name="ReferenceRect" type="ReferenceRect"]
+[node name="Fear" type="ReferenceRect"]
+custom_minimum_size = Vector2(64, 64)
 offset_right = 64.0
 offset_bottom = 64.0
 script = ExtResource("1_3qxaa")
 
 [node name="TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0

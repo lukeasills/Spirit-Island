@@ -27,20 +27,20 @@ func resolve_level3_effects():
 	var region = await Main.select_land(regions, false)
 	if region == null:
 		return
-	var health = region.get_presence().amount * 2
+	var health = region["region"].get_presence().amount * 2
 	while health > 0:
 		var towns = health > 1
 		var cities = health > 2
 		Main.get_node("LabelContainer").set_text(str("Remove up to ",health," Health worth of Invaders here."))
-		var selection = await Main.select_invaders_for_removal([region], true, towns, cities, true)
+		var selection = await Main.select_invaders_for_removal([region["region"]], true, towns, cities, true)
 		if selection == null || selection["skipped"]:
 			return
 		health -= 1
-		if region.towns.has(selection["token"]):
+		if region["region"].towns.has(selection["token"]):
 			health -= 1
-		elif region.cities.has(selection["token"]):
+		elif region["region"].cities.has(selection["token"]):
 			health -= 2
 		if health < 0:
 			health = 0
-		await Main.remove_invader(region, selection["token"], false)
+		await Main.remove_invader(region["region"], selection["token"], false)
 	Main.get_node("LabelContainer").turn_off_text()

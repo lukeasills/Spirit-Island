@@ -13,3 +13,7 @@ layout_mode = 2
 offset_right = 64.0
 offset_bottom = 64.0
 disabled = true
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

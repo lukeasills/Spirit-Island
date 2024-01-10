@@ -13,19 +13,19 @@ func resolve_level1_effects():
 	var selected = await Main.select_invaders_for_removal(regions, true, false, false)
 	if selected == null:
 		return
-	await Main.remove_invader(selected["region"], selected["token"], false)
+	await Main.remove_invader(selected["token"].get_parent().get_parent(), selected["token"], false)
 
 func resolve_level2_effects():
 	var regions = Main.get_inland_land()
 	var selected = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selected == null:
 		return
-	await Main.remove_invader(selected["region"], selected["token"], false)
+	await Main.remove_invader(selected["token"].get_parent().get_parent(), selected["token"], false)
 
 func resolve_level3_effects():
 	var regions = Main.get_any_land()
 	var selected = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selected == null:
 		return
-	await Main.remove_invader(selected["region"], selected["token"], false)
+	await Main.remove_invader(selected["token"].get_parent().get_parent(), selected["token"], false)
 
