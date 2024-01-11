@@ -60,17 +60,6 @@ offset_right = 56.0
 offset_bottom = 478.0
 scale = Vector2(1, 1)
 
-[node name="CardEffectButton" type="Button" parent="."]
-visible = false
-offset_left = 229.0
-offset_top = 1168.0
-offset_right = 401.0
-offset_bottom = 1218.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 30
-disabled = true
-text = "Skip effect"
-
 [node name="PowerCardHand" type="ReferenceRect" parent="."]
 visible = false
 offset_left = 623.0
@@ -125,5 +114,4 @@ offset_bottom = 66.0
 
 [connection signal="active_region_selected" from="LandMap" to="." method="_on_land_map_active_region_selected"]
 [connection signal="invader_actions_completed" from="InvaderBoard" to="." method="_on_invader_board_invader_actions_completed"]
-[connection signal="pressed" from="CardEffectButton" to="." method="on_skip_button_pressed"]
-[connection signal="pressed" from="CardEffectButton" to="CardEffectButton" method="_on_pressed"]
+[connection signal="continue_pressed" from="ActiveCardSpace" to="." method="_on_active_card_space_continue_pressed"]

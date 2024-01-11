@@ -7,11 +7,11 @@ func _ready():
 	level2_effect_text = "You may replace 1 Town with 1 Explorer in a Coastal land."
 	level3_effect_text  = "You may replace 1 City with 1 Town, or 1 Town with 1 Explorer in a Coastal land."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	var regions = Main.get_land_with_cities()
 	await Main.block_invader_actions(regions, [false, [true, true], false])
 
-func resolve_level2_effects():
+func resolve_level2_effects(active_option=0):
 	var regions = Main.get_coastal_land()
 	var selection = await Main.select_invaders_for_removal(regions, false, true, false, true)
 	if selection == null || selection["skipped"]:
@@ -20,7 +20,7 @@ func resolve_level2_effects():
 	await Main.remove_invader(region, selection["token"], false)
 	await region.add_explorer()
 
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_coastal_land()
 	var selection = await Main.select_invaders_for_removal(regions, false, true, true, true)
 	if selection == null || selection["skipped"]:

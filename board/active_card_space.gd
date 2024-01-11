@@ -1,5 +1,5 @@
 extends ReferenceRect
-
+signal continue_pressed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,7 +31,16 @@ func unhighlight_fear_level():
 func attach_power_card(power_card):
 	pass
 
-func detach_fear_card():
+func enable_skip_button():
+	$ContinueButton.disabled = false
+	$ContinueButton.visible = true
+
+func disable_skip_button():
+	$ContinueButton.disabled = true
+	$ContinueButton.visible = false
+
+func detach_fear_card():	
+	disable_skip_button()
 	unhighlight_fear_level()
 	var card = detach_card()
 	return card
@@ -40,3 +49,6 @@ func detach_card():
 	var card = $CardContainer.get_children()[0]
 	$CardContainer.remove_child(card)
 	return card
+
+func _on_continue_button_pressed():
+	continue_pressed.emit()

@@ -7,14 +7,14 @@ func _ready():
 	level2_effect_text = "Remove 1 Explorer or Town from a land with a Presence."
 	level3_effect_text  = "Choose a land with a Presence. Remove 1 Explorer or Town, or 1 City if it is a land with a Holy Site."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	var regions = Main.get_land_with_presence(true)
 	var selection = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selection == null:
 		return
 	await Main.remove_invader(selection["token"].get_parent().get_parent(), selection["token"], false)
 
-func resolve_level2_effects():
+func resolve_level2_effects(active_option=0):
 	var regions = Main.get_land_with_presence()
 	var selection = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selection == null:
@@ -22,7 +22,7 @@ func resolve_level2_effects():
 	await Main.remove_invader(selection["token"].get_parent().get_parent(), selection["token"], false)
 
 # Not quite consistent with other selection rules... need to figure out how to handle OR
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_land_with_presence()
 	var region = await Main.select_land(regions, false)
 	if region == null:

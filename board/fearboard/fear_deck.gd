@@ -20,7 +20,7 @@ func _prcess(delta):
 # Emit the new card to be listened to by main
 func draw():
 	# Get a random card from the current stage
-	var random_card_index = 11#randi() % (get_child_count()-1)
+	var random_card_index = 13#randi() % (get_child_count()-1)
 	var drawn_card = get_children()[random_card_index]
 	remove_child(drawn_card)
 	

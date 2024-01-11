@@ -7,7 +7,7 @@ func _ready():
 	level2_effect_text = "You may push up to 3 Explorers or Towns from an Inland land."
 	level3_effect_text  = "You may push any number of Explorers or Towns from one land."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	# First...
 	var regions = Main.get_inland_land()
 	var token_selection = await Main.select_invaders_for_removal(regions, true, false, false, true)
@@ -31,7 +31,7 @@ func resolve_level1_effects():
 	await Main.push_token(token_selection["token"], source_region, region_selection["region"], false)
 	Main.get_node("LabelContainer").turn_off_text()
 
-func resolve_level2_effects():
+func resolve_level2_effects(active_option=0):
 	# First...
 	var regions = Main.get_inland_land()
 	var token_selection = await Main.select_invaders_for_removal(regions, true, true, false, true)
@@ -66,7 +66,7 @@ func resolve_level2_effects():
 	await Main.push_token(token_selection["token"], source_region, region_selection["region"], false)
 	Main.get_node("LabelContainer").turn_off_text()
 
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	# First...
 	var regions = Main.get_inland_land()
 	var token_selection = await Main.select_invaders_for_removal(regions, true, true, false, true)

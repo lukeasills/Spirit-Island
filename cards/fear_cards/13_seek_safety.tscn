@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7fv8bq6ee5or"]
+[gd_scene load_steps=4 format=3 uid="uid://c7fv8bq6ee5or"]
 
 [ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_sct88"]
 [ext_resource type="Script" path="res://cards/fear_cards/13_seek_safety.gd" id="2_p38cw"]
+[ext_resource type="PackedScene" uid="uid://7t6mr5blaks2" path="res://cards/option_button.tscn" id="3_tqpo4"]
 
 [node name="SeekSafety" instance=ExtResource("1_sct88")]
 mouse_filter = 2
@@ -44,9 +45,9 @@ offset_right = 225.0
 offset_bottom = 206.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 10
-text = "You may Gather 1 Explorer into a land
-with Towns / Cities, or Gather 1 Town
-into a land with Cities. "
+text = "You may Gather 1 Explorer into a 
+land with Towns / Cities, OR Gather 
+1 Town into a land with Cities. "
 horizontal_alignment = 1
 
 [node name="FearLevel3Text" type="Label" parent="." index="4"]
@@ -62,3 +63,18 @@ text = "You may remove up to 3 Health
 worth of Invaders from
 a land without Cities."
 horizontal_alignment = 1
+
+[node name="Option0Button" parent="Level2Options" index="0" instance=ExtResource("3_tqpo4")]
+layout_mode = 0
+offset_left = 202.0
+offset_top = 157.0
+offset_right = 266.0
+offset_bottom = 221.0
+
+[node name="Option1Button" parent="Level2Options" index="1" instance=ExtResource("3_tqpo4")]
+layout_mode = 0
+offset_left = 193.0
+offset_top = 191.0
+offset_right = 257.0
+offset_bottom = 255.0
+option_number = 1

@@ -7,7 +7,7 @@ func _ready():
 	level2_effect_text = "Each Town destroys 1 Explorer in its land. Each City destroys 2 Explorers in its land"
 	level3_effect_text  = "Destroy all Explorers in lands with Towns or Cities. Each City destroys 1 Town in its land."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	var regions = Main.get_land_with_invaders()
 	# In each region
 	for region in regions:
@@ -20,7 +20,7 @@ func resolve_level1_effects():
 					await Main.destroy_invader(region, region.explorers[0], true)
 		region.set_unlit()
 
-func resolve_level2_effects():
+func resolve_level2_effects(active_option=0):
 	var regions = Main.get_land_with_invaders()
 	# In each region
 	for region in regions:
@@ -41,7 +41,7 @@ func resolve_level2_effects():
 					await Main.destroy_invader(region, region.explorers[0], true)
 		region.set_unlit()
 
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_land_with_invaders()
 	# In each region
 	for region in regions:

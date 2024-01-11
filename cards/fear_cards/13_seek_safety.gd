@@ -7,7 +7,7 @@ func _ready():
 	level2_effect_text = "You may Gather 1 Explorer into a land with Towns or Cities, or Gather 1 Town into a land with Cities."
 	level3_effect_text  = "You may remove up to 3 Health worth of Invaders from a land without Cities."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	var regions = Main.get_land_with_invaders()
 	var valid_regions = []
 	for region in regions:
@@ -25,60 +25,62 @@ func resolve_level1_effects():
 	for adj in source.adjacent_regions:
 		if adj.towns.size() + adj.cities.size() > source.towns.size() + source.cities.size():
 			valid_destinations.append(adj)
-	var destination = await Main.select_land(valid_destinations, false, Main.get_token_instance("explorer"))
+	var destination = await Main.select_land(valid_destinations, false, "explorer")
 	await Main.push_token(token_selection["token"], source, destination["region"], false)
 
-func resolve_level2_effects():
-	var lands_with_invaders = Main.get_land_with_invaders()
-	var regions = []
-	for land in lands_with_invaders:
-		var city = land.cities.size() > 0
-		var town_or_city = land.towns.size() > 0 || city
-		if town_or_city:
-			for adj in land.adjacent_regions:
-				if city && adj.towns.size() > 0:
-					regions.append(land)
-					break
-				elif adj.explorers.size() > 0:
-					regions.append(land)
-					break			
-	var region_selection = await Main.select_land(regions, true)
-	if region_selection == null || region_selection["skipped"]:
-		return
-	Main.initiate_gather(region_selection["region"])
-	var adjacent_regions = region_selection["region"].adjacent_regions
-	var explorers = false
-	var towns = false
-	if region_selection["region"].cities.size() > 0:
-		for adj in adjacent_regions:
-			if adj.explorers.size() > 0:
-				explorers = true
-			if adj.towns.size() > 0:
-				towns = true
-			if explorers && towns:
-				break
+func resolve_level2_effects(active_option=0):
+	if active_option == 0:
+		var lands_with_invaders = Main.get_land_with_invaders()
+		var regions = []
+		for land in lands_with_invaders:
+			if land.cities.size() > 0 || land.towns.size() > 0:
+				regions.append(land)
+		var region_selection = await Main.select_land(regions, true)
+		if region_selection == null || region_selection["skipped"]:
+			return
+		elif region_selection["option_selected"] && region_selection["option"] == 1:
+			await resolve_level2_effects(1)
+		else:
+			Main.initiate_gather(region_selection["region"])
+			var adjacent_regions = region_selection["region"].adjacent_regions
+			var token_selection = await Main.select_invaders_for_removal(adjacent_regions, true, false, false, true)
+			Main.resolve_gather()
+			if token_selection == null || token_selection["skipped"]:
+				pass
+			elif region_selection["option_selected"] && region_selection["option"] == 1:
+				await resolve_level2_effects(1)
+			else:
+				for option in $Level2Options.get_children():
+					option.disabled = true
+				await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), region_selection["region"],false)
 	else:
-		for adj in adjacent_regions:
-			if adj.explorers.size() > 0:
-				explorers = true
-				break
-	var message = ""
-	if explorers && towns:
-		message = "You may Gather 1 Explorer or 1 Town."
-	elif explorers:
-		message = "You may Gather 1 Explorer."
-	else:
-		message = "You may Gather 1 Town."
-	Main.get_node("LabelContainer").set_text(message)
-	var token_selection = await Main.select_invaders_for_removal(adjacent_regions, explorers, towns, false, true)
-	Main.resolve_gather()
-	if token_selection == null || token_selection["skipped"]:
-		return
-	await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), region_selection["region"],false)
+		var lands_with_invaders = Main.get_land_with_invaders()
+		var regions = []
+		for land in lands_with_invaders:
+			if land.cities.size() > 0:
+				regions.append(land)
+		var region_selection = await Main.select_land(regions, true)
+		if region_selection == null || region_selection["skipped"]:
+			return
+		elif region_selection["option_selected"] && region_selection["option"] == 0:
+			await resolve_level2_effects(0)
+		else:
+			Main.initiate_gather(region_selection["region"])
+			var adjacent_regions = region_selection["region"].adjacent_regions
+			var token_selection = await Main.select_invaders_for_removal(adjacent_regions, false, true, false, true)
+			Main.resolve_gather()
+			if token_selection == null || token_selection["skipped"]:
+				pass
+			elif region_selection["option_selected"] && region_selection["option"] == 1:
+				await resolve_level2_effects(0)
+			else:
+				for option in $Level2Options.get_children():
+					option.disabled = true
+				await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), region_selection["region"],false)
 	Main.get_node("LabelContainer").turn_off_text()
 	
 
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_any_land()
 	var valid_regions = []
 	var health = 3

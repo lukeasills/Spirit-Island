@@ -17,22 +17,41 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="FearLevel1Highlight" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.25)
 layout_mode = 2
 offset_right = 240.0
 offset_bottom = 336.0
+mouse_filter = 2
 texture = ExtResource("3_8bf7i")
 
 [node name="FearLevel2Highlight" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.25)
 layout_mode = 2
 offset_right = 240.0
 offset_bottom = 336.0
+mouse_filter = 2
 texture = ExtResource("4_q8lbi")
 
 [node name="FearLevel3Highlight" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.25)
 layout_mode = 2
 offset_right = 240.0
 offset_bottom = 336.0
+mouse_filter = 2
 texture = ExtResource("5_gdnix")
+
+[node name="ContinueButton" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 86.3636
+offset_top = 314.091
+offset_right = 146.364
+offset_bottom = 336.091
+theme_override_font_sizes/font_size = 10
+disabled = true
+text = "Continue"
+
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

@@ -23,7 +23,7 @@ signal fear_card_earned_resolved
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	fear_level = 1
+	fear_level = 3
 	is_focused = false
 	is_in_motion = false
 
@@ -79,10 +79,7 @@ func resolve_earned_fear_cards(is_delayed):
 		fear_card.deactivate()
 		await fear_card.reveal()
 		fear_card = $EarnedFearCardsSpot.detach(fear_card)
-		await get_tree().get_root().get_node("Main").set_fear_card_active(fear_card, fear_level)
-		await get_tree().get_root().get_node("Main").prompt_faer_card_effect_button()
-		await fear_card.resolve_effects(fear_level)
-		fear_card = await get_tree().get_root().get_node("Main").set_fear_card_inactive()
+		await get_tree().get_root().get_node("Main").resolve_fear_card(fear_card, fear_level)
 		fear_card.queue_free()
 	fear_cards_resolved.emit()
 

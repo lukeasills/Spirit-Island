@@ -7,36 +7,46 @@ func _ready():
 	level2_effect_text = "Choose a land. In chosen land: Gather up to 2 Dahan, then 1 Damage if Dahan are present."
 	level3_effect_text  = "Choose a land. In chosen land: Gather up to 2 Dahan, then 1 Damage per Dahan present."
 
-func resolve_level1_effects():
-	# First...
-	var regions = Main.get_land_with_invaders()
-	var regions_2 = []
-	for region in regions:
-		var adjacent_regions = region.adjacent_regions
-		for adjacent_region in adjacent_regions:
-			if adjacent_region.dahans.size() > 0:
-				regions_2.append(adjacent_region)
-	regions.append_array(regions_2)
-	var token_selection = await Main.select_dahan_for_removal(regions, true)
-	if token_selection == null || token_selection["skipped"]:
-		return
-	Main.get_node("LabelContainer").set_text("Select a destination.")
-	# If a push...
-	if token_selection["token"].get_parent().get_parent().has_invaders():
-		regions = token_selection["token"].get_parent().get_parent().adjacent_regions
-		var destination = await Main.select_land(regions, false)
-		await Main.push_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), destination["region"], false)
-	# If a gather...
-	else:
-		regions = token_selection["token"].get_parent().get_parent().adjacent_regions
-		var valid_destinations = []
+func resolve_level1_effects(active_option=0):
+	# Push option
+	if active_option == 0:
+		var regions = Main.get_land_with_invaders()
+		var token_selection = await Main.select_dahan_for_removal(regions, false)#true)
+		if token_selection == null || token_selection["skipped"]:
+			return
+		elif token_selection["option_selected"] && token_selection["option"] == 1:
+			await resolve_level1_effects(token_selection["option"])
+		else:
+			for option in $Level1Options.get_children():
+				option.disabled = true
+			Main.get_node("LabelContainer").set_text("Select a destination.")
+			regions = token_selection["token"].get_parent().get_parent().adjacent_regions
+			var destination = await Main.select_land(regions, false)
+			await Main.push_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), destination["region"], false)
+	# Gather option
+	elif active_option == 1:
+		var regions = Main.get_land_with_invaders()
+		var regions_2 = []
 		for region in regions:
-			if region.has_invaders():
-				valid_destinations.append(region)
-		var destination = await Main.select_land(valid_destinations, false)
-		await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), destination["region"], false)
-	
-func resolve_level2_effects():
+			for adj in region.adjacent_regions:
+				if adj.dahans.size() > 0:
+					regions_2.append(region)
+					break
+		var region_selection  = await Main.select_land(regions_2, false)#true)
+		if region_selection == null || region_selection["skipped"]:
+			return
+		elif region_selection["option_selected"] && region_selection["option"] == 0:
+			await resolve_level1_effects(region_selection["option"])
+		else:
+			for option in $Level1Options.get_children():
+				option.disabled = true
+			Main.get_node("LabelContainer").set_text("Select a dahan.")
+			Main.initiate_gather(region_selection["region"])
+			var token_selection = await Main.select_dahan_for_removal(region_selection["region"].adjacent_regions, false)
+			Main.resolve_gather()
+			await Main.gather_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), region_selection["region"], true)
+		
+func resolve_level2_effects(active_option=0):
 	var regions = Main.get_any_land()
 	var chosen_land = await Main.select_land(regions, false)
 	Main.get_node("LabelContainer").set_text("Gather up to 2 Dahan, then 1 Damage if Dahan are present.")
@@ -56,7 +66,7 @@ func resolve_level2_effects():
 	Main.get_node("LabelContainer").turn_off_text()
 	
 
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_any_land()
 	var chosen_land = await Main.select_land(regions, false)
 	Main.get_node("LabelContainer").set_text("Gather up to 2 Dahan, then 1 Damage per Dahan present.")

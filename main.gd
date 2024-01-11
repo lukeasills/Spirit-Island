@@ -78,6 +78,13 @@ func get_token_instance(type):
 # - FEAR BOARD RELATIONSHIPS
 func generate_fear(num):
 	await $FearBoard.generate_fear(num)
+
+func resolve_fear_card(fear_card, fear_level):
+	await set_fear_card_active(fear_card, fear_level)
+	await prompt_continue_button()
+	fear_card.mouse_filter = 0
+	await fear_card.resolve_effects(fear_level)
+	return await set_fear_card_inactive()
 	
 func set_fear_card_active(fear_card, fear_level):
 	$ActiveCardTransformer.attach(fear_card)
@@ -96,13 +103,10 @@ func set_fear_card_inactive():
 	fear_card = $ActiveCardTransformer.detach()
 	return fear_card
 
-func prompt_faer_card_effect_button():
-	$CardEffectButton.visible = true
-	$CardEffectButton.disabled = false
-	$CardEffectButton.text = "Continue"
-	await $CardEffectButton.pressed
-	$CardEffectButton.visible = false
-	$CardEffectButton.disabled = true
+func prompt_continue_button():
+	$ActiveCardSpace.enable_skip_button()
+	await $ActiveCardSpace.continue_pressed
+	$ActiveCardSpace.disable_skip_button()
 
 # - LAND MAP RELATIONSHIPS
 
@@ -123,10 +127,11 @@ func select_invaders_for_damage(regions, explorers=true, towns=true, cities=true
 			region.set_unlit()
 		return null
 	var selected
-	if !skippable:
-		selected = await player_selection_made
-	else:
-		selected = await await_skippable_selection()
+	if skippable:
+		$ActiveCardSpace.enable_skip_button()
+	selected = await player_selection_made
+	if skippable:
+		$ActiveCardSpace.disable_skip_button()
 	for region in regions:
 		region.deactivate_invaders()
 		region.set_unlit()
@@ -142,10 +147,11 @@ func select_invaders_for_destruction(regions, explorers=true, towns=true, cities
 			region.set_unlit()
 		return null
 	var selected
-	if !skippable:
-		selected = await player_selection_made
-	else:
-		selected = await await_skippable_selection()
+	if skippable:
+		$ActiveCardSpace.enable_skip_button()
+	selected = await player_selection_made
+	if skippable:
+		$ActiveCardSpace.disable_skip_button()
 	for region in regions:
 		region.set_unlit()
 		region.deactivate_invaders()
@@ -161,10 +167,11 @@ func select_invaders_for_removal(regions, explorers=true, towns=true, cities=tru
 			region.set_unlit()
 		return null
 	var selected
-	if !skippable:
-		selected = await player_selection_made
-	else:
-		selected = await await_skippable_selection()
+	if skippable:
+		$ActiveCardSpace.enable_skip_button()
+	selected = await player_selection_made
+	if skippable:
+		$ActiveCardSpace.disable_skip_button()
 	for region in regions:
 		region.set_unlit()
 		region.deactivate_invaders()
@@ -182,10 +189,11 @@ func select_dahan_for_removal(regions, skippable=false):
 			region.set_unlit()
 		return null
 	var selected
-	if !skippable:
-		selected = await player_selection_made
-	else:
-		selected = await await_skippable_selection()
+	if skippable:
+		$ActiveCardSpace.enable_skip_button()
+	selected = await player_selection_made
+	if skippable:
+		$ActiveCardSpace.disable_skip_button()
 	for region in regions:
 		region.set_unlit()
 		region.deactivate_dahan()
@@ -201,10 +209,11 @@ func select_land(regions, skippable=false, hover_token = null):
 	if regions.size() == 0:
 		return null
 	var selected
-	if !skippable:
-		selected = await player_selection_made
-	else:
-		selected = await await_skippable_selection()
+	if skippable:
+		$ActiveCardSpace.enable_skip_button()
+	selected = await player_selection_made
+	if skippable:
+		$ActiveCardSpace.disable_skip_button()
 	for region in regions:
 		region.set_inactive()
 	return selected
@@ -348,21 +357,11 @@ func block_invader_actions(regions, actions):
 		await await_timer()
 		region.set_unlit()
 
-# -- Skippable action functions
-func await_skippable_selection():
-	$CardEffectButton.visible = true
-	$CardEffectButton.disabled = false
-	$CardEffectButton.text = "Continue"
-	var selection = await player_selection_made
-	$CardEffectButton.visible = false
-	$CardEffectButton.disabled = true
-	return selection
-
 # -- TOKEN INTERACTION FUNCTIONS
 
 func on_token_selected(token):
 	if token.active:
-		player_selection_made.emit({"token":token,"skipped":false})
+		player_selection_made.emit({"token":token,"skipped":false, "option_selected":false})
 
 func on_token_hovered(token):
 	if token.active:
@@ -389,7 +388,7 @@ func on_token_end_hovered(token):
 
 func on_region_selected(region):
 	if region.active:
-		player_selection_made.emit({"region":region,"skipped":false})
+		player_selection_made.emit({"region":region,"skipped":false, "option_selected":false})
 
 func on_region_hovered(region):
 	if region.active:
@@ -399,9 +398,13 @@ func on_region_end_hovered(region):
 	if region.active:
 		active_region_end_hovered.emit(region)
 
-# -- SKIP BUTTON INTERACTION FUNCTIONS
-func on_skip_button_pressed():
+# -- ACTIVE CARD INTERACTION FUNCTIONS
+func _on_active_card_space_continue_pressed():
 	player_selection_made.emit({"skipped":true})
+
+func on_option_button_pressed(option_number):
+	print(str("option selected: ", option_number))
+	player_selection_made.emit({"skipped":false,"option_selected":true,"option":option_number})
 
 func _on_invader_deck_emptied():
 	invader_deck_empty = true

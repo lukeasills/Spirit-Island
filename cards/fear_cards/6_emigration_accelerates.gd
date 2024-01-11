@@ -8,21 +8,21 @@ func _ready():
 	level2_effect_text = "Remove 1 Explorer or Town from a Coastal land."
 	level3_effect_text  = "Remove 1 Explorer or Town from any land."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	var regions = Main.get_coastal_land()
 	var selected = await Main.select_invaders_for_removal(regions, true, false, false)
 	if selected == null:
 		return
 	await Main.remove_invader(selected["token"].get_parent().get_parent(), selected["token"], false)
 
-func resolve_level2_effects():
+func resolve_level2_effects(active_option=0):
 	var regions = Main.get_coastal_land()
 	var selected = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selected == null:
 		return
 	await Main.remove_invader(selected["token"].get_parent().get_parent(), selected["token"], false)
 
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_any_land()
 	var selected = await Main.select_invaders_for_removal(regions, true, true, false)
 	if selected == null:

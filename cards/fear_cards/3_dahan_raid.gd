@@ -8,7 +8,7 @@ func _ready():
 	level2_effect_text = "Choose a land with Dahan. 1 Damage per Dahan there."
 	level3_effect_text  = "Choose a land with Dahan. 2 Damage per Dahan there."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	var regions = Main.get_land_with_dahan()
 	var selected_land = await Main.select_land(regions)
 	if selected_land == null:
@@ -19,7 +19,7 @@ func resolve_level1_effects():
 	Main.get_node("LabelContainer").set_text("Distribute 1 damage there.")
 	await Main.damage_invader(selected_land["region"], selected_invader["token"], false)
 
-func resolve_level2_effects():
+func resolve_level2_effects(active_option=0):
 	var regions = Main.get_land_with_dahan()
 	var selected_land = await Main.select_land(regions)
 	if selected_land == null:
@@ -33,7 +33,7 @@ func resolve_level2_effects():
 		await Main.damage_invader(selected_land["region"], selected_invader["token"], false)
 		damage_to_deal -= 1
 
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_land_with_dahan()
 	var selected_land = await Main.select_land(regions)
 	if selected_land == null:

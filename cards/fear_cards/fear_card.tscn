@@ -17,4 +17,19 @@ disabled = true
 texture_normal = ExtResource("2_8hor1")
 texture_hover = ExtResource("3_emvr5")
 
+[node name="Level1Options" type="ReferenceRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Level2Options" type="ReferenceRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Level3Options" type="ReferenceRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

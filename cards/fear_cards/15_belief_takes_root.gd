@@ -7,11 +7,11 @@ func _ready():
 	level2_effect_text = "Defend 2 in all lands with a Presence. Gain 1 Energy per Holy Site you have in lands with Invaders."
 	level3_effect_text  = "Choose a land and remove up to 2 Health worth of Invaders per Presence there."
 
-func resolve_level1_effects():
+func resolve_level1_effects(active_option=0):
 	var regions = Main.get_land_with_presence(false)
 	await Main.defend(regions, "constant", 2)
 
-func resolve_level2_effects():
+func resolve_level2_effects(active_option=0):
 	var regions = Main.get_land_with_presence(false)
 	await Main.defend(regions, "constant", 2)
 	regions = Main.get_land_with_presence(true)
@@ -22,7 +22,7 @@ func resolve_level2_effects():
 	print(str("Gained ",gained_energy, " energy."))
 
 # Not quite consistent with other selection rules... need to figure out how to handle OR
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	var regions = Main.get_land_with_presence()
 	var region = await Main.select_land(regions, false)
 	if region == null:

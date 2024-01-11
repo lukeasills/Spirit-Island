@@ -8,13 +8,11 @@ var card_back_lit = load("res://art/cards/fear/FearCardBackLit.png")
 
 @onready var revealed = false
 
-@export var level1_options_polygons: Array[PackedVector2Array]
-@export var level2_options_polygons: Array[PackedVector2Array]
-@export var level3_options_polygons: Array[PackedVector2Array]
-
 var level1_effect_text
 var level2_effect_text
 var level3_effect_text 
+
+signal effects_resolved
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,43 +27,47 @@ func fear_card_on_ready():
 	card_effects_on_ready()
 
 # Base function for resolving effects. In fear cards, determine which level
-func setup_effects(fear_level):
-	if fear_level == 1:
-		setup_level1_effects()
-	elif fear_level == 2:
-		setup_level2_effects()
-	else:
-		setup_level3_effects()
-	pass
 
 func resolve_effects(fear_level):
 	if fear_level == 1:
 		Main.get_node("LabelContainer").set_text(level1_effect_text)
+		for option_button in $Level1Options.get_children():
+			option_button.visible = true
+			option_button.disabled = false
+		if $Level1Options.get_children().size() > 0:
+			$Level1Options.get_children()[0].select()
 		await resolve_level1_effects()
+		for option_button in $Level1Options.get_children():
+			option_button.hide_button()
 	elif fear_level == 2:
 		Main.get_node("LabelContainer").set_text(level2_effect_text)
+		for option_button in $Level2Options.get_children():
+			option_button.visible = true
+			option_button.disabled = false
+		if $Level2Options.get_children().size() > 0:
+			$Level2Options.get_children()[0].select()
 		await resolve_level2_effects()
+		for option_button in $Level2Options.get_children():
+			option_button.hide_button()
 	else:
 		Main.get_node("LabelContainer").set_text(level3_effect_text)
+		for option_button in $Level3Options.get_children():
+			option_button.visible = true
+			option_button.disabled = false
+		if $Level3Options.get_children().size() > 0:
+			$Level3Options.get_children()[0].select()
 		await resolve_level3_effects()
+		for option_button in $Level3Options.get_children():
+			option_button.hide_button()
 	Main.get_node("LabelContainer").turn_off_text()
 
-func setup_level1_effects():
+func resolve_level1_effects(active_option=0):
 	pass
 
-func setup_level2_effects():
+func resolve_level2_effects(active_option=0):
 	pass
 
-func setup_level3_effects():
-	pass
-
-func resolve_level1_effects():
-	pass
-
-func resolve_level2_effects():
-	pass
-
-func resolve_level3_effects():
+func resolve_level3_effects(active_option=0):
 	pass
 
 func card_pressed():

@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bd7mlc3ojmhbt"]
+[gd_scene load_steps=4 format=3 uid="uid://bd7mlc3ojmhbt"]
 
 [ext_resource type="PackedScene" uid="uid://vyxn6jvgraqn" path="res://cards/fear_cards/fear_card.tscn" id="1_2fvmv"]
 [ext_resource type="Script" path="res://cards/fear_cards/12_dahan_enheartened.gd" id="2_36q0g"]
+[ext_resource type="PackedScene" uid="uid://7t6mr5blaks2" path="res://cards/option_button.tscn" id="3_sl8hb"]
 
 [node name="DahanEnheartened" instance=ExtResource("1_2fvmv")]
-mouse_filter = 2
 script = ExtResource("2_36q0g")
 
 [node name="TextureButton" parent="." index="0"]
@@ -31,7 +31,7 @@ offset_bottom = 130.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 9
 text = "You may Push 1 Dahan from a land
-with Invaders or Gather 1 Dahan into
+with Invaders OR Gather 1 Dahan into
 a land with Invaders."
 horizontal_alignment = 1
 
@@ -62,3 +62,18 @@ text = "Choose a land. In chosen lands:
 Gather up to 2 Dahan, then
 1 Damage per Dahan present."
 horizontal_alignment = 1
+
+[node name="Option0Button" parent="Level1Options" index="0" instance=ExtResource("3_sl8hb")]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 81.0
+offset_right = 264.0
+offset_bottom = 145.0
+
+[node name="Option1Button" parent="Level1Options" index="1" instance=ExtResource("3_sl8hb")]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 106.0
+offset_right = 264.0
+offset_bottom = 170.0
+option_number = 1
