@@ -3,6 +3,7 @@ extends ReferenceRect
 signal emptied
 
 var cards_drawn
+@export var card_loader: Resource
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,7 +11,10 @@ func _ready():
 	setup_initial_deck()
 
 func setup_initial_deck():
-	pass
+	var cards = card_loader.get_cards(9)
+	for card in cards:
+		card.visible = false
+		add_child(card)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _prcess(delta):
@@ -20,7 +24,7 @@ func _prcess(delta):
 # Emit the new card to be listened to by main
 func draw():
 	# Get a random card from the current stage
-	var random_card_index = 13#randi() % (get_child_count()-1)
+	var random_card_index = randi() % (get_child_count()-1)
 	var drawn_card = get_children()[random_card_index]
 	remove_child(drawn_card)
 	

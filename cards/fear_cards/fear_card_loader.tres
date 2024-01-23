@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dyqvjepauadkw"]
+
+[ext_resource type="Script" path="res://cards/fear_cards/fear_card_loader.gd" id="1_orons"]
+
+[resource]
+script = ExtResource("1_orons")
+card_hard_list = Array[String](["1_dahan_on_their_guard", "2_isolation", "3_dahan_raid", "4_wary_of_the_interior", "5_tall_tales_of_savagery", "6_emigration_accelerates", "7_scapegoats", "8_avoid_the_dahan", "9_overseas_trade_seem_safer", "10_trade_suffers", "11_retreat", "12_dahan_enheartened", "13_seek_safety", "14_fear_of_the_unseen", "15_belief_takes_root"])
+relative_path = "res://cards/fear_cards/"
