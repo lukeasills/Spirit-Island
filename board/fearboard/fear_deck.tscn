@@ -27,79 +27,46 @@ script = ExtResource("1_v7mys")
 [node name="DahanOnTheirGuard" parent="." instance=ExtResource("2_ylyot")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="Isolation" parent="." instance=ExtResource("3_nrmx7")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="DahanRaid" parent="." instance=ExtResource("4_37qkj")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="WaryOfTheInterior" parent="." instance=ExtResource("5_1dmtu")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="TallTalesOfSavagery" parent="." instance=ExtResource("6_1al5d")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="EmigrationAccelerates" parent="." instance=ExtResource("7_8fu1d")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="Scapegoats" parent="." instance=ExtResource("8_t844j")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="AvoidTheDahan" parent="." instance=ExtResource("9_188go")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="OverseasTradeSeemSafer" parent="." instance=ExtResource("10_bo6qj")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="TradeSuffers" parent="." instance=ExtResource("11_pre7c")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="Retreat" parent="." instance=ExtResource("2_jeer6")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="DahanEnheartened" parent="." instance=ExtResource("2_ogu4t")]
 visible = false
@@ -112,16 +79,10 @@ layout_mode = 0
 [node name="FearOfTheUnseen" parent="." instance=ExtResource("2_seemt")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="BeliefTakesRoot" parent="." instance=ExtResource("2_btxb2")]
 visible = false
 layout_mode = 0
-level1_option_buttons = Array[Node]([])
-level2_option_buttons = Array[Node]([])
-level3_option_buttons = Array[Node]([])
 
 [node name="DeckButton" type="TextureButton" parent="."]
 layout_mode = 0
