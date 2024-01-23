@@ -115,6 +115,7 @@ func await_timer():
 	await effect_timer.timeout
 
 # -- Select functions
+# Make components selectable in certain regions and return the player's choice
 # --- Select invaders
 
 func select_invaders_for_damage(regions, explorers=true, towns=true, cities=true, skippable=false):
@@ -198,6 +199,7 @@ func select_dahan_for_removal(regions, skippable=false):
 		region.set_unlit()
 		region.deactivate_dahan()
 	return selected
+
 # --- Select lands
 
 func select_land(regions, skippable=false, hover_token = null):
@@ -220,6 +222,7 @@ func select_land(regions, skippable=false, hover_token = null):
 	
 
 # -- Region condition functions
+# Returns an array of regions based on a condition
 
 func get_regions():
 	return $LandMap.get_regions()

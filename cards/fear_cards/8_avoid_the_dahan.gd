@@ -9,7 +9,7 @@ func _ready():
 
 func resolve_level1_effects(active_option=0):
 	var regions = Main.get_land_with_dahan("at least", 2)
-	await Main.block_invader_actions(regions, [true, false, false])
+	await Main.block_invader_actions(regions, [true, [false, false], false])
 
 func resolve_level2_effects(active_option=0):
 	var regions = Main.get_land_with_dahan()

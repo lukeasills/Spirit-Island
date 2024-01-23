@@ -15,7 +15,7 @@ func resolve_level1_effects(active_option=0):
 		return
 	var source_region = token_selection["token"].get_parent().get_parent()
 	Main.get_node("LabelContainer").set_text("Select a destination.")
-	var region_selection = await Main.select_land(token_selection["token"].get_parent().get_parent().adjacent_regions, "invader", false)
+	var region_selection = await Main.select_land(token_selection["token"].get_parent().get_parent().adjacent_regions, false, "invader")
 	if region_selection == null:
 		return
 	await Main.push_token(token_selection["token"], token_selection["token"].get_parent().get_parent(), region_selection["region"], false)
