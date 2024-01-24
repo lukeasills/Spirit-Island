@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dj1o4vf8b6lqi"]
+[gd_scene load_steps=5 format=3 uid="uid://dj1o4vf8b6lqi"]
 
 [ext_resource type="Texture2D" uid="uid://bcptpix7s4cov" path="res://art/cards/fear/FearCardBack.png" id="1_ndnlc"]
 [ext_resource type="Script" path="res://board/fearboard/fear_deck.gd" id="1_v7mys"]
 [ext_resource type="Resource" uid="uid://dyqvjepauadkw" path="res://cards/fear_cards/fear_card_loader.tres" id="2_bla31"]
+[ext_resource type="PackedScene" uid="uid://ch4xiflvgrijb" path="res://cards/fear_cards/terror_level_card.tscn" id="3_k86vl"]
 
 [node name="FearDeck" type="ReferenceRect"]
 offset_right = 240.0
@@ -10,6 +11,7 @@ offset_bottom = 336.0
 mouse_filter = 2
 script = ExtResource("1_v7mys")
 card_loader = ExtResource("2_bla31")
+terror_level_card = ExtResource("3_k86vl")
 
 [node name="DeckButton" type="TextureButton" parent="."]
 layout_mode = 0

@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cj0lykqi38rqy"]
+[gd_scene load_steps=11 format=3 uid="uid://cj0lykqi38rqy"]
 
 [ext_resource type="PackedScene" uid="uid://dj1o4vf8b6lqi" path="res://board/fearboard/fear_deck.tscn" id="1_3jeqi"]
 [ext_resource type="Script" path="res://board/fearboard/fear_board.gd" id="1_s6yyv"]
 [ext_resource type="PackedScene" uid="uid://bptwhp61iay73" path="res://board/fearboard/earned_fear_cards_spot.tscn" id="2_lx8qu"]
 [ext_resource type="PackedScene" uid="uid://e4nfm80o7kmd" path="res://board/fearboard/fear_pool.tscn" id="3_4im1w"]
+[ext_resource type="PackedScene" uid="uid://ch4xiflvgrijb" path="res://cards/fear_cards/terror_level_card.tscn" id="4_jlt5w"]
 [ext_resource type="PackedScene" uid="uid://bsoono7ubgwlq" path="res://cards/card_transformer.tscn" id="4_qqpo1"]
 [ext_resource type="Script" path="res://cards/fear_cards/1_dahan_on_their_guard.gd" id="5_orn7k"]
 [ext_resource type="Texture2D" uid="uid://c3048dajn8ute" path="res://art/cards/fear/FearCardFront.png" id="6_388bb"]
@@ -28,39 +29,46 @@ speed = Vector2(0, 60)
 
 [node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(0, 0, 0, 880, 530, 880, 530, 0, 0, 0)
+polygon = PackedVector2Array(0, 0, 0, 920, 760, 920, 760, 0, 0, 0)
 
 [node name="BorderPolygon" type="Polygon2D" parent="."]
 color = Color(0.341176, 0.317647, 0.4, 1)
-polygon = PackedVector2Array(0, 0, 0, 880, 530, 880, 530, 0, 0, 0)
+polygon = PackedVector2Array(0, 0, 0, 920, 760, 920, 760, 0, 0, 0)
 
 [node name="BackgroundPolygon" type="Polygon2D" parent="."]
 color = Color(0.482353, 0.482353, 0.529412, 1)
-polygon = PackedVector2Array(10, 10, 10, 870, 520, 870, 520, 10, 10, 10)
+polygon = PackedVector2Array(10, 10, 10, 910, 750, 910, 750, 10, 10, 10)
 
 [node name="FearDeck" parent="." instance=ExtResource("1_3jeqi")]
-offset_left = 63.0
-offset_top = 555.0
-offset_right = 303.0
-offset_bottom = 891.0
+offset_left = 56.0
+offset_top = 608.0
+offset_right = 296.0
+offset_bottom = 944.0
 scale = Vector2(0.75, 0.75)
 metadata/_edit_use_anchors_ = true
 
 [node name="EarnedFearCardsSpot" parent="." instance=ExtResource("2_lx8qu")]
-offset_left = 288.0
-offset_top = 555.0
-offset_right = 528.0
-offset_bottom = 891.0
+offset_left = 293.0
+offset_top = 608.0
+offset_right = 533.0
+offset_bottom = 944.0
 scale = Vector2(0.75, 0.75)
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="FearPool" parent="." instance=ExtResource("3_4im1w")]
-offset_left = 23.0
-offset_top = 29.0
-offset_right = 663.0
-offset_bottom = 669.0
+[node name="TerrorLevelCard" parent="." instance=ExtResource("4_jlt5w")]
+offset_left = 500.0
+offset_top = 608.0
+offset_right = 780.0
+offset_bottom = 944.0
 scale = Vector2(0.75, 0.75)
+
+[node name="FearPool" parent="." instance=ExtResource("3_4im1w")]
+offset_left = 70.0
+offset_top = 4.0
+offset_right = 710.0
+offset_bottom = 644.0
+scale = Vector2(0.95, 0.95)
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
@@ -76,10 +84,10 @@ default_speed = Vector2(10, 0)
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="."]
-offset_left = 161.0
-offset_top = 819.0
-offset_right = 434.0
-offset_bottom = 866.0
+offset_left = 275.0
+offset_top = 863.0
+offset_right = 548.0
+offset_bottom = 910.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0.458824, 0.329412, 0.180392, 1)
 theme_override_constants/outline_size = 3
@@ -93,7 +101,7 @@ metadata/_edit_use_anchors_ = true
 [node name="HighlightPolygon" type="Polygon2D" parent="."]
 visible = false
 color = Color(1, 1, 1, 0.0588235)
-polygon = PackedVector2Array(10, 10, 10, 870, 520, 870, 520, 10, 10, 10)
+polygon = PackedVector2Array(0, 0, 0, 920, 760, 920, 760, 0, 0, 0)
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

@@ -21,15 +21,14 @@ offset_bottom = 367.0
 scale = Vector2(0.8, 0.8)
 
 [node name="FearBoard" parent="." instance=ExtResource("3_a8qb4")]
-position = Vector2(55, -540)
-unfocused_position = Vector2(55, -540)
-focused_position = Vector2(55, 40)
+position = Vector2(0, -580)
+unfocused_position = Vector2(0, -580)
 
 [node name="InvaderBoard" parent="." instance=ExtResource("4_rhvda")]
 position = Vector2(760, -260)
 speed = Vector2(0, 40)
 unfocused_position = Vector2(760, -260)
-focused_position = Vector2(760, 40)
+focused_position = Vector2(760, 0)
 blight_scene = ExtResource("6_poenu")
 
 [node name="LabelContainer" type="CenterContainer" parent="."]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://ch4xiflvgrijb"]
+
+[ext_resource type="Texture2D" uid="uid://bspslixs8ebhq" path="res://art/cards/fear/TerrorLevel1.png" id="1_a313y"]
+[ext_resource type="Script" path="res://cards/fear_cards/terror_level_card.gd" id="2_sxsgv"]
+
+[node name="TerrorLevelCard" type="TextureRect"]
+offset_left = -40.0
+offset_right = 240.0
+offset_bottom = 336.0
+texture = ExtResource("1_a313y")
+script = ExtResource("2_sxsgv")
+
+[node name="TerrorLevelLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 22.0
+offset_right = 237.0
+offset_bottom = 81.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 1
+theme_override_font_sizes/font_size = 20
+text = "TERROR LEVEL"
+
+[node name="NumberLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 47.0
+offset_right = 188.0
+offset_bottom = 75.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 20
+text = "I"
+horizontal_alignment = 1
+
+[node name="VictoryConditionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 161.0
+offset_right = 250.0
+offset_bottom = 184.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 1
+text = "VICTORY CONDITION:"
